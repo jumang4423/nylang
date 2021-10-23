@@ -1,0 +1,15 @@
+🍙 checkCat = 🏨 ( animal ) {
+    🐶 ( animal == "cat" ) {
+        💨 👍
+    } 😱 {
+        💨 👎
+    } 
+};
+
+bark ( 🐶 ( checkCat ( "cat" ) ) {
+    💨 "i am cat"
+} 😱 {
+    💨 "i am not cat"
+} );
+
+💨 bark ( 3 + 3 * 5 )
