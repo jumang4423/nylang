@@ -23,7 +23,7 @@ pub fn run_program(file: String) -> Result<(), io::Error> {
 
     env.evaluator(program);
 
-    println!("\n-! {}", "-! finished".color(blue_color_res.unwrap_or(Color::Green)).bold());
+    println!("\n-! {}", "finished".color(blue_color_res.unwrap_or(Color::Green)).bold());
 
     Ok(())
 }
@@ -43,7 +43,7 @@ pub fn ast_program(file: String) -> Result<(), io::Error> {
 
     println!("{:?}", program);
 
-    println!("\n-! {}", "-! finished".color(blue_color_res.unwrap_or(Color::Green)).bold());
+    println!("\n-! {}", "finished".color(blue_color_res.unwrap_or(Color::Green)).bold());
 
     Ok(())
 }
@@ -68,7 +68,7 @@ pub fn parse_program(file: String) -> Result<(), io::Error> {
         tok = l.next_token();
     }
 
-    println!("\n-! {}", "-! finished".color(blue_color_res.unwrap_or(Color::Green)).bold());
+    println!("\n-! {}", "finished".color(blue_color_res.unwrap_or(Color::Green)).bold());
 
     Ok(())
 }

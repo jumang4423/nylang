@@ -84,6 +84,10 @@ impl<'a> Parser<'a> {
         self.next_token();
         let value = self.expression_parser(ast::ast::WhichTheBest::Lowest);
 
+        if self.peek_token == token::token::Token::Semicolon {
+            self.next_token();
+        }
+
         ast::ast::Statement::Return(value)
     }
 
@@ -278,8 +282,11 @@ impl<'a> Parser<'a> {
                 self.next_token();
             }
         }
-
         self.next_token(); //////////////////////////////???????????????????????
+
+        if self.peek_token == token::token::Token::Semicolon {
+            self.next_token();
+        }
 
         ast::ast::Expression::Call {
             closure: Box::new(closure),
