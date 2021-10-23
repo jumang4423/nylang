@@ -171,15 +171,15 @@ impl Evaluator {
                     }
                 }
             }
-            ast::ast::Expression::Function { parameters, body } => {
-                object::object::Object::Function {
+            ast::ast::Expression::Closure { parameters, body } => {
+                object::object::Object::Closure {
                     parameters: parameters.clone(),
                     body: *body.clone(),
                     env: enve::enve::Environment::ve(*self.env.clone().into_inner()),
                 }
             }
             ast::ast::Expression::Call {
-                function,
+                closure,
                 arguments,
             } => {
                 let mut args = Vec::new();
@@ -187,20 +187,20 @@ impl Evaluator {
                     args.push(self.expression_evaluator(expr.clone()));
                 }
 
-                if let ast::ast::Expression::Ident(func) = *function.clone() {
+                if let ast::ast::Expression::Ident(func) = *closure.clone() {
                     if func == "bark" {
                         println!("{}", args.iter().map(|arg| format!("{} ", arg)).collect::<String>());
                         return object::object::Object::Null
                     }
                 }
 
-                let function = self.expression_evaluator(*function);
+                let closure = self.expression_evaluator(*closure);
 
-                if let object::object::Object::Function {
+                if let object::object::Object::Closure {
                     parameters,
                     body,
                     env,
-                } = function
+                } = closure
                 {
                     let mut env = Evaluator::from(env);
                     for (ident, arg) in parameters.iter().zip(args.iter()) {
