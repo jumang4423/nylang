@@ -1,7 +1,7 @@
 use super::super::ast;
+use super::super::builtin;
 use super::super::enve;
 use super::super::object;
-use super::super::builtin;
 use std::cell::RefCell;
 
 // actual program runner
@@ -59,41 +59,115 @@ impl Evaluator {
         evaluated
     }
 
-    pub fn prefix_evaluator(&mut self, operator: ast::ast::Prefix, right: object::object::Object) -> object::object::Object {
+    pub fn prefix_evaluator(
+        &mut self,
+        operator: ast::ast::Prefix,
+        right: object::object::Object,
+    ) -> object::object::Object {
         match (operator, right) {
-            (ast::ast::Prefix::Bang, object::object::Object::Boolean(b_value)) => object::object::Object::Boolean(!b_value),
-            (ast::ast::Prefix::Minus, object::object::Object::Integer(b_value)) => object::object::Object::Integer(-1 * b_value),
-            _ => object::object::Object::Null
+            (ast::ast::Prefix::Bang, object::object::Object::Boolean(b_value)) => {
+                object::object::Object::Boolean(!b_value)
+            }
+            (ast::ast::Prefix::Minus, object::object::Object::Integer(b_value)) => {
+                object::object::Object::Integer(-1 * b_value)
+            }
+            _ => object::object::Object::Null,
         }
     }
 
-    pub fn infix_evaluator(&mut self, operator: ast::ast::Infix, left: object::object::Object, right: object::object::Object) -> object::object::Object {
+    pub fn infix_evaluator(
+        &mut self,
+        operator: ast::ast::Infix,
+        left: object::object::Object,
+        right: object::object::Object,
+    ) -> object::object::Object {
         match (operator, left, right) {
-            (ast::ast::Infix::Plus, object::object::Object::Integer(l_value), object::object::Object::Integer(r_value)) => object::object::Object::Integer(l_value + r_value),
-            (ast::ast::Infix::Minus, object::object::Object::Integer(l_value), object::object::Object::Integer(r_value)) => object::object::Object::Integer(l_value - r_value),
-            (ast::ast::Infix::Slash, object::object::Object::Integer(l_value), object::object::Object::Integer(r_value)) => object::object::Object::Integer(l_value / r_value),
-            (ast::ast::Infix::Asterisk, object::object::Object::Integer(l_value), object::object::Object::Integer(r_value)) => object::object::Object::Integer(l_value * r_value),
-            (ast::ast::Infix::Eq, object::object::Object::Integer(l_value), object::object::Object::Integer(r_value)) => object::object::Object::Boolean(l_value == r_value),
-            (ast::ast::Infix::NotEq, object::object::Object::Integer(l_value), object::object::Object::Integer(r_value)) => object::object::Object::Boolean(l_value != r_value),
-            (ast::ast::Infix::GreaterThan, object::object::Object::Integer(l_value), object::object::Object::Integer(r_value)) => object::object::Object::Boolean(l_value > r_value),
-            (ast::ast::Infix::LessThan, object::object::Object::Integer(l_value), object::object::Object::Integer(r_value)) => object::object::Object::Boolean(l_value < r_value),
-            (ast::ast::Infix::Eq, object::object::Object::Boolean(l_value), object::object::Object::Boolean(r_value)) => object::object::Object::Boolean(l_value == r_value),
-            (ast::ast::Infix::NotEq, object::object::Object::Boolean(l_value), object::object::Object::Boolean(r_value)) => object::object::Object::Boolean(l_value != r_value),
-            (ast::ast::Infix::Plus, object::object::Object::String(l_value), object::object::Object::String(r_value)) => object::object::Object::String(format!("{}{}", l_value, r_value)),
-            (ast::ast::Infix::Eq, object::object::Object::String(l_value), object::object::Object::String(r_value)) => object::object::Object::Boolean(l_value == r_value),
-            (ast::ast::Infix::NotEq, object::object::Object::String(l_value), object::object::Object::String(r_value)) => object::object::Object::Boolean(l_value != r_value),
-            (ast::ast::Infix::Eq, object::object::Object::Null, object::object::Object::Null) => object::object::Object::Boolean(true),
-            (ast::ast::Infix::NotEq, object::object::Object::Null, object::object::Object::Null) => object::object::Object::Boolean(false),
-            _ => object::object::Object::Null
+            (
+                ast::ast::Infix::Plus,
+                object::object::Object::Integer(l_value),
+                object::object::Object::Integer(r_value),
+            ) => object::object::Object::Integer(l_value + r_value),
+            (
+                ast::ast::Infix::Minus,
+                object::object::Object::Integer(l_value),
+                object::object::Object::Integer(r_value),
+            ) => object::object::Object::Integer(l_value - r_value),
+            (
+                ast::ast::Infix::Slash,
+                object::object::Object::Integer(l_value),
+                object::object::Object::Integer(r_value),
+            ) => object::object::Object::Integer(l_value / r_value),
+            (
+                ast::ast::Infix::Asterisk,
+                object::object::Object::Integer(l_value),
+                object::object::Object::Integer(r_value),
+            ) => object::object::Object::Integer(l_value * r_value),
+            (
+                ast::ast::Infix::Eq,
+                object::object::Object::Integer(l_value),
+                object::object::Object::Integer(r_value),
+            ) => object::object::Object::Boolean(l_value == r_value),
+            (
+                ast::ast::Infix::NotEq,
+                object::object::Object::Integer(l_value),
+                object::object::Object::Integer(r_value),
+            ) => object::object::Object::Boolean(l_value != r_value),
+            (
+                ast::ast::Infix::GreaterThan,
+                object::object::Object::Integer(l_value),
+                object::object::Object::Integer(r_value),
+            ) => object::object::Object::Boolean(l_value > r_value),
+            (
+                ast::ast::Infix::LessThan,
+                object::object::Object::Integer(l_value),
+                object::object::Object::Integer(r_value),
+            ) => object::object::Object::Boolean(l_value < r_value),
+            (
+                ast::ast::Infix::Eq,
+                object::object::Object::Boolean(l_value),
+                object::object::Object::Boolean(r_value),
+            ) => object::object::Object::Boolean(l_value == r_value),
+            (
+                ast::ast::Infix::NotEq,
+                object::object::Object::Boolean(l_value),
+                object::object::Object::Boolean(r_value),
+            ) => object::object::Object::Boolean(l_value != r_value),
+            (
+                ast::ast::Infix::Plus,
+                object::object::Object::String(l_value),
+                object::object::Object::String(r_value),
+            ) => object::object::Object::String(format!("{}{}", l_value, r_value)),
+            (
+                ast::ast::Infix::Eq,
+                object::object::Object::String(l_value),
+                object::object::Object::String(r_value),
+            ) => object::object::Object::Boolean(l_value == r_value),
+            (
+                ast::ast::Infix::NotEq,
+                object::object::Object::String(l_value),
+                object::object::Object::String(r_value),
+            ) => object::object::Object::Boolean(l_value != r_value),
+            (ast::ast::Infix::Eq, object::object::Object::Null, object::object::Object::Null) => {
+                object::object::Object::Boolean(true)
+            }
+            (
+                ast::ast::Infix::NotEq,
+                object::object::Object::Null,
+                object::object::Object::Null,
+            ) => object::object::Object::Boolean(false),
+            _ => object::object::Object::Null,
         }
     }
 
-    pub fn block_evaluator(&mut self, statements: Vec<ast::ast::Statement>) -> object::object::Object {
+    pub fn block_evaluator(
+        &mut self,
+        statements: Vec<ast::ast::Statement>,
+    ) -> object::object::Object {
         let mut result = object::object::Object::Null;
         for statement in statements.iter() {
             result = self.statement_evaluator(statement.clone());
             if let object::object::Object::ReturnValue(_) = result {
-                return result
+                return result;
             }
         }
         result
@@ -107,13 +181,9 @@ impl Evaluator {
             ast::ast::Statement::Let { identifier, value } => {
                 // let indentifier to stringify!
                 if let ast::ast::Expression::Ident(stringified_identifier) = identifier {
-
                     let env_vle = self.expression_evaluator(value);
 
-                    self.set_env(
-                        stringified_identifier.clone(),
-                        env_vle,
-                    );
+                    self.set_env(stringified_identifier.clone(), env_vle);
                     return object::object::Object::Null;
                 } else {
                     panic!("not implemented");
@@ -132,12 +202,10 @@ impl Evaluator {
         expression: ast::ast::Expression,
     ) -> object::object::Object {
         return match expression {
-            ast::ast::Expression::Ident(identifier) => {
-                match self.get_env(identifier.as_str()) {
-                    Some(value) => value,
-                    None => panic!("identifier not found"),
-                }
-            }
+            ast::ast::Expression::Ident(identifier) => match self.get_env(identifier.as_str()) {
+                Some(value) => value,
+                None => panic!("identifier not found"),
+            },
             ast::ast::Expression::Integer(integer) => object::object::Object::Integer(integer),
             ast::ast::Expression::Bool(boolean) => object::object::Object::Boolean(boolean),
             ast::ast::Expression::String(string) => object::object::Object::String(string),
@@ -146,17 +214,11 @@ impl Evaluator {
                 self.prefix_evaluator(op, right)
             }
             ast::ast::Expression::Infix { op, left, right } => {
-
                 let left = self.expression_evaluator(*left);
                 let right = self.expression_evaluator(*right);
 
-                return self.infix_evaluator(
-                op,
-                left,
-                right,
-            )
-        }
-            ,
+                return self.infix_evaluator(op, left, right);
+            }
             ast::ast::Expression::If {
                 condition,
                 consequence,
@@ -172,33 +234,27 @@ impl Evaluator {
                     }
                 }
             }
-            ast::ast::Expression::Closure { parameters, body } => {
-                object::object::Object::Closure {
-                    parameters: parameters.clone(),
-                    body: *body.clone(),
-                    env: enve::enve::Environment::ve(*self.env.clone().into_inner()),
-                }
-            }
-            ast::ast::Expression::Call {
-                closure,
-                arguments,
-            } => {
+            ast::ast::Expression::Closure { parameters, body } => object::object::Object::Closure {
+                parameters: parameters.clone(),
+                body: *body.clone(),
+                env: enve::enve::Environment::ve(*self.env.clone().into_inner()),
+            },
+            ast::ast::Expression::Call { closure, arguments } => {
                 let mut args = Vec::new();
                 for expr in arguments.iter() {
                     args.push(self.expression_evaluator(expr.clone()));
                 }
 
                 if let ast::ast::Expression::Ident(func) = *closure.clone() {
-
                     match func.as_str() {
                         "🎤" => builtin::builtin::bark(args),
                         "🎤🎶" => builtin::builtin::barkln(args),
                         "😪" => builtin::builtin::sleep(args),
                         "🌸" => builtin::builtin::looper(args, self),
-                        _ => {},
+                        _ => {}
                     }
 
-                    return object::object::Object::Null
+                    return object::object::Object::Null;
                 }
 
                 let closure = self.expression_evaluator(*closure);

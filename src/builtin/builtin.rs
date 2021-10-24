@@ -2,11 +2,21 @@ use super::super::object;
 use std::thread;
 
 pub fn bark(args: std::vec::Vec<object::object::Object>) {
-    print!("{}", args.iter().map(|arg| format!("{} ", arg)).collect::<String>());
+    print!(
+        "{}",
+        args.iter()
+            .map(|arg| format!("{} ", arg))
+            .collect::<String>()
+    );
 }
 
 pub fn barkln(args: std::vec::Vec<object::object::Object>) {
-    println!("{}", args.iter().map(|arg| format!("{} ", arg)).collect::<String>());
+    println!(
+        "{}",
+        args.iter()
+            .map(|arg| format!("{} ", arg))
+            .collect::<String>()
+    );
 }
 
 pub fn sleep(args: std::vec::Vec<object::object::Object>) {
@@ -17,14 +27,21 @@ pub fn sleep(args: std::vec::Vec<object::object::Object>) {
     }
 }
 
-pub fn looper(args: std::vec::Vec<object::object::Object>, eval: &mut super::super::eval::eval::Evaluator) {
-    if let object::object::Object::Closure{ parameters, body, env } = &args[0] {
-
+pub fn looper(
+    args: std::vec::Vec<object::object::Object>,
+    eval: &mut super::super::eval::eval::Evaluator,
+) {
+    if let object::object::Object::Closure {
+        parameters,
+        body,
+        env,
+    } = &args[0]
+    {
         if args.len() == 1 {
             loop {
-
-
-                if let object::object::Object::ReturnValue(value) = eval.statement_evaluator(body.clone()) {
+                if let object::object::Object::ReturnValue(value) =
+                    eval.statement_evaluator(body.clone())
+                {
                     if let object::object::Object::Boolean(b_vle) = *value {
                         if !b_vle {
                             break;
@@ -35,8 +52,6 @@ pub fn looper(args: std::vec::Vec<object::object::Object>, eval: &mut super::sup
                 } else {
                     panic!("loop: function must return something since this loop function doesnt have a loop number");
                 }
-
-                
             }
         } else {
             if let object::object::Object::Integer(int) = &args[1] {
@@ -46,7 +61,7 @@ pub fn looper(args: std::vec::Vec<object::object::Object>, eval: &mut super::sup
             } else {
                 panic!("night: argument must be an integer");
             }
-        }        
+        }
     } else {
         panic!("loop: first argument must be a function");
     }
