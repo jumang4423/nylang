@@ -98,10 +98,10 @@ usage 2: without loop number but the function returns boolean
 
 ## builtin functions
 
-- bark(ln) to print out
+- 🎤(🎶) to print out
 
 ```
-barkln ( "hoge" ) ; // prints hoge\n
+🎤🎶 ( "hoge" ) ; // prints hoge\n
 ```
 
 - 😪 to sleep
