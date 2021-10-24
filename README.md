@@ -32,27 +32,29 @@ nylang run <filename>.nyl
 
 ## reserved word
 
-- dog to conditional check: If Expression
+- 🐶 to conditional check: If Expression
 ```
 🐶 ( 👍 == 👍 ) { } 😱 { } ; 
 ```
 
-- fart to return: Return Expression
+- 💨 to return: Return Expression
 ```
 💨 "cat"
 ```
 
-- hotel to make a new closure expression: Closure Expression
+- 🏨 to make a new closure expression: Closure Expression
 ```
 🏨 ( A , B ) { } ;
 ```
 
-- 🍙 to make a new object in environment memory: Void
+- 🍙 to make a variable and assign in environment: Void
 ```
 🍙 cat = "cat" ;
 ```
 
 - 🌸 to loop
+
+usage 1: with a loop number
 ```
 🌸 ( 
     🏨 ( ) { // function
@@ -62,10 +64,17 @@ nylang run <filename>.nyl
 )
 ```
 
-- 👍 true, 👎 false
-
+usage 2: without loop number but the function returns boolean
 ```
-bark ( 👍 ) ;
+
+🍙 cnt = 0 ;
+
+🌸 ( 
+    🏨 ( ) { // function
+        🍙 cnt = cnt + 1 ;
+        💨 cnt != 100 // loop till the function returns false
+    }
+)
 ```
 
 # types
