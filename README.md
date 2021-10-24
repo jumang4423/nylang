@@ -4,7 +4,7 @@
 
 a cute programming language inspired by monkey language in rust
 
-## install & uninstall
+# install & uninstall
 
 ```
 chmod +x scripts/install.sh && ./scripts/install.sh
@@ -14,7 +14,7 @@ chmod +x scripts/install.sh && ./scripts/install.sh
 chmod +x scripts/uninstall.sh && ./scripts/uninstall.sh
 ```
 
-## excution
+# excution
 
 - show help
 
@@ -28,9 +28,9 @@ nylang
 nylang run <filename>.nyl
 ```
 
-## nylang documentation
+# nylang documentation
 
-### reserved word
+## reserved word
 
 - dog to conditional check: If Expression
 ```
@@ -52,19 +52,23 @@ nylang run <filename>.nyl
 🍙 cat = "cat" ;
 ```
 
+- 🌸 to loop
+```
+🌸 ( 
+    🏨 ( ) { // function
+        // statement
+    } , 
+    100 // loop number
+)
+```
+
 - 👍 true, 👎 false
 
 ```
 bark ( 👍 ) ;
 ```
 
-- bark to print out
-
-```
-bark ( "hoge hoge" ) ;
-```
-
-### types
+# types
 
 - number
 
@@ -81,4 +85,18 @@ bark ( "hoge hoge" ) ;
 - string
 ```
 "hoge"
+```
+
+## builtin functions
+
+- bark(ln) to print out
+
+```
+barkln ( "hoge" ) ; // prints hoge\n
+```
+
+- 😪 to sleep
+
+```
+😪 ( 500 ) ; // wait 0.5s 
 ```

@@ -14,6 +14,7 @@ mod parser;
 mod object;
 mod enve;
 mod eval;
+mod builtin;
 
 fn main() -> io::Result<()> {
 

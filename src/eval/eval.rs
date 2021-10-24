@@ -1,6 +1,7 @@
 use super::super::ast;
 use super::super::enve;
 use super::super::object;
+use super::super::builtin;
 use std::cell::RefCell;
 
 // actual program runner
@@ -188,10 +189,16 @@ impl Evaluator {
                 }
 
                 if let ast::ast::Expression::Ident(func) = *closure.clone() {
-                    if func == "bark" {
-                        println!("{}", args.iter().map(|arg| format!("{} ", arg)).collect::<String>());
-                        return object::object::Object::Null
+
+                    match func.as_str() {
+                        "🎤" => builtin::builtin::bark(args),
+                        "🎤🎶" => builtin::builtin::barkln(args),
+                        "😪" => builtin::builtin::sleep(args),
+                        "🌸" => builtin::builtin::looper(args, self),
+                        _ => {},
                     }
+
+                    return object::object::Object::Null
                 }
 
                 let closure = self.expression_evaluator(*closure);

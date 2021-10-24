@@ -10,7 +10,20 @@ pub struct Lexer<'a> {
 }
 
 fn is_letter(c: char) -> bool {
-    c >= 'a' && c <='z' || c >= 'A' && c <='Z' || c == '_' || c == '🏨'|| c == '🍙' || c == '👍' || c == '👎' || c == '🐶' || c == '😱' || c == '💨' 
+    c >= 'a' && c <= 'z'
+        || c >= 'A' && c <= 'Z'
+        || c == '_'
+        || c == '🏨'
+        || c == '🍙'
+        || c == '👍'
+        || c == '👎'
+        || c == '🐶'
+        || c == '😱'
+        || c == '💨'
+        || c == '😪'
+        || c == '🎤'
+        || c == '🎶'
+        || c == '🌸'
 }
 
 impl<'a> Lexer<'a> {
@@ -61,9 +74,9 @@ impl<'a> Lexer<'a> {
             ZERO_CHAR => token::token::Token::EOF,
             char => {
                 if is_letter(self.cur_char) {
-                    return self.check_identifier()
+                    return self.check_identifier();
                 } else if char.is_numeric() {
-                    return self.check_number()
+                    return self.check_number();
                 } else {
                     token::token::Token::Illegal
                 }
