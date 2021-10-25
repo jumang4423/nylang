@@ -1,6 +1,6 @@
 # nylang
 
-![](_img/src.png)
+![](_img/emojis.png)
 
 a cute language with a bunch emoji
 
@@ -38,11 +38,6 @@ nylang run <filename>.nyl
 
 ## reserved word
 
-- 🐶 to conditional check: If Expression
-```
-🐶 ( 👍 == 👍 ) { } 😱 { } ; 
-```
-
 - 💨 to return: Return Expression
 ```
 💨 "cat"
@@ -58,10 +53,26 @@ nylang run <filename>.nyl
 🍙 cat = "cat" ;
 ```
 
-- 🌸 to loop
+- 🐶 to conditional check: If Expression
+
+```
+🐶 ( 👍 == 👍 ) { } 😱 { } ; 
+```
+
+this also returns something
+
+```
+🍙 a = 🐶 ( 👍 == 👍 ) { 💨 "ass" } ; 
+```
+
+- 🌸 to loop: Void
 
 usage 1: with a loop number
+
 ```
+
+// ident ( closure, number )
+
 🌸 ( 
     🏨 ( ) { // function
         // statement
@@ -72,6 +83,8 @@ usage 1: with a loop number
 
 usage 2: without loop number but the function returns boolean
 ```
+
+// ident ( closure )
 
 🍙 cnt = 0 ;
 
@@ -104,19 +117,19 @@ usage 2: without loop number but the function returns boolean
 
 ## builtin functions
 
-- 🎤(🎶) to print out
+- 🎤(🎶) to print out: Void
 
 ```
 🎤🎶 ( "hoge" ) ; // prints hoge\n
 ```
 
-- 😪 to sleep
+- 😪 to sleep: Void
 
 ```
 😪 ( 500 ) ; // wait 0.5s 
 ```
 
-- 🌹 to return random emojis
+- 🌹 to return random emojis: String(Emojis)
 
 ```
 🌹 ( 5 ) ; // random 5 emojis
