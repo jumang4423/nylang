@@ -15,6 +15,7 @@ mod object;
 mod enve;
 mod eval;
 mod builtin;
+mod tools;
 
 fn main() -> io::Result<()> {
 

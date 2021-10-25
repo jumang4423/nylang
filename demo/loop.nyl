@@ -1,14 +1,14 @@
 🍙 cnt = 0 ;
 
 🌸 ( 
-    🏨 ( _ ) {
+    🏨 ( ) {
         🎤 ( "we are looping forever" ) ;
         🎤🎶 ( cnt ) ;
         🍙 cnt = cnt + 1 ;
 
-        😪 ( 100 ) ;
+        😪 ( 1 ) ;
     } , 
-    10
+    1000
 ) ;
 
 🎤🎶 ( "that we are here in this world💓" ) ;

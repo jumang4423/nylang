@@ -242,7 +242,6 @@ impl<'a> Parser<'a> {
         let mut indentifier_vecs = Vec::new();
 
         if self.peek_token == token::token::Token::RParen {
-            self.next_token();
             indentifier_vecs
         } else {
             self.next_token();
@@ -270,9 +269,7 @@ impl<'a> Parser<'a> {
     fn call_parser(&mut self, closure: ast::ast::Expression) -> ast::ast::Expression {
         let mut args = Vec::new();
 
-        if self.peek_token == token::token::Token::RParen {
-            self.next_token();
-        } else {
+        if self.peek_token != token::token::Token::RParen {
             self.next_token();
             while {
                 args.push(self.expression_parser(ast::ast::WhichTheBest::Lowest));
@@ -282,7 +279,12 @@ impl<'a> Parser<'a> {
                 self.next_token();
             }
         }
-        self.next_token(); //////////////////////////////???????????????????????
+        
+        self.next_token(); // )
+
+        if self.cur_token != token::token::Token::RParen {
+            panic!("Expected RParen in call expression");
+        } 
 
         if self.peek_token == token::token::Token::Semicolon {
             self.next_token();

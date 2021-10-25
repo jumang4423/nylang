@@ -1,6 +1,66 @@
+use super::super::lexer;
 use super::super::object;
-use std::thread;
+use super::super::parser;
+use super::super::tools;
 use rand::Rng;
+use std::fs;
+use std::io;
+use std::thread;
+use std::env;
+
+#[allow(deprecated)]
+pub fn import(
+    args: std::vec::Vec<object::object::Object>,
+    eval_global: &mut super::super::eval::eval::Evaluator,
+) -> object::object::Object {
+    if let object::object::Object::String(file_name) = &args[0] {
+        let file_name_string: String = file_name.clone();
+        let home_path = env::home_dir().unwrap().display().to_string();
+
+        let _lines = match fs::read_to_string(format!("{}/{}", &home_path,  &file_name_string)) {
+            Ok(lines) => lines,
+            Err(_e) => panic!("Error reading file"),
+        };
+        let l = lexer::lexer::Lexer::new(_lines.as_str());
+        let mut p = parser::parser::Parser::new(l);
+        let program = p.program_parser();
+
+        // loop through the program
+        for statement in program.statements.iter() {
+            // evaluate the statement
+            eval_global.statement_evaluator(statement.clone());
+        }
+
+        object::object::Object::Null
+    } else {
+        panic!("import: argument must be a string");
+    }
+}
+
+pub fn scanf(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
+    let mut _type = "string";
+
+    if args.len() != 1 {
+        panic!("get_input: wrong number of arguments");
+    }
+
+    if let object::object::Object::String(_str) = &args[0] {
+        _type = &_str;
+    }
+
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("cannot get input");
+
+    // remove last enter from input
+
+    return match _type {
+        "number" => object::object::Object::Integer(input.trim().parse::<i32>().unwrap()),
+        "boolean" | "bool" => {
+            object::object::Object::Boolean(tools::tools::str_to_bool(input.trim().to_string()))
+        }
+        _ => object::object::Object::String(input.trim().to_string()),
+    };
+}
 
 pub fn bark(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
     print!(
@@ -77,19 +137,8 @@ pub fn looper(
     object::object::Object::Null
 }
 
-pub fn random_emojis (args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-    let emojis = vec![
-        "🐧",
-        "🦄",
-        "🐝",
-        "🐹",
-        "🐰",
-        "🦊",
-        "🐼",
-        "🐨",
-        "🐯",
-        "🐷"
-    ];
+pub fn random_emojis(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
+    let emojis = vec!["🐧", "🦄", "🐝", "🐹", "🐰", "🦊", "🐼", "🐨", "🐯", "🐷"];
 
     if args.len() == 1 {
         if let object::object::Object::Integer(int) = &args[0] {
@@ -106,5 +155,4 @@ pub fn random_emojis (args: std::vec::Vec<object::object::Object>) -> object::ob
     } else {
         panic!("random_emoji: too many arguments");
     }
-
 }

@@ -98,6 +98,14 @@ usage 2: without loop number but the function returns boolean
 )
 ```
 
+- ```🐽🐽🐽 ( "<filename>.nyl" ) ;``` to import namespaced functions to the file
+
+```
+🐽🐽🐽 ( ".nylang/demo/__test__.nyl" ) ;
+
+__test__say_hello ( ) ; // imported!
+```
+
 # types
 
 - number
@@ -123,6 +131,17 @@ usage 2: without loop number but the function returns boolean
 
 ```
 🎤🎶 ( "hoge" ) ; // prints hoge\n
+```
+
+- 👀 ( type T ) to get input: T
+
+T can be ```"string", "number" and "boolean"```
+
+```
+🍙 _input = 👀 ( "number" ) ;
+
+🎤🎶 ( _input * _input ) ;
+
 ```
 
 - 😪 to sleep: Void

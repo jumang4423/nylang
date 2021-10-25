@@ -4,7 +4,7 @@
     } 😱 {
         💨 👎 ;
     } 
-};
+} ;
 🍙 age = 3 + 3 * 5;
 
 🎤🎶 ( "-! basic printing test" ) ;
@@ -36,16 +36,18 @@
 
 😪 ( 1000 ) ;
 
+🎤🎶 ( "-! how many times loop? (enter number):" ) ;
+
 🍙 cnt = 0;
-🍙 loop_num = 5;
+🍙 loop_num = 👀 ( "number" );
 
 🌸 ( 
-    🏨 ( _ ) {
+    🏨 ( ) {
         🎤 ( "current number is: " ) ;
         🎤🎶 ( cnt ) ;
         🍙 cnt = cnt + 1 ;
 
-        😪 ( 100 ) ;
+        😪 ( 10 ) ;
     } , 
     loop_num
 ) ; 
@@ -57,10 +59,10 @@
 
 😪 ( 1000 ) ;
 
-🍙 cnt = 1;
+🍙 cnt = 1 ;
 
 🌸 ( 
-    🏨 ( _ ) {
+    🏨 ( ) {
         🎤 ( "current number * 2 is: " ) ;
         🎤🎶 ( cnt ) ;
         🍙 cnt = cnt * 2 ;
@@ -78,7 +80,7 @@
 😪 ( 1000 ) ;
 
 🌸 ( 
-    🏨 ( _ ) {
+    🏨 ( ) {
         🎤 ( 🌹 ( 2 ) ) ;
 
         🎤🎶 ( "< eating us not allowed by your god" ) ;

@@ -253,6 +253,8 @@ impl Evaluator {
                         "😪" => return builtin::builtin::sleep(args),
                         "🌸" => return builtin::builtin::looper(args, self),
                         "🌹" => return builtin::builtin::random_emojis(args),
+                        "👀" => return builtin::builtin::scanf(args),
+                        "🐽🐽🐽" => return builtin::builtin::import(args, self),
                         _ => { }
                     }
                 }

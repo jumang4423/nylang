@@ -20,7 +20,6 @@ pub fn run_program(file: String) -> Result<(), io::Error> {
     let l = lexer::lexer::Lexer::new(_lines.as_str());
     let mut p = parser::parser::Parser::new(l);
     let program = p.program_parser();
-
     env.evaluator(program);
 
     println!("\n-! {}", "finished".color(blue_color_res.unwrap_or(Color::Green)).bold());
@@ -41,7 +40,12 @@ pub fn ast_program(file: String) -> Result<(), io::Error> {
     let mut p = parser::parser::Parser::new(l);
     let program = p.program_parser();
 
-    println!("{:?}", program);
+    let mut _line_cnt: i32 = 1; 
+
+    program.statements.iter().for_each(|statement| {
+        println!("{}: {:?}\n", _line_cnt, statement);
+        _line_cnt += 1;
+    });
 
     println!("\n-! {}", "finished".color(blue_color_res.unwrap_or(Color::Green)).bold());
 
