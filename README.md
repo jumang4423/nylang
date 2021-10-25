@@ -1,14 +1,16 @@
-# nylang
-
 ![](_img/emojis.png)
+
+# nylang
 
 a cute language with a bunch emoji
 
 # quick demo
 
-- 1. install cargo to excute rust compiler
+- 1. ```git clone <this github repo>```
 
-- 2. run ```cargo run run demo/demo.nyl```
+- 2. install cargo to excute rust compiler
+
+- 3. run ```cargo run run demo/demo.nyl```
 
 # install & uninstall
 
