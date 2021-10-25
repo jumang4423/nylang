@@ -2,7 +2,13 @@
 
 ![](_img/src.png)
 
-a cute programming language inspired by monkey language in rust
+a cute language with a bunch emoji
+
+# quick demo
+
+- 1. install cargo to excute rust compiler
+
+- 2. run ```cargo run run demo/demo.nyl```
 
 # install & uninstall
 
@@ -109,3 +115,11 @@ usage 2: without loop number but the function returns boolean
 ```
 😪 ( 500 ) ; // wait 0.5s 
 ```
+
+- 🌹 to return random emojis
+
+```
+🌹 ( 5 ) ; // random 5 emojis
+```
+
+there is 10 emojis available, which means that somehow we can generates random numbers using this function.

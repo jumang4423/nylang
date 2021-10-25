@@ -1,40 +1,48 @@
 use super::super::object;
 use std::thread;
+use rand::Rng;
 
-pub fn bark(args: std::vec::Vec<object::object::Object>) {
+pub fn bark(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
     print!(
         "{}",
         args.iter()
             .map(|arg| format!("{} ", arg))
             .collect::<String>()
     );
+
+    object::object::Object::Null
 }
 
-pub fn barkln(args: std::vec::Vec<object::object::Object>) {
+pub fn barkln(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
     println!(
         "{}",
         args.iter()
             .map(|arg| format!("{} ", arg))
             .collect::<String>()
     );
+
+    object::object::Object::Null
 }
 
-pub fn sleep(args: std::vec::Vec<object::object::Object>) {
+#[allow(deprecated)]
+pub fn sleep(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
     if let object::object::Object::Integer(seconds) = args[0] {
         thread::sleep_ms(seconds as u32);
     } else {
         panic!("night: argument must be an integer");
     }
+
+    object::object::Object::Null
 }
 
 pub fn looper(
     args: std::vec::Vec<object::object::Object>,
     eval: &mut super::super::eval::eval::Evaluator,
-) {
+) -> object::object::Object {
     if let object::object::Object::Closure {
-        parameters,
+        parameters: _,
         body,
-        env,
+        env: _,
     } = &args[0]
     {
         if args.len() == 1 {
@@ -65,4 +73,38 @@ pub fn looper(
     } else {
         panic!("loop: first argument must be a function");
     }
+
+    object::object::Object::Null
+}
+
+pub fn random_emojis (args: std::vec::Vec<object::object::Object>) -> object::object::Object {
+    let emojis = vec![
+        "🐧",
+        "🦄",
+        "🐝",
+        "🐹",
+        "🐰",
+        "🦊",
+        "🐼",
+        "🐨",
+        "🐯",
+        "🐷"
+    ];
+
+    if args.len() == 1 {
+        if let object::object::Object::Integer(int) = &args[0] {
+            let mut emojis_vec = vec![];
+            for _ in 0..*int {
+                let index = rand::thread_rng().gen_range(0..emojis.len());
+                emojis_vec.push(emojis[index].to_string());
+            }
+
+            return object::object::Object::String(emojis_vec.join(" "));
+        } else {
+            panic!("random_emoji: argument must be an integer");
+        }
+    } else {
+        panic!("random_emoji: too many arguments");
+    }
+
 }

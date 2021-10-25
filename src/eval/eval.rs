@@ -245,16 +245,16 @@ impl Evaluator {
                     args.push(self.expression_evaluator(expr.clone()));
                 }
 
+                // non reserved by parser
                 if let ast::ast::Expression::Ident(func) = *closure.clone() {
                     match func.as_str() {
-                        "🎤" => builtin::builtin::bark(args),
-                        "🎤🎶" => builtin::builtin::barkln(args),
-                        "😪" => builtin::builtin::sleep(args),
-                        "🌸" => builtin::builtin::looper(args, self),
-                        _ => {}
+                        "🎤" => return builtin::builtin::bark(args),
+                        "🎤🎶" => return builtin::builtin::barkln(args),
+                        "😪" => return builtin::builtin::sleep(args),
+                        "🌸" => return builtin::builtin::looper(args, self),
+                        "🌹" => return builtin::builtin::random_emojis(args),
+                        _ => { }
                     }
-
-                    return object::object::Object::Null;
                 }
 
                 let closure = self.expression_evaluator(*closure);
