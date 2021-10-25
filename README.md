@@ -72,7 +72,6 @@ this also returns something
 usage 1: with a loop number
 
 ```
-
 // ident ( closure, number )
 
 🌸 ( 
@@ -84,8 +83,8 @@ usage 1: with a loop number
 ```
 
 usage 2: without loop number but the function returns boolean
-```
 
+```
 // ident ( closure )
 
 🍙 cnt = 0 ;
