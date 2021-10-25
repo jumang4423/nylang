@@ -4,157 +4,52 @@
 
 a cute language with a bunch emoji
 
-# quick demo
+# documentation
 
-- 1. ```git clone <this github repo>```
+[WIKI](https://github.com/jumang4423/nylang/wiki)
 
-- 2. install cargo to excute rust compiler
+# usage
 
-- 3. run ```cargo run run samples/demo.nyl```
+## dependancies
 
-# install & uninstall
+- rust ( cargo )
+
+## install & uninstall
+
+> install 
 
 ```
 chmod +x scripts/install.sh && ./scripts/install.sh
 ```
 
+> uninstall
+
 ```
 chmod +x scripts/uninstall.sh && ./scripts/uninstall.sh
 ```
 
-# excution
+## excution
 
-- show help
+> show help
 
 ```
 nylang
 ```
 
-- run program
+> run program
 
 ```
 nylang run <filename>.nyl
 ```
 
-# nylang documentation
-
-## reserved word
-
-- 💨 to return: Return Expression
-```
-💨 "cat"
-```
-
-- 🏨 to make a new closure expression: Closure Expression
-```
-🏨 ( A , B ) { } ;
-```
-
-- 🍙 to make a variable and assign in environment: Void
-```
-🍙 cat = "cat" ;
-```
-
-- 🐶 to conditional check: If Expression
+> parse program
 
 ```
-🐶 ( 👍 == 👍 ) { } 😱 { } ; 
+nylang parse <filename>.nyl
 ```
 
-this also returns something
+> show ast
 
 ```
-🍙 a = 🐶 ( 👍 == 👍 ) { 💨 "ass" } ; 
+nylang ast <filename>.nyl
 ```
-
-- 🌸 to loop: Void
-
-usage 1: with a loop number
-
-```
-// ident ( closure, number )
-
-🌸 ( 
-    🏨 ( ) { // function
-        // statement
-    } , 
-    100 // loop number
-)
-```
-
-usage 2: without loop number but the function returns boolean
-
-```
-// ident ( closure )
-
-🍙 cnt = 0 ;
-
-🌸 ( 
-    🏨 ( ) { // function
-        🍙 cnt = cnt + 1 ;
-        💨 cnt != 100 // loop till the function returns false
-    }
-)
-```
-
-- ```🐽🐽🐽 ( "<filename>.nyl" ) ;``` to import namespaced functions to the file
-
-```
-🐽🐽🐽 ( ".nylang/demo/__test__.nyl" ) ;
-
-__test__say_hello ( ) ; // imported!
-```
-
--- ```🍄🍄 ( "comment" ) ;``` to comment out
-
-# types
-
-- number
-
-```
-123456789
-```
-
-- boolean
-
-```
-👍 👎
-```
-
-- string
-```
-"hoge"
-```
-
-## builtin functions
-
-- 🎤(🎶) to print out: Void
-
-```
-🎤🎶 ( "hoge" ) ; // prints hoge\n
-```
-
-- 👀 ( type T ) to get input: T
-
-T can be ```"string", "number" and "boolean"```
-
-```
-🍙 _input = 👀 ( "number" ) ;
-
-🎤🎶 ( _input * _input ) ;
-
-```
-
-- 😪 to sleep: Void
-
-```
-😪 ( 500 ) ; // wait 0.5s 
-```
-
-- 🌹 to return random emojis: String(Emojis)
-
-```
-🌹 ( 5 ) ; // random 5 emojis
-```
-
-there is 10 emojis available, which means that somehow we can generates random numbers using this function.
