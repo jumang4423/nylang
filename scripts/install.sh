@@ -9,7 +9,7 @@ chmod +x ~/.nylang
 
 # move the binary
 cp target/debug/nylang ~/.nylang
-cp -r demo/ ~/.nylang/demo
+cp -r lib/ ~/.nylang/lib
 rm target/debug/nylang
 chmod +x ~/.nylang/nylang
 

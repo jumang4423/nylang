@@ -1,0 +1,12 @@
+🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
+
+🍙 cnt = 0 ;
+
+🌸 (
+    🏨 ( ) {
+        🎤🎶 ( __rand__random_num ( cnt ) ) ;
+        🍙 cnt = cnt + 1 ;
+
+        💨 cnt != 8 ;
+    }
+)

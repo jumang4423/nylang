@@ -1,0 +1,21 @@
+
+🍄🍄 ( "simple calculator, (operator left right) " ) ;
+🍙 __math__calc = 🏨 ( operator, left, right ) {
+    🐶 ( operator == "+" ) {
+        💨 left + right ;
+    } ;
+
+    🐶 ( operator == "-" ) {
+        💨 left - right ;
+    } ;
+
+    🐶 ( operator == "*" ) {
+        💨 left * right ;
+    } ;
+
+    🐶 ( operator == "/" ) {
+        💨 left / right ;
+    } ;
+
+    💨 -1 ;
+} ;

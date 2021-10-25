@@ -1,0 +1,33 @@
+🍄🍄 ( 
+    "random number generation library!"
+) ;
+
+🍄🍄 ( "generates random number by digit" ) ;
+🍙 __rand__random_num = 🏨 ( digit ) { 
+    🍙 current_digit = 1 ;
+    🍙 return_num = 1 ;
+    🍙 random_Num = 0 ;
+
+    🌸 ( 
+        🏨 ( ) {
+            🍙 rnd = 🌹 ( 1 ) ;
+            
+            🐶 ( rnd == "🐧" ) { 🍙 random_Num = 0 ; } ;
+            🐶 ( rnd == "🦄" ) { 🍙 random_Num = 1 ; } ;
+            🐶 ( rnd == "🐝" ) { 🍙 random_Num = 2 ; } ;
+            🐶 ( rnd == "🐹" ) { 🍙 random_Num = 3 ; } ;
+            🐶 ( rnd == "🐰" ) { 🍙 random_Num = 4 ; } ;
+            🐶 ( rnd == "🦊" ) { 🍙 random_Num = 5 ; } ;
+            🐶 ( rnd == "🐼" ) { 🍙 random_Num = 6 ; } ;
+            🐶 ( rnd == "🐨" ) { 🍙 random_Num = 7 ; } ;
+            🐶 ( rnd == "🐯" ) { 🍙 random_Num = 8 ; } ;
+            🐶 ( rnd == "🐷" ) { 🍙 random_Num = 9 ; } ;
+
+            🍙 return_num = return_num + current_digit * random_Num ;
+            🍙 current_digit = current_digit * 10 ;
+        } ,
+        digit
+    ) ;
+
+    💨 return_num - 1 ;
+} ;

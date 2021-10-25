@@ -1,3 +1,9 @@
+🍄🍄 ( 
+    "welcome to nylang!",
+    "this demo shows that what exactly nylang can do!"
+) ;
+
+
 🍙 checkCat = 🏨 ( animal ) {
     🐶 ( animal == "cat" ) {
         💨 👍 ;

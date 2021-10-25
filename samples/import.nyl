@@ -1,0 +1,8 @@
+🍄🍄 ( 
+    "this imports test modules",
+    "file path starts from home directory implicitly"
+) ;
+
+🐽🐽🐽 ( ".nylang/lib/__test__.nyl" ) ;
+
+__test__say_hello ( ) ;

@@ -182,7 +182,6 @@ impl Evaluator {
                 // let indentifier to stringify!
                 if let ast::ast::Expression::Ident(stringified_identifier) = identifier {
                     let env_vle = self.expression_evaluator(value);
-
                     self.set_env(stringified_identifier.clone(), env_vle);
                     return object::object::Object::Null;
                 } else {
@@ -255,6 +254,7 @@ impl Evaluator {
                         "🌹" => return builtin::builtin::random_emojis(args),
                         "👀" => return builtin::builtin::scanf(args),
                         "🐽🐽🐽" => return builtin::builtin::import(args, self),
+                        "🍄🍄" => return object::object::Object::Null,
                         _ => { }
                     }
                 }

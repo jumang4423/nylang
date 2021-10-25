@@ -68,7 +68,7 @@ impl<'a> Parser<'a> {
         } else {
             panic!("Expected identifier")
         };
-        self.next_token(); // ==
+        self.next_token(); // =
         self.next_token(); // value
 
         let value = self.expression_parser(ast::ast::WhichTheBest::Lowest);
@@ -114,6 +114,8 @@ impl<'a> Parser<'a> {
             token::token::Token::If => self.expression_if_parser(),
             token::token::Token::Closure => self.closure_parser(),
             token => {
+
+                println!("{:?}", self.peek_token);
                 panic!("Unexpected token {:?}", token)
             }
         };
@@ -172,11 +174,11 @@ impl<'a> Parser<'a> {
     }
 
     fn expression_if_parser(&mut self) -> ast::ast::Expression {
+
         self.next_token();
         // if (
         let bools = Box::new(self.expression_parser(ast::ast::WhichTheBest::Lowest));
 
-        self.next_token();
         self.next_token();
         self.next_token();
 
@@ -206,13 +208,14 @@ impl<'a> Parser<'a> {
         let mut blocks = Vec::new();
 
         loop {
-            if self.cur_token == token::token::Token::RBrace
+            if self.cur_token != token::token::Token::RBrace
                 && self.cur_token != token::token::Token::EOF
             {
-                break;
-            } else {
                 blocks.push(self.statement_parser());
+
                 self.next_token();
+            } else {
+                break;
             }
         }
 

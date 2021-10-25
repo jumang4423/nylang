@@ -1,0 +1,6 @@
+🍄🍄 ( 
+    "for import test",
+    "you can check you can import functions or not"
+) ;
+
+🍙 __test__say_hello = 🏨 ( ) { 🎤🎶 ( "hello, importing succeed!" ) } ;

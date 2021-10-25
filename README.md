@@ -10,7 +10,7 @@ a cute language with a bunch emoji
 
 - 2. install cargo to excute rust compiler
 
-- 3. run ```cargo run run demo/demo.nyl```
+- 3. run ```cargo run run samples/demo.nyl```
 
 # install & uninstall
 
@@ -104,6 +104,8 @@ usage 2: without loop number but the function returns boolean
 
 __test__say_hello ( ) ; // imported!
 ```
+
+-- ```🍄🍄 ( "comment" ) ;``` to comment out
 
 # types
 
