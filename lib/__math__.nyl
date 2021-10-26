@@ -19,3 +19,17 @@
 
     💨 -1 ;
 } ;
+
+🍄🍄 ( "generates bot ^ expo" ) ;
+🍙 __math__pow = 🏨 ( bot, expo ) {
+    🍙 ans = 1;
+
+    🌸 (
+        🏨 ( ) {
+            🍙 ans = ans * bot ;
+        },
+        expo
+    ) ;
+
+    💨 ans ;
+} ;
