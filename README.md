@@ -53,3 +53,17 @@ nylang parse <filename>.nyl
 ```
 nylang ast <filename>.nyl
 ```
+
+## excute uisng docker
+
+- to start the container
+
+```
+docker compose up -d
+```
+
+- entering shell
+
+```
+docker compose exec nylang bash
+```
