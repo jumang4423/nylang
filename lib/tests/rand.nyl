@@ -4,9 +4,34 @@
 
 🌸 (
     🏨 ( ) {
-        🎤🎶 ( __rand__random_num_zero_to_digit ( 8 ) ) ;
+        🎤 ( 
+            __rand__random_num_zero_to_specified_number ( 999999999 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ),
+            👍
+        ) ;
         🍙 cnt = cnt + 1 ;
 
-        💨 cnt != 30 ;
+        💨 cnt != 100 ;
     }
 ) ;
+
+🍙 cnt = 0 ;
+
+🌸 (
+    🏨 ( ) {
+        🎤 ( 
+            __rand__random_num_zero_to_specified_number ( 999999999 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ),
+            👎
+        ) ;
+        🍙 cnt = cnt + 1 ;
+
+        💨 cnt != 100 ;
+    }
+) ;
+
+🎤🎶 ( "" ) ;

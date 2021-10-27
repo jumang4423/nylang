@@ -22,12 +22,13 @@
     💨 random_Num ;
 } ;
 
-🍄🍄 ( "generates random number from 0 to number of digit" ) ;
-🍙 __rand__random_num_zero_to_digit = 🏨 ( digit ) { 
+🍄🍄 ( "generates random number from 0 to specified number" ) ;
+🍙 __rand__random_num_zero_to_specified_number = 🏨 ( num ) { 
+
+    🍙 digit = 9 ;
     🍙 current_digit = 1 ;
     🍙 return_num = 1 ;
     🍙 random_Num = 0 ;
-
     🍙 con_rand = __rand__random_number ( ) + 1 ;
 
     🌸 ( 
@@ -38,5 +39,5 @@
         con_rand % digit
     ) ;
 
-    💨 return_num - 1 ;
+    💨 return_num % num  ;
 } ;

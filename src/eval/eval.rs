@@ -252,8 +252,8 @@ impl Evaluator {
                 // non reserved by parser
                 if let ast::ast::Expression::Ident(func) = *closure.clone() {
                     match func.as_str() {
-                        "🎤" => return builtin::builtin::bark(args),
-                        "🎤🎶" => return builtin::builtin::barkln(args),
+                        "🎤" => return builtin::builtin::bark(args, false),
+                        "🎤🎶" => return builtin::builtin::bark(args, true),
                         "😪" => return builtin::builtin::sleep(args),
                         "🌸" => return builtin::builtin::looper(args, self),
                         "🌹" => return builtin::builtin::random_emojis(args),

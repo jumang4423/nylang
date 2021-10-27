@@ -8,6 +8,23 @@ use std::io;
 use std::thread;
 use std::env;
 
+use colored::Colorize;
+
+macro_rules! cast {
+    ($target: expr, $pat: path) => {
+        {
+            if let $pat(a) = $target { // #1
+                a
+            } else {
+                panic!(
+                    "mismatch variant when cast to {}", 
+                    stringify!($pat)); // #2
+            }
+        }
+    };
+}
+
+
 #[allow(deprecated)]
 pub fn import(
     args: std::vec::Vec<object::object::Object>,
@@ -62,24 +79,45 @@ pub fn scanf(args: std::vec::Vec<object::object::Object>) -> object::object::Obj
     };
 }
 
-pub fn bark(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-    print!(
-        "{}",
-        args.iter()
-            .map(|arg| format!("{} ", arg))
-            .collect::<String>()
-    );
+pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> object::object::Object {
 
-    object::object::Object::Null
-}
+    match args.len() {
+        1 => {
+            print!(
+                "{}",
+                args[0]
+            );
+        }
+        5 => {
 
-pub fn barkln(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-    println!(
-        "{}",
-        args.iter()
-            .map(|arg| format!("{} ", arg))
-            .collect::<String>()
-    );
+            // unwrap colors from objects
+            let red = cast!(args[1], object::object::Object::Integer);
+            let green = cast!(args[2], object::object::Object::Integer);
+            let blue = cast!(args[3], object::object::Object::Integer);
+            let is_text_coloring = cast!(args[4], object::object::Object::Boolean);
+
+            if is_text_coloring {
+                print!(
+                    "{}",
+                    format!("{}", args[0]).truecolor(red as u8, green as u8, blue as u8).bold()
+                );
+            } else {
+                print!(
+                    "{}",
+                    format!("{}", args[0]).on_truecolor(red as u8, green as u8, blue as u8).bold()
+                );
+            }
+
+            
+        }
+        _ => { 
+            panic!("🎤: arguments are invalid, arg len should be 1 or 5")
+        }
+    }
+
+    if newline {
+        println! () ;
+    }
 
     object::object::Object::Null
 }
@@ -144,7 +182,7 @@ pub fn random_emojis(args: std::vec::Vec<object::object::Object>) -> object::obj
         if let object::object::Object::Integer(int) = &args[0] {
             let mut emojis_vec = vec![];
             for _ in 0..*int {
-                let index = rand::thread_rng().gen_range(0..emojis.len());
+                let index = rand::thread_rng().gen_range(0, emojis.len());
                 emojis_vec.push(emojis[index].to_string());
             }
 

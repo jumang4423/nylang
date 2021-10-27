@@ -7,4 +7,4 @@ edition = "2018"
 
 [dependencies]
 colored = "2" 
-rand = "0.8.4"
+rand = { version = "0.7.3", features = ["wasm-bindgen"] }
