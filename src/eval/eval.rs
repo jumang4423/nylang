@@ -203,7 +203,7 @@ impl Evaluator {
 
     pub fn array_evaluator(&mut self, elements: Vec<ast::ast::Expression>) -> object::object::Object {
 
-        let mut obj_array: Vec<object::object::Object>;
+        let obj_array: Vec<object::object::Object>;
         obj_array = elements.iter().map(|element| self.expression_evaluator(element.clone())).collect();
         object::object::Object::Array(obj_array)
     }
@@ -319,9 +319,6 @@ impl Evaluator {
                 } else {
                     panic!("not implemented");
                 }
-            }
-            _ => {
-                panic!("no such expression found")
             }
         };
     }
