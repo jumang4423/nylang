@@ -40,6 +40,13 @@ pub enum Expression {
         consequence: Box<Statement>,
         alternative: Option<Box<Statement>>,
     },
+    Array {
+        elements: Vec<Expression>
+    },
+    ArrayIndex {
+        left_ident: Box<Expression>,
+        index: Box<Expression>
+    },
     Closure {
         parameters: Vec<Expression>,
         body: Box<Statement>,

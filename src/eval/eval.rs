@@ -201,6 +201,13 @@ impl Evaluator {
         };
     }
 
+    pub fn array_evaluator(&mut self, elements: Vec<ast::ast::Expression>) -> object::object::Object {
+
+        let mut obj_array: Vec<object::object::Object>;
+        obj_array = elements.iter().map(|element| self.expression_evaluator(element.clone())).collect();
+        object::object::Object::Array(obj_array)
+    }
+ 
     pub fn expression_evaluator(
         &mut self,
         expression: ast::ast::Expression,
@@ -213,6 +220,33 @@ impl Evaluator {
             ast::ast::Expression::Integer(integer) => object::object::Object::Integer(integer),
             ast::ast::Expression::Bool(boolean) => object::object::Object::Boolean(boolean),
             ast::ast::Expression::String(string) => object::object::Object::String(string),
+            ast::ast::Expression::Array { elements } => self.array_evaluator(elements.clone()),
+            ast::ast::Expression::ArrayIndex { left_ident, index } => {
+                let array_obj: object::object::Object ;
+                let evaled_index = self.expression_evaluator(*index);
+                let wrapped_num: i32 ;
+
+                if let object::object::Object::Integer(w_index) = evaled_index {
+                    wrapped_num = w_index ;
+                } else {
+                    panic! ( "ArrayIndex: index should be integer") ;
+                }
+
+                if let ast::ast::Expression::Ident(ident) = *left_ident.clone() {
+                    match self.get_env(ident.as_str()) {
+                        Some(obj) => array_obj = obj,
+                        None => { panic! ("no ident")}
+                    }
+                } else {
+                    panic! ( "ArrayIndex: given ident dead, be sure you initialized correctly" ) ;
+                }
+
+                if let object::object::Object::Array(vec_array) = array_obj {
+                    return vec_array[wrapped_num as usize].clone();
+                } else {
+                    panic! ( "ArrayIndex: given ident is not array type, maybe" ) ;
+                }
+            }
             ast::ast::Expression::Prefix { op, right } => {
                 let right = self.expression_evaluator(*right);
                 self.prefix_evaluator(op, right)
@@ -285,6 +319,9 @@ impl Evaluator {
                 } else {
                     panic!("not implemented");
                 }
+            }
+            _ => {
+                panic!("no such expression found")
             }
         };
     }
