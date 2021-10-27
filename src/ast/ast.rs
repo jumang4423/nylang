@@ -73,6 +73,7 @@ pub enum Infix {
     Minus,
     Asterisk,
     Slash,
+    Percent,
     Eq,
     NotEq,
     LessThan,

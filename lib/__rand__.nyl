@@ -2,31 +2,40 @@
     "random number generation library!"
 ) ;
 
-🍄🍄 ( "generates random number by digit" ) ;
-🍙 __rand__random_num = 🏨 ( digit ) { 
+🍄🍄 ( "generates 0 - 9 random number" ) ;
+🍙 __rand__random_number = 🏨 ( ) { 
+    🍙 random_Num = 0 ;
+
+    🍙 rnd = 🌹 ( 1 ) ;
+            
+    🐶 ( rnd == "🐧" ) { 🍙 random_Num = 0 ; } ;
+    🐶 ( rnd == "🦄" ) { 🍙 random_Num = 1 ; } ;
+    🐶 ( rnd == "🐝" ) { 🍙 random_Num = 2 ; } ;
+    🐶 ( rnd == "🐹" ) { 🍙 random_Num = 3 ; } ;
+    🐶 ( rnd == "🐰" ) { 🍙 random_Num = 4 ; } ;
+    🐶 ( rnd == "🦊" ) { 🍙 random_Num = 5 ; } ;
+    🐶 ( rnd == "🐼" ) { 🍙 random_Num = 6 ; } ;
+    🐶 ( rnd == "🐨" ) { 🍙 random_Num = 7 ; } ;
+    🐶 ( rnd == "🐯" ) { 🍙 random_Num = 8 ; } ;
+    🐶 ( rnd == "🐷" ) { 🍙 random_Num = 9 ; } ;
+
+    💨 random_Num ;
+} ;
+
+🍄🍄 ( "generates random number from 0 to number of digit" ) ;
+🍙 __rand__random_num_zero_to_digit = 🏨 ( digit ) { 
     🍙 current_digit = 1 ;
     🍙 return_num = 1 ;
     🍙 random_Num = 0 ;
 
+    🍙 con_rand = __rand__random_number ( ) + 1 ;
+
     🌸 ( 
         🏨 ( ) {
-            🍙 rnd = 🌹 ( 1 ) ;
-            
-            🐶 ( rnd == "🐧" ) { 🍙 random_Num = 0 ; } ;
-            🐶 ( rnd == "🦄" ) { 🍙 random_Num = 1 ; } ;
-            🐶 ( rnd == "🐝" ) { 🍙 random_Num = 2 ; } ;
-            🐶 ( rnd == "🐹" ) { 🍙 random_Num = 3 ; } ;
-            🐶 ( rnd == "🐰" ) { 🍙 random_Num = 4 ; } ;
-            🐶 ( rnd == "🦊" ) { 🍙 random_Num = 5 ; } ;
-            🐶 ( rnd == "🐼" ) { 🍙 random_Num = 6 ; } ;
-            🐶 ( rnd == "🐨" ) { 🍙 random_Num = 7 ; } ;
-            🐶 ( rnd == "🐯" ) { 🍙 random_Num = 8 ; } ;
-            🐶 ( rnd == "🐷" ) { 🍙 random_Num = 9 ; } ;
-
-            🍙 return_num = return_num + current_digit * random_Num ;
+            🍙 return_num = return_num + current_digit * __rand__random_number ( ) ;
             🍙 current_digit = current_digit * 10 ;
         } ,
-        digit
+        con_rand % digit
     ) ;
 
     💨 return_num - 1 ;

@@ -4,9 +4,9 @@
 
 🌸 (
     🏨 ( ) {
-        🎤🎶 ( __rand__random_num ( cnt ) ) ;
+        🎤🎶 ( __rand__random_num_zero_to_digit ( 8 ) ) ;
         🍙 cnt = cnt + 1 ;
 
-        💨 cnt != 8 ;
+        💨 cnt != 30 ;
     }
-)
+) ;

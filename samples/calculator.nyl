@@ -6,7 +6,7 @@
         🎤🎶 ( "input left number :" ) ;
         🍙 left = 👀 ( "number" );
 
-        🎤🎶 ( "operator? (+-*/) :" ) ;
+        🎤🎶 ( "operator? (+-*/%) :" ) ;
         🍙 operator = 👀 ( "string" );
 
         🎤🎶 ( "input right number :" ) ;

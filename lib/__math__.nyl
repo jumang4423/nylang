@@ -17,6 +17,10 @@
         💨 left / right ;
     } ;
 
+    🐶 ( operator == "%" ) {
+        💨 left % right ;
+    } ;
+
     💨 -1 ;
 } ;
 

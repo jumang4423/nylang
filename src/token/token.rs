@@ -26,6 +26,7 @@ pub enum Token {
     Bang,
     Asterisk,
     Slash,
+    Percent,
 
     // delimiters
     LessThan,
@@ -36,7 +37,7 @@ pub enum Token {
     RParen,
     LBrace,
     RBrace,
-    // if else 
+    // if else
     If,
     Else,
     Return,
@@ -61,20 +62,19 @@ impl Token {
         }
     }
 
-    
     pub fn which_the_best(&self) -> ast::ast::WhichTheBest {
         match self {
-            Token::Equql       => ast::ast::WhichTheBest::Equals,
-            Token::NotEquql    => ast::ast::WhichTheBest::Equals,
-            Token::LessThan       => ast::ast::WhichTheBest::LessGreater,
-            Token::GreaterThan       => ast::ast::WhichTheBest::LessGreater,
-            Token::Plus     => ast::ast::WhichTheBest::Sum,
-            Token::Minus    => ast::ast::WhichTheBest::Sum,
-            Token::Slash    => ast::ast::WhichTheBest::Product,
+            Token::Equql => ast::ast::WhichTheBest::Equals,
+            Token::NotEquql => ast::ast::WhichTheBest::Equals,
+            Token::LessThan => ast::ast::WhichTheBest::LessGreater,
+            Token::GreaterThan => ast::ast::WhichTheBest::LessGreater,
+            Token::Plus => ast::ast::WhichTheBest::Sum,
+            Token::Minus => ast::ast::WhichTheBest::Sum,
+            Token::Slash => ast::ast::WhichTheBest::Product,
             Token::Asterisk => ast::ast::WhichTheBest::Product,
-            Token::LParen   => ast::ast::WhichTheBest::Call,
-            _                => ast::ast::WhichTheBest::Lowest,
+            Token::Percent => ast::ast::WhichTheBest::Product,
+            Token::LParen => ast::ast::WhichTheBest::Call,
+            _ => ast::ast::WhichTheBest::Lowest,
         }
     }
-
 }

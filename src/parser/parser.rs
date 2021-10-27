@@ -140,6 +140,10 @@ impl<'a> Parser<'a> {
                     self.next_token();
                     left_exp = self.infix_parser(left_exp);
                 }
+                token::token::Token::Percent => {
+                    self.next_token();
+                    left_exp = self.infix_parser(left_exp);
+                }
                 token::token::Token::LParen => {
                     self.next_token();
                     left_exp = self.call_parser(left_exp);
@@ -326,6 +330,7 @@ impl<'a> Parser<'a> {
             token::token::Token::Minus => ast::ast::Infix::Minus,
             token::token::Token::Asterisk => ast::ast::Infix::Asterisk,
             token::token::Token::Slash => ast::ast::Infix::Slash,
+            token::token::Token::Percent => ast::ast::Infix::Percent,
             token::token::Token::Equql => ast::ast::Infix::Eq,
             token::token::Token::NotEquql => ast::ast::Infix::NotEq,
             token::token::Token::LessThan => ast::ast::Infix::LessThan,

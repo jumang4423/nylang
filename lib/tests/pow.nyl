@@ -1,5 +1,11 @@
 🐽🐽🐽 ( ".nylang/lib/__math__.nyl" ) ;
 
-🎤🎶 ( __math__pow ( 2, 3 ) ) ;
-🎤🎶 ( __math__pow ( 4, 6 ) ) ;
-🎤🎶 ( __math__pow ( 10, 8 ) ) ;
+🍙 expo_vle = 1 ;
+
+🌸 (
+    🏨 ( ) {
+        🎤🎶 ( __math__pow ( 2, expo_vle ) ) ;   
+        🍙 expo_vle = expo_vle + 1 ;
+        💨 expo_vle != 10 ;
+    }
+) ;

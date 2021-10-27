@@ -103,6 +103,11 @@ impl Evaluator {
                 object::object::Object::Integer(r_value),
             ) => object::object::Object::Integer(l_value * r_value),
             (
+                ast::ast::Infix::Percent,
+                object::object::Object::Integer(l_value),
+                object::object::Object::Integer(r_value),
+            ) => object::object::Object::Integer(l_value % r_value),
+            (
                 ast::ast::Infix::Eq,
                 object::object::Object::Integer(l_value),
                 object::object::Object::Integer(r_value),

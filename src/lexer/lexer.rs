@@ -66,6 +66,7 @@ impl<'a> Lexer<'a> {
             }
             '*' => token::token::Token::Asterisk,
             '/' => token::token::Token::Slash,
+            '%' => token::token::Token::Percent,
             '<' => token::token::Token::LessThan,
             '>' => token::token::Token::GreaterThan,
             ';' => token::token::Token::Semicolon,
