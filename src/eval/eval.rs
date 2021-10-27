@@ -223,16 +223,19 @@ impl Evaluator {
             ast::ast::Expression::Array { elements } => self.array_evaluator(elements.clone()),
             ast::ast::Expression::ArrayIndex { left_ident, index } => {
                 let array_obj: object::object::Object ;
-                let evaled_index = self.expression_evaluator(*index);
+                let evaled_index: object::object::Object = self.expression_evaluator(*index);
                 let wrapped_num: i32 ;
 
+
+                // wrapping the index
                 if let object::object::Object::Integer(w_index) = evaled_index {
                     wrapped_num = w_index ;
                 } else {
                     panic! ( "ArrayIndex: index should be integer") ;
                 }
 
-                if let ast::ast::Expression::Ident(ident) = *left_ident.clone() {
+                // wrapping the array
+                if let ast::ast::Expression::Ident(ident) = *left_ident {
                     match self.get_env(ident.as_str()) {
                         Some(obj) => array_obj = obj,
                         None => { panic! ("no ident")}
@@ -241,6 +244,7 @@ impl Evaluator {
                     panic! ( "ArrayIndex: given ident dead, be sure you initialized correctly" ) ;
                 }
 
+                // accecing the array
                 if let object::object::Object::Array(vec_array) = array_obj {
                     return vec_array[wrapped_num as usize].clone();
                 } else {
