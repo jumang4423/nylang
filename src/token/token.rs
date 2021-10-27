@@ -37,6 +37,11 @@ pub enum Token {
     RParen,
     LBrace,
     RBrace,
+
+    // for array 
+    LBRacket,
+    RBRacket,
+
     // if else
     If,
     Else,

@@ -73,7 +73,7 @@ impl<'a> Parser<'a> {
 
         let value = self.expression_parser(ast::ast::WhichTheBest::Lowest);
 
-        if self.cur_token != token::token::Token::Semicolon {
+        if self.peek_token == token::token::Token::Semicolon {
             self.next_token();
         }
 
@@ -101,11 +101,19 @@ impl<'a> Parser<'a> {
         ast::ast::Statement::Expression(expression)
     }
 
+    #[allow(mutable_borrow_reservation_conflict)]
     fn expression_parser(&mut self, precedence: ast::ast::WhichTheBest) -> ast::ast::Expression {
         let mut left_exp = match &self.cur_token {
-            token::token::Token::Ident(ident) => ast::ast::Expression::Ident(ident.clone()),
+            token::token::Token::Ident(ident) => {
+                if &self.peek_token == &token::token::Token::LBRacket {
+                    self.index_parser(ident.clone())
+                } else {
+                    ast::ast::Expression::Ident(ident.clone())
+                }
+            }
             token::token::Token::String(s) => ast::ast::Expression::String(s.clone()),
             token::token::Token::Integer(value) => ast::ast::Expression::Integer(value.clone()),
+            token::token::Token::LBRacket => self.array_parser(),
             token::token::Token::True => ast::ast::Expression::Bool(true),
             token::token::Token::False => ast::ast::Expression::Bool(false),
             token::token::Token::Bang => self.prefix_parser(),
@@ -114,8 +122,7 @@ impl<'a> Parser<'a> {
             token::token::Token::If => self.expression_if_parser(),
             token::token::Token::Closure => self.closure_parser(),
             token => {
-
-                println!("{:?}", self.peek_token);
+                // println!("{:?}", self.peek_token);
                 panic!("Unexpected token {:?}", token)
             }
         };
@@ -178,7 +185,6 @@ impl<'a> Parser<'a> {
     }
 
     fn expression_if_parser(&mut self) -> ast::ast::Expression {
-
         self.next_token();
         // if (
         let bools = Box::new(self.expression_parser(ast::ast::WhichTheBest::Lowest));
@@ -224,6 +230,43 @@ impl<'a> Parser<'a> {
         }
 
         ast::ast::Statement::Block(blocks)
+    }
+
+    fn array_parser(&mut self) -> ast::ast::Expression {
+        let mut elements: Vec<ast::ast::Expression> = Vec::new();
+
+        if self.peek_token != token::token::Token::RBRacket {
+            self.next_token();
+
+            loop {
+                elements.push(self.expression_parser(ast::ast::WhichTheBest::Lowest));
+                if self.peek_token == token::token::Token::Comma {
+                    self.next_token();
+                    self.next_token();
+                } else {
+                    break;
+                }
+            }
+        }
+
+        self.next_token();
+        self.next_token();
+
+        ast::ast::Expression::Array { elements: elements }
+    }
+
+    fn index_parser(&mut self, ident: String) -> ast::ast::Expression {
+        self.next_token();
+        self.next_token();
+
+        let index = self.expression_parser(ast::ast::WhichTheBest::Lowest);
+
+        self.next_token();
+
+        ast::ast::Expression::ArrayIndex {
+            left_ident: Box::new(ast::ast::Expression::Ident(ident)),
+            index: Box::new(index),
+        }
     }
 
     fn closure_parser(&mut self) -> ast::ast::Expression {
@@ -286,12 +329,11 @@ impl<'a> Parser<'a> {
                 self.next_token();
             }
         }
-        
         self.next_token(); // )
 
         if self.cur_token != token::token::Token::RParen {
             panic!("Expected RParen in call expression");
-        } 
+        }
 
         if self.peek_token == token::token::Token::Semicolon {
             self.next_token();

@@ -72,6 +72,8 @@ impl<'a> Lexer<'a> {
             ';' => token::token::Token::Semicolon,
             '(' => token::token::Token::LParen,
             ')' => token::token::Token::RParen,
+            '[' => token::token::Token::LBRacket,
+            ']' => token::token::Token::RBRacket,
             ',' => token::token::Token::Comma,
             '{' => token::token::Token::LBrace,
             '}' => token::token::Token::RBrace,

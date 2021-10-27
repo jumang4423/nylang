@@ -1,0 +1,5 @@
+🍙 test_array = [ 1, 2 * 5, 3 - 1  ] ;
+
+🎤🎶 ( test_array [ 0 ] ) ;
+🎤🎶 ( test_array [ 1 ] ) ;
+🎤🎶 ( test_array [ 2 ] ) ;

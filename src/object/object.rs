@@ -7,6 +7,7 @@ pub enum Object {
     String(String),
     Integer(i32),
     Boolean(bool),
+    Array(Vec<Object>),
     Null,
     ReturnValue(Box<Object>),
     Closure {
