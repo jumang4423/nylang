@@ -56,4 +56,22 @@
     )
 
     💨 sum ;
-}
+} ;
+
+🍄🍄 ( "return larger number" ) ;
+🍙 __math__max = 🏨 ( left, right ) {
+    🐶 ( left > right ) {
+        💨 left ;
+    } 😱 {
+        💨 right ;
+    }
+} ;
+
+🍄🍄 ( "return smaller number" ) ;
+🍙 __math__min = 🏨 ( left, right ) {
+    🐶 ( left < right ) {
+        💨 left ;
+    } 😱 {
+        💨 right ;
+    }
+} ;

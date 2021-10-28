@@ -1,10 +1,32 @@
 🐽🐽🐽 ( ".nylang/lib/__array__.nyl" ) ;
+🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
 
-🍙 arr = [ 1, 2 * 5, 3 - 1 ] ;
-🍙 arr = __array__assign ( arr, 2, 10000 );
-
-🍙 closure = 🏨 ( x ) { 
-    🎤🎶 ( x * 5 ) ;   
+🍙 array_print = 🏨 ( x, i ) { 
+    🎤 ( x ) ;
+    🎤 ( ", " ) ;
 } ;
 
-__array__forEach ( arr, closure ) ;
+🍙 un_sorted = [ ] ;
+
+🌸 (
+    🏨 () {
+        🍙 un_sorted = 🥌 ( un_sorted, __rand__random_num_zero_to_specified_number ( 255 ) );
+    }, 
+    25
+) ;
+
+🎤🎶 ( "not sorted ( 25 elements ): " ) ;
+
+🎤 ( "[ " ) ;  
+__array__forEach ( un_sorted, array_print ) ;
+🎤🎶 ( " ]" ) ;
+
+🎤🎶 ( "" ) ;
+
+🎤🎶 ( "sorted: " ) ;
+
+🍙 sorted = __array__sort ( un_sorted ) ;
+
+🎤 ( "[ " ) ;  
+__array__forEach ( sorted, array_print ) ;
+🎤🎶 ( " ]" ) ;

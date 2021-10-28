@@ -29,9 +29,39 @@
 
     🌸 (
         🏨 () {
-            closure ( array [ cur_index ] ) ;
+            closure ( array [ cur_index ], cur_index ) ;
             🍙 cur_index = cur_index + 1 ;
         },
         📏 ( array ) 
     ) ;
 } ;
+
+🍄🍄 ( "sort number pair of array" ) ;
+🍙 __array__sort = 🏨 ( array ) {
+    🍙 i = 0 ;
+    🍙 j = 0 ;
+
+    🌸 (
+        🏨 () {
+
+            🍙 j = i + 1 ;
+
+            🌸 (
+                🏨 () {
+                    🐶 (array [ i ] > array[ j ] ) {
+				        🍙 tmp = array [ i ] ;
+                        🍙 array = __array__assign ( array, i, array [ j ] ) ;
+                        🍙 array = __array__assign ( array, j, tmp ) ;
+			        }
+                    🍙 j = j + 1 ;
+                },
+                📏 ( array ) - i - 1
+            ) ;
+
+            🍙 i = i + 1 ;
+        },
+        📏 ( array ) - 1
+    ) ;
+
+    💨 array ;
+}

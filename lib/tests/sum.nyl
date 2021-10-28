@@ -1,5 +1,0 @@
-🐽🐽🐽 ( ".nylang/lib/__math__.nyl" ) ;
-
-🍙 test_array = [ 1, 2 * 5, 3 - 1  ] ;
-
-🎤🎶 ( __math__sum ( test_array ) ) ;

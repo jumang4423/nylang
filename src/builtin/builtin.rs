@@ -165,7 +165,7 @@ pub fn looper(
                     eval.statement_evaluator(body.clone());
                 }
             } else {
-                panic!("night: argument must be an integer");
+                panic!("loop: argument must be an integer");
             }
         }
     } else {

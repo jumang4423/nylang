@@ -1,10 +1,26 @@
 🐽🐽🐽 ( ".nylang/lib/__array__.nyl" ) ;
 
 🍙 arr = [ 1, 2, 3, 4 ] ;
-🍙 arr = __array__assign ( arr, 2, 100 );
 
-🍙 closure = 🏨 ( x ) { 
+🍙 closure = 🏨 ( x, i ) { 
+    🎤 ( i ) ;  
+    🎤 ( ": " ) ;  
     🎤🎶 ( x * 5 ) ;   
 } ;
 
+🎤🎶 ( "[" ) ;  
 __array__forEach ( arr, closure ) ;
+🎤🎶 ( "]" ) ;
+
+🌸 (
+    🏨 () {
+        🍙 arr = 🥌 ( arr, 5 );
+    }, 
+    10
+) ;
+
+🍙 arr = __array__assign ( arr, 10, 100 );
+
+🎤🎶 ( "[" ) ;  
+__array__forEach ( arr, closure ) ;
+🎤🎶 ( "]" ) ;
