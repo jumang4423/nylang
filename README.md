@@ -42,10 +42,10 @@ nylang
 nylang run <filename>.nyl
 ```
 
-> parse program
+> show tokens program
 
 ```
-nylang parse <filename>.nyl
+nylang lexer <filename>.nyl
 ```
 
 > show ast

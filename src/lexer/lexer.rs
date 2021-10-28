@@ -155,3 +155,52 @@ impl<'a> Lexer<'a> {
         token::token::Token::String(string) // WEIRD
     }
 }
+
+#[test]
+fn test_lexer() {
+    let input = "
+🍙 five = 5 ;
+🍄🍄 ( \"welcome to nylang!\" ) ;
+🐶 ( animal == \"cat\" ) { 💨 👍 ; } 😱 { 💨 👎 ; }  } ;";
+    let mut lexer = Lexer::new(input);
+    let mut tokens = vec![];
+    while lexer.cur_char != ZERO_CHAR {
+        tokens.push(lexer.next_token());
+    }
+    tokens.push(token::token::Token::EOF);
+    assert_eq!(
+        tokens,
+        vec![
+            token::token::Token::Let,
+            token::token::Token::Ident("five".to_string()),
+            token::token::Token::Assign,
+            token::token::Token::Integer(5),
+            token::token::Token::Semicolon,
+            token::token::Token::Ident("🍄🍄".to_string()),
+            token::token::Token::LParen,
+            token::token::Token::String("welcome to nylang!".to_string()),
+            token::token::Token::RParen,
+            token::token::Token::Semicolon,
+            token::token::Token::If,
+            token::token::Token::LParen,
+            token::token::Token::Ident("animal".to_string()),
+            token::token::Token::Equql,
+            token::token::Token::String("cat".to_string()),
+            token::token::Token::RParen,
+            token::token::Token::LBrace,
+            token::token::Token::Return,
+            token::token::Token::True,
+            token::token::Token::Semicolon,
+            token::token::Token::RBrace,
+            token::token::Token::Else,
+            token::token::Token::LBrace,
+            token::token::Token::Return,
+            token::token::Token::False,
+            token::token::Token::Semicolon,
+            token::token::Token::RBrace,
+            token::token::Token::RBrace,
+            token::token::Token::Semicolon,
+            token::token::Token::EOF,
+        ]
+    );
+}
