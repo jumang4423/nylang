@@ -1,0 +1,9 @@
+🍙 test_string = "nyanko" ;
+🍙 test_array= [ 1, 2, 3 ] ;
+
+🎤🎶 ( "nyanko string len is: " ) ;
+🎤🎶 ( 📏 ( test_string ) ) ;
+
+🎤🎶 ( "[ 1, 2, 3 ] array len is: " ) ;
+🎤🎶 ( 📏 ( test_array
+ ) ) ;

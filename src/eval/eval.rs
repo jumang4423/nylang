@@ -297,6 +297,8 @@ impl Evaluator {
                         "🌹" => return builtin::builtin::random_emojis(args),
                         "👀" => return builtin::builtin::scanf(args),
                         "🐽🐽🐽" => return builtin::builtin::import(args, self),
+                        "📏" => return builtin::builtin::len(args),
+                        "🥌" => return builtin::builtin::push(args),
                         "🍄🍄" => return object::object::Object::Null,
                         _ => { }
                     }

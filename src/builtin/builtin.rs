@@ -194,3 +194,47 @@ pub fn random_emojis(args: std::vec::Vec<object::object::Object>) -> object::obj
         panic!("random_emoji: too many arguments");
     }
 }
+
+// Array related functions
+
+pub fn len (args: std::vec::Vec<object::object::Object>) -> object::object::Object {
+    if args.len() == 1 {
+
+        match &args[0] {
+            object::object::Object::String(string) => {
+                return object::object::Object::Integer(string.len() as i32);
+            }
+            object::object::Object::Array(array) => {
+                return object::object::Object::Integer(array.len() as i32);
+            }
+            _ => {
+                panic!("len: argument must be a string or array");
+            }
+        }
+    } else {
+        panic!("len: too many arguments");
+    }
+}
+
+pub fn push(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
+
+    // if args.len() == 2 {
+    //     match &args[0] {
+    //         object::object::Object::Array(array) => {
+    //             match &args[0] {
+    //                 object::object::Object::Array(array) => {
+    //                     array.push(args[1].clone());
+    //                     return object::object::Object::Array(array.clone());
+    //                 }
+    //             }
+    //         }
+    //         _ => {
+    //             panic!("push: argument must be an array");
+    //         }
+    //     }
+    // } else {
+    //     panic!("push: too many arguments");
+    // }
+
+    object::object::Object::Null
+}
