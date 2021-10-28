@@ -1,5 +1,7 @@
 🍙 test_array = [ 1, 2 * 5, 3 - 1  ] ;
 
 🎤🎶 ( test_array [ 0 ] ) ;
-🎤🎶 ( test_array [ 1 ] ) ;
-🎤🎶 ( test_array [ 2 ] ) ;
+
+🍙 test_array_pushed = 🥌 ( test_array, 5 ) ;
+
+🎤🎶 ( test_array_pushed [ 3 ] ) ;

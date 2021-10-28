@@ -29,6 +29,7 @@ fn is_letter(c: char) -> bool {
         || c == '🐽'
         || c == '🍄'
         || c == '📏'
+        || c == '🥌'
 }
 
 impl<'a> Lexer<'a> {
