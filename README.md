@@ -2,6 +2,8 @@
 
 # nylang
 
+[![rust test action](https://github.com/jumang4423/nylang/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/jumang4423/nylang/actions/workflows/test.yml)
+
 a cute language with a bunch emoji
 
 # documentation
