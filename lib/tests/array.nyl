@@ -1,0 +1,10 @@
+🐽🐽🐽 ( ".nylang/lib/__array__.nyl" ) ;
+
+🍙 arr = [ 1, 2, 3, 4 ] ;
+
+🍙 closure = 🏨 ( x ) { 
+    🎤🎶 ( x ) ;   
+    💨 👍 ;
+} ;
+
+__array__map ( arr, closure ) ;

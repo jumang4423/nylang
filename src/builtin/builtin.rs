@@ -238,3 +238,25 @@ pub fn push(args: std::vec::Vec<object::object::Object>) -> object::object::Obje
         panic!("push: too many arguments");
     }
 }
+
+pub fn rest(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
+    if args.len() == 1 {
+        match &args[0] {
+            object::object::Object::Array(array) => {
+                let mut array_clone = array.clone();
+                array_clone.remove(0);
+                return object::object::Object::Array(array_clone);
+            }
+            object::object::Object::String(string) => {
+                let mut string_clone = string.clone();
+                string_clone.remove(0);
+                return object::object::Object::String(string_clone);
+            }
+            _ => {
+                panic!("rest: argument must be an array");
+            }
+        }
+    } else {
+        panic!("rest: too many arguments");
+    }
+}

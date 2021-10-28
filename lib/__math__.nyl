@@ -1,3 +1,6 @@
+🍄🍄 ( 
+    "math calculations library!"
+) ;
 
 🍄🍄 ( "simple calculator, (operator left right) " ) ;
 🍙 __math__calc = 🏨 ( operator, left, right ) {

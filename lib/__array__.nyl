@@ -1,0 +1,16 @@
+🍄🍄 ( 
+    "array operations library!"
+) ;
+
+🍄🍄 ( "do map for array" ) ;
+🍙 __array__map = 🏨 ( array, closure ) {
+    🍙 _iter = 🏨 ( array, acc ) {
+        💨 🐶 ( 📏 ( array ) == 0 ) {
+            💨 acc ;
+        } 😱 {
+            💨 _iter ( 🌛 ( array ), 🥌 ( acc, closure ( array [ 0 ] ) ) ) ;
+        }
+    }
+
+    💨 _iter ( array, [ ] ) ;
+} ;

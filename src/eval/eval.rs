@@ -299,6 +299,7 @@ impl Evaluator {
                         "🐽🐽🐽" => return builtin::builtin::import(args, self),
                         "📏" => return builtin::builtin::len(args),
                         "🥌" => return builtin::builtin::push(args),
+                        "🌛" => return builtin::builtin::rest(args),
                         "🍄🍄" => return object::object::Object::Null,
                         _ => { }
                     }

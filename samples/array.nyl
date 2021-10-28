@@ -5,3 +5,7 @@
 🍙 test_array_pushed = 🥌 ( test_array, 5 ) ;
 
 🎤🎶 ( test_array_pushed [ 3 ] ) ;
+
+🍙 test_array_rested = 🌛 ( test_array ) ;
+
+🎤🎶 ( test_array_rested [ 0 ] ) ;
