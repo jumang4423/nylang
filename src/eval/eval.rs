@@ -215,7 +215,9 @@ impl Evaluator {
         return match expression {
             ast::ast::Expression::Ident(identifier) => match self.get_env(identifier.as_str()) {
                 Some(value) => value,
-                None => panic!("identifier not found"),
+                None => {
+                    panic!("identifier not found: {}", identifier)
+                },
             },
             ast::ast::Expression::Integer(integer) => object::object::Object::Integer(integer),
             ast::ast::Expression::Bool(boolean) => object::object::Object::Boolean(boolean),

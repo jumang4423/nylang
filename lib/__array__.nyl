@@ -2,15 +2,36 @@
     "array operations library!"
 ) ;
 
-🍄🍄 ( "do map for array" ) ;
-🍙 __array__map = 🏨 ( array, closure ) {
-    🍙 _iter = 🏨 ( array, acc ) {
-        💨 🐶 ( 📏 ( array ) == 0 ) {
-            💨 acc ;
-        } 😱 {
-            💨 _iter ( 🌛 ( array ), 🥌 ( acc, closure ( array [ 0 ] ) ) ) ;
-        }
-    }
+🍄🍄 ( "assign by index then return array" ) ;
+🍙 __array__assign = 🏨 ( array, index, value ) {
+    🍙 cur_index = 0 ;
+    🍙 return_array = [ ] ; 
 
-    💨 _iter ( array, [ ] ) ;
+    🌸 (
+        🏨 () {  
+            🐶 ( cur_index == index ) {
+                🍙 return_array = 🥌 ( return_array, value ) ;
+            } 😱 {
+                🍙 return_array = 🥌 ( return_array, array [ 0 ] ) ;
+            } ;
+            🍙 array = 🌛 ( array ) ; 
+            🍙 cur_index = cur_index + 1 ;
+        },
+        📏 ( array ) 
+    ) ;
+
+    💨 return_array ;
+} ;
+
+🍄🍄 ( "do for each for array" ) ;
+🍙 __array__forEach = 🏨 ( array, closure ) {
+    🍙 cur_index = 0 ;
+
+    🌸 (
+        🏨 () {
+            closure ( array [ cur_index ] ) ;
+            🍙 cur_index = cur_index + 1 ;
+        },
+        📏 ( array ) 
+    ) ;
 } ;

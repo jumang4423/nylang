@@ -122,7 +122,6 @@ impl<'a> Parser<'a> {
             token::token::Token::If => self.expression_if_parser(),
             token::token::Token::Closure => self.closure_parser(),
             token => {
-                // println!("{:?}", self.peek_token);
                 panic!("Unexpected token {:?}", token)
             }
         };
@@ -247,9 +246,9 @@ impl<'a> Parser<'a> {
                     break;
                 }
             }
-        }
+        } 
 
-        self.next_token();
+        // self.next_token();
         self.next_token();
 
         ast::ast::Expression::Array { elements: elements }
@@ -329,6 +328,7 @@ impl<'a> Parser<'a> {
                 self.next_token();
             }
         }
+
         self.next_token(); // )
 
         if self.cur_token != token::token::Token::RParen {
