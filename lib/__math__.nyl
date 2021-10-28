@@ -37,3 +37,20 @@
 
     💨 ans ;
 } ;
+
+🍄🍄 ( "generates sum of array" ) ;
+🍙 __math__sum = 🏨 ( arr ) {
+    🍙 i = 0 ;
+    🍙 sum = 0 ;
+
+    🌸 (
+        🏨 ( ) {
+            🍙 sum = sum + arr[ i ] ;
+            🍙 i = i + 1 ;
+
+            💨 i != 📏(arr) ;
+        }
+    )
+
+    💨 sum ;
+}
