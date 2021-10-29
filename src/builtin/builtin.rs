@@ -108,6 +108,9 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> objec
                 .truecolor(red as u8, green as u8, blue as u8)
                 .bold()
             );
+            if array_of_str.len() > 1 && newline {
+              println!();
+            }
           }
         } else {
           for s in array_of_str.iter() {
@@ -117,11 +120,10 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> objec
                 .on_truecolor(red as u8, green as u8, blue as u8)
                 .bold()
             );
+            if array_of_str.len() > 1 && newline {
+              println!();
+            }
           }
-        }
-
-        if array_of_str.len() > 1 && newline {
-          println!();
         }
       }
       _ => {
