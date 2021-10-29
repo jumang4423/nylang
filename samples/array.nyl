@@ -12,10 +12,10 @@
     🏨 () {
         🍙 un_sorted = 🥌 ( un_sorted, __rand__random_num_zero_to_specified_number ( 255 ) );
     }, 
-    25
+    30
 ) ;
 
-🎤🎶 ( "not sorted ( 25 elements ): " ) ;
+🎤🎶 ( "not sorted ( 30 elements ): " ) ;
 
 🎤 ( "[ " ) ;  
 __array__forEach ( un_sorted, array_print ) ;

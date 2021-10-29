@@ -1,0 +1,115 @@
+🍄🍄 ( 
+    "welcome to nylang!",
+    "this demo shows that what exactly nylang can do!"
+) ;
+
+🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
+🐽🐽🐽 ( ".nylang/lib/__math__.nyl" ) ;
+
+🍙 checkCat = 🏨 ( animal ) {
+🐶 ( animal == "cat" ) { 💨 👍 ; } 😱 { 💨 👎 ; }  } ;
+🍙 age = 3 + 3 * 5 ;
+
+🎤🎶 ( "-! basic printing test", 255, 0 , 0, 👎 ) ; 🎤🎶 ( "" ) ;
+
+😪 ( 1000 ) ;
+
+🎤🎶 ( 🐶 ( checkCat ( "cat" ) ) { 💨 "i am cat" ; } 😱 { 💨 "i am not cat" ; } ) ;
+
+🎤 ( "who" ) ; 🎤 ( age ) ; 🎤🎶 ( "years old" ) ;
+
+🎤🎶 ( 🐶 ( age < 20 ) { 💨 "i am young!" ; } 😱 { 💨 "i am old enough" ; } ) ;
+
+😪 ( 250 ) ;
+
+🥚 ( ) ;
+
+🍙 cnt = 0 ;
+
+🌸 (
+    🏨 ( ) {
+        🎤 ( 
+            __rand__random_num_zero_to_specified_number ( 999999999 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ),
+            👍
+        ) ;
+        🍙 cnt = cnt + 1 ;
+
+        💨 cnt != 100 ;
+    }
+) ;
+
+🍙 cnt = 0 ;
+
+🌸 (
+    🏨 ( ) {
+        🎤 ( 
+            __rand__random_num_zero_to_specified_number ( 999999999 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ), 
+            __rand__random_num_zero_to_specified_number ( 255 ),
+            👎
+        ) ;
+        🍙 cnt = cnt + 1 ;
+
+        💨 cnt != 100 ;
+    }
+) ;
+
+🎤🎶 ( "" ) ;
+
+😪 ( 250 ) ;
+
+🎤🎶 ( "" ) ; 🎤🎶 ( "-! loop test 1" , 255, 0 , 0, 👎) ; 🎤🎶 ( "" ) ;
+
+😪 ( 1000 ) ;
+
+🎤🎶 ( "-! how many times loop? ( 1 < number < 100 ):" , 0, 255 , 0, 👎) ;
+
+🍙 cnt = 0 ;
+🍙 loop_num = __math__min ( 100, __math__max ( 1, 👀 ( "number" ) ) ) ;
+
+🌸 ( 
+    🏨 ( ) {
+        🎤 ( "current number is: " ) ;
+        🎤🎶 ( cnt ) ;
+        🍙 cnt = cnt + 1 ;
+
+        😪 ( 10 ) ;
+    } , 
+    loop_num
+) ; 
+
+🎤🎶 ( "" ) ; 🎤🎶 ( "-! loop test 2" , 255, 0 , 0, 👎) ; 🎤🎶 ( "" ) ;
+
+😪 ( 1000 ) ;
+
+🍙 cnt = 1 ;
+
+🌸 ( 
+    🏨 ( ) {
+        🎤 ( "current number * 2 is: " ) ;
+        🎤🎶 ( cnt ) ;
+        🍙 cnt = cnt * 2 ;
+        😪 ( 2 ) ;
+
+        💨 cnt != 4096 ;
+    }
+) ;
+
+🎤🎶 ( "" ) ; 🎤🎶 ( "-! random emoji test" , 255, 0 , 0, 👎) ; 🎤🎶 ( "" ) ;
+
+😪 ( 1000 ) ;
+
+🌸 ( 
+    🏨 ( ) {
+        🎤 ( 🌹 ( 2 ) ) ;
+        🎤🎶 ( "< eating us not allowed by your god" ) ;
+        😪 ( 20 ) ;
+    },
+    25
+)
+
+🎤🎶 ( "" ) ;

@@ -300,6 +300,8 @@ impl Evaluator {
             "📏" => return builtin::builtin::len(args),
             "🥌" => return builtin::builtin::push(args),
             "🌛" => return builtin::builtin::rest(args),
+            "❌" => return builtin::builtin::panipani(args),
+            "🥚" => return builtin::builtin::clear(),
             "🍄🍄" => return object::object::Object::Null,
             _ => {}
           }

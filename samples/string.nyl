@@ -1,5 +1,7 @@
 🍙 str = "ryom" ;
 
 🎤🎶 ( 🥌 ( str, "a" ) ) ;
-
 🎤🎶 ( str + "a" ) ;
+
+🎤🎶 ( "newline using variable: " ) ;
+🎤🎶 ( "newline using variable: " ) ;

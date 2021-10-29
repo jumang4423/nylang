@@ -1,115 +1,111 @@
-🍄🍄 ( 
-    "welcome to nylang!",
-    "this demo shows that what exactly nylang can do!"
-) ;
+🍄🍄 ( "life game" ) ;
 
+🍄🍄 ( "library import" ) ;
+🐽🐽🐽 ( ".nylang/lib/__array__.nyl" ) ;
 🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
-🐽🐽🐽 ( ".nylang/lib/__math__.nyl" ) ;
 
-🍙 checkCat = 🏨 ( animal ) {
-🐶 ( animal == "cat" ) { 💨 👍 ; } 😱 { 💨 👎 ; }  } ;
-🍙 age = 3 + 3 * 5 ;
-
-🎤🎶 ( "-! basic printing test", 255, 0 , 0, 👎 ) ; 🎤🎶 ( "" ) ;
-
-😪 ( 1000 ) ;
-
-🎤🎶 ( 🐶 ( checkCat ( "cat" ) ) { 💨 "i am cat" ; } 😱 { 💨 "i am not cat" ; } ) ;
-
-🎤 ( "who" ) ; 🎤 ( age ) ; 🎤🎶 ( "years old" ) ;
-
-🎤🎶 ( 🐶 ( age < 20 ) { 💨 "i am young!" ; } 😱 { 💨 "i am old enough" ; } ) ;
-
-😪 ( 250 ) ;
-
-🎤🎶 ( "" ) ;
-
-🍙 cnt = 0 ;
-
-🌸 (
+🍄🍄 ( "make empty 2 dimentional array" ) ;
+🍙 make_array = 🏨 ( arr, size, value ) {
+  🌸 (
     🏨 ( ) {
-        🎤 ( 
-            __rand__random_num_zero_to_specified_number ( 999999999 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ),
-            👍
-        ) ;
-        🍙 cnt = cnt + 1 ;
+      🍙 array_of_array = [ ] ;
+      🌸 (
+        🏨 ( ) {
+          🍙 array_of_array = 🥌 ( array_of_array, value ) ;
+        },
+        size
+      ) ;
 
-        💨 cnt != 100 ;
-    }
-) ;
-
-🍙 cnt = 0 ;
-
-🌸 (
-    🏨 ( ) {
-        🎤 ( 
-            __rand__random_num_zero_to_specified_number ( 999999999 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ),
-            👎
-        ) ;
-        🍙 cnt = cnt + 1 ;
-
-        💨 cnt != 100 ;
-    }
-) ;
-
-🎤🎶 ( "" ) ;
-
-😪 ( 250 ) ;
-
-🎤🎶 ( "" ) ; 🎤🎶 ( "-! loop test 1" , 255, 0 , 0, 👎) ; 🎤🎶 ( "" ) ;
-
-😪 ( 1000 ) ;
-
-🎤🎶 ( "-! how many times loop? ( 1 < number < 100 ):" , 0, 255 , 0, 👎) ;
-
-🍙 cnt = 0 ;
-🍙 loop_num = __math__min ( 100, __math__max ( 1, 👀 ( "number" ) ) ) ;
-
-🌸 ( 
-    🏨 ( ) {
-        🎤 ( "current number is: " ) ;
-        🎤🎶 ( cnt ) ;
-        🍙 cnt = cnt + 1 ;
-
-        😪 ( 10 ) ;
-    } , 
-    loop_num
-) ; 
-
-🎤🎶 ( "" ) ; 🎤🎶 ( "-! loop test 2" , 255, 0 , 0, 👎) ; 🎤🎶 ( "" ) ;
-
-😪 ( 1000 ) ;
-
-🍙 cnt = 1 ;
-
-🌸 ( 
-    🏨 ( ) {
-        🎤 ( "current number * 2 is: " ) ;
-        🎤🎶 ( cnt ) ;
-        🍙 cnt = cnt * 2 ;
-        😪 ( 2 ) ;
-
-        💨 cnt != 4096 ;
-    }
-) ;
-
-🎤🎶 ( "" ) ; 🎤🎶 ( "-! random emoji test" , 255, 0 , 0, 👎) ; 🎤🎶 ( "" ) ;
-
-😪 ( 1000 ) ;
-
-🌸 ( 
-    🏨 ( ) {
-        🎤 ( 🌹 ( 2 ) ) ;
-        🎤🎶 ( "< eating us not allowed by your god" ) ;
-        😪 ( 20 ) ;
+      🍙 arr = 🥌 ( arr, array_of_array ) ;
     },
-    25
-)
+    size
+  ) ;
 
-🎤🎶 ( "" ) ;
+  🐶 ( 📏 ( arr ) != size ) {
+    ❌ ( "array size is incorrect" ) ;
+  }
+
+  🍙 __test_ar_ar = arr [ 0 ] ;
+  🐶 ( __test_ar_ar [ 0 ] != value ) {
+    ❌ ( "expected value is incorrect" ) ;
+  }
+  💨 arr ;
+} ;
+
+🍄🍄 ( "put random value" ) ;
+🍙 put_random_value = 🏨 ( arr, times ) {
+  🌸 (
+    🏨 ( ) {
+        🍙 i = __rand__random_num_zero_to_specified_number ( 📏 ( arr ) ) ;
+        🍙 j = __rand__random_num_zero_to_specified_number ( 📏 ( arr ) ) ;
+        🍙 ar_ar = arr [ i ] ;
+        🍙 arr = __array__assign ( arr , i , __array__assign ( ar_ar , j , __rand__random_number ( ) % 2 ) ) ;
+    },
+    times
+  ) ;
+
+  💨 arr ;
+} ;
+
+🍄🍄 ( "literally display array" ) ;
+🍙 display_array = 🏨 ( arr ) {
+  🍙 i = 0 ; 🍙 j = 0 ;
+  🍙 arr_len = 📏 ( arr ) ;
+  🍙 str = "" ;
+
+  🌸 (
+    🏨 ( ) {
+      🍙 j = 0 ; 
+      🌸 (
+        🏨 ( ) {
+          🍙 _ar = arr [ i ] ;
+          🐶 ( _ar [ j ] ) {
+            🍙 str = 🥌 ( str, "o " ) ;
+          } 😱 {
+            🍙 str = 🥌 ( str, "- " ) ;
+          } ;
+          🍙 j = j + 1 ;
+        },
+        arr_len
+      ) ;
+      🍙 str = 🥌 ( str, "\n" ) ;
+      🍙 i = i + 1 ;
+    },
+    arr_len
+  ) ;
+
+  🎤🎶 ( str ) ;
+} ;
+
+🍙 main = 🏨 ( ) {
+
+  🥚 ( ) ;
+  🎤🎶 ( "-! preparing array...", 255, 0, 0, 👎 ) ;
+
+  🍙 array_size = 20 ;
+  🍙 array = put_random_value ( make_array ( [ ], array_size, 👎 ), array_size * array_size ) ;
+
+  🍙 i = 0 ; 🍙 j = 0 ;
+  🍙 array_len = 📏 ( array ) ;
+
+  🌸 (
+    🏨 ( ) {
+      🍙 j = 0 ; 
+      🌸 (
+        🏨 ( ) {
+          display_array ( array ) ;
+          🍙 ar_ar = array [ i ] ;
+          🍙 ar_ar = __array__assign ( ar_ar , j , 👎 ) ;
+          🍙 array = __array__assign ( array , i , ar_ar ) ;
+          🥚 ( ) ;
+          🍙 j = j + 1 ; 
+        },
+        array_len
+      ) ;
+      🍙 i = i + 1 ; 
+    },
+    array_len
+  ) ;
+} ;
+
+main ( ) ;

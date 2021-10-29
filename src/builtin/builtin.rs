@@ -76,40 +76,93 @@ pub fn scanf(args: std::vec::Vec<object::object::Object>) -> object::object::Obj
 }
 
 pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> object::object::Object {
-  match args.len() {
-    1 => {
-      print!("{}", args[0]);
-    }
-    5 => {
-      // unwrap colors from objects
-      let red = cast!(args[1], object::object::Object::Integer);
-      let green = cast!(args[2], object::object::Object::Integer);
-      let blue = cast!(args[3], object::object::Object::Integer);
-      let is_text_coloring = cast!(args[4], object::object::Object::Boolean);
+  if let object::object::Object::String(str) = &args[0] {
+    let array_of_str: Vec<String> = str
+      .as_str()
+      .clone()
+      .split("\\n")
+      .map(|s| s.to_string())
+      .collect();
 
-      if is_text_coloring {
-        print!(
-          "{}",
-          format!("{}", args[0])
-            .truecolor(red as u8, green as u8, blue as u8)
-            .bold()
-        );
-      } else {
-        print!(
-          "{}",
-          format!("{}", args[0])
-            .on_truecolor(red as u8, green as u8, blue as u8)
-            .bold()
-        );
+    match args.len() {
+      1 => {
+        for s in array_of_str.iter() {
+          print!("{}", s);
+          if array_of_str.len() > 1 && newline {
+            println!();
+          }
+        }
+      }
+      5 => {
+        // unwrap colors from objects
+        let red = cast!(args[1], object::object::Object::Integer);
+        let green = cast!(args[2], object::object::Object::Integer);
+        let blue = cast!(args[3], object::object::Object::Integer);
+        let is_text_coloring = cast!(args[4], object::object::Object::Boolean);
+
+        if is_text_coloring {
+          for s in array_of_str.iter() {
+            print!(
+              "{}",
+              format!("{}", s)
+                .truecolor(red as u8, green as u8, blue as u8)
+                .bold()
+            );
+          }
+        } else {
+          for s in array_of_str.iter() {
+            print!(
+              "{}",
+              format!("{}", s)
+                .on_truecolor(red as u8, green as u8, blue as u8)
+                .bold()
+            );
+          }
+        }
+
+        if array_of_str.len() > 1 && newline {
+          println!();
+        }
+      }
+      _ => {
+        panic!("🎤: arguments are invalid, arg len should be 1 or 5")
       }
     }
-    _ => {
-      panic!("🎤: arguments are invalid, arg len should be 1 or 5")
+  } else {
+    match args.len() {
+      1 => {
+        print!("{}", args[0].to_string());
+      }
+      5 => {
+        // unwrap colors from objects
+        let red = cast!(args[1], object::object::Object::Integer);
+        let green = cast!(args[2], object::object::Object::Integer);
+        let blue = cast!(args[3], object::object::Object::Integer);
+        let is_text_coloring = cast!(args[4], object::object::Object::Boolean);
+
+        if is_text_coloring {
+          print!(
+            "{}",
+            format!("{}", args[0].to_string())
+              .truecolor(red as u8, green as u8, blue as u8)
+              .bold()
+          );
+        } else {
+          print!(
+            "{}",
+            format!("{}", args[0].to_string())
+              .on_truecolor(red as u8, green as u8, blue as u8)
+              .bold()
+          );
+        }
+      }
+      _ => {
+        panic!("🎤: arguments are invalid, arg len should be 1 or 5")
+      }
     }
   }
-
   if newline {
-    println!();
+    println!("");
   }
 
   object::object::Object::Null
@@ -186,7 +239,16 @@ pub fn random_emojis(args: std::vec::Vec<object::object::Object>) -> object::obj
   }
 }
 
-// Array related functions
+pub fn clear() -> object::object::Object {
+  print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
+  object::object::Object::Null
+}
+
+////////////////////////////////////////////////////////////////////////////////
+///
+/// // Array related functions
+///
+////////////////////////////////////////////////////////////////////////////////
 
 pub fn len(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
   if args.len() == 1 {
@@ -247,5 +309,28 @@ pub fn rest(args: std::vec::Vec<object::object::Object>) -> object::object::Obje
     }
   } else {
     panic!("rest: too many arguments");
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+///
+/// // error handling
+///
+////////////////////////////////////////////////////////////////////////////////
+
+pub fn panipani(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
+  if args.len() == 1 {
+    if let object::object::Object::String(string) = &args[0] {
+      println!(
+        "{} {}",
+        "panic:".on_truecolor(255, 150, 150).bold(),
+        string.truecolor(255, 0, 0).bold()
+      );
+      std::process::exit(1);
+    } else {
+      panic!("panic: argument must be a string");
+    }
+  } else {
+    panic!("🎤: too many arguments");
   }
 }
