@@ -36,6 +36,20 @@
     ) ;
 } ;
 
+🍙 __array__map = 🏨 ( array, closure ) {
+    🍙 cur_index = 0 ;
+
+    🌸 (
+        🏨 () {
+            🍙 array = __array__assign ( array, cur_index, closure ( array [ cur_index ], cur_index ) ) ;
+            🍙 cur_index = cur_index + 1 ;
+        },
+        📏 ( array ) 
+    ) ;
+
+    💨 array ;
+} ;
+
 🍄🍄 ( "sort number pair of array" ) ;
 🍙 __array__sort = 🏨 ( array ) {
     🍙 i = 0 ;

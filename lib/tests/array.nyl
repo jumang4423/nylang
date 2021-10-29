@@ -5,12 +5,14 @@
 🍙 closure = 🏨 ( x, i ) { 
     🎤 ( i ) ;  
     🎤 ( ": " ) ;  
-    🎤🎶 ( x * 5 ) ;   
+    🎤🎶 ( x ) ;   
 } ;
 
 🎤🎶 ( "[" ) ;  
 __array__forEach ( arr, closure ) ;
 🎤🎶 ( "]" ) ;
+
+🎤🎶 ( "array forEach: " ) ; 
 
 🌸 (
     🏨 () {
@@ -23,4 +25,16 @@ __array__forEach ( arr, closure ) ;
 
 🎤🎶 ( "[" ) ;  
 __array__forEach ( arr, closure ) ;
+🎤🎶 ( "]" ) ;
+
+🎤🎶 ( "array map: " ) ; 
+
+🍙 map_closure = 🏨 ( x, i ) { 
+    💨 x + i ;
+} ;
+
+🍙 maped_arr = __array__map ( arr, map_closure ) ;
+
+🎤🎶 ( "[" ) ;  
+__array__forEach ( maped_arr, closure ) ;
 🎤🎶 ( "]" ) ;
