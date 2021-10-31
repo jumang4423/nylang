@@ -80,6 +80,8 @@ pub enum Infix {
   Minus,
   Asterisk,
   Slash,
+  And,
+  Or,
   Percent,
   Eq,
   NotEq,
@@ -90,6 +92,7 @@ pub enum Infix {
 #[derive(Copy, Clone, PartialEq, Eq, Debug, PartialOrd, Ord)]
 pub enum WhichTheBest {
   Lowest,
+  AndOr,
   Equals,
   LessGreater,
   Sum,

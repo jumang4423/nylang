@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "-! [0]building..."
-cargo build
+cargo build --release
 
 echo "-! [1]copying..."
 # make directory
@@ -8,7 +8,7 @@ mkdir -p ~/.nylang
 chmod +x ~/.nylang
 
 # move the binary
-cp target/debug/nylang ~/.nylang
+cp target/release/nylang ~/.nylang
 cp -r lib/ ~/.nylang/lib
 rm target/debug/nylang
 chmod +x ~/.nylang/nylang

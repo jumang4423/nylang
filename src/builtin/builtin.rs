@@ -252,6 +252,52 @@ pub fn clear() -> object::object::Object {
 ///
 ////////////////////////////////////////////////////////////////////////////////
 
+pub fn assign(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
+  // ( array, value, index0 )
+  if args.len() == 3 {
+    match &args[0] {
+      object::object::Object::Array(array) => {
+        let index: i32 = match &args[2] {
+          object::object::Object::Integer(int) => *int,
+          _ => panic!("🎤: index must be an integer"),
+        };
+
+        let mut array_copy = array.clone();
+        array_copy[index as usize] = args[1].clone();
+        return object::object::Object::Array(array_copy);
+      }
+      _ => {
+        panic!("🎤: first argument must be an array");
+      }
+    }
+    // ( array, value, index0, index1 )
+  } else if args.len() == 4 {
+    match &args[0] {
+      object::object::Object::Array(array) => {
+        match &array[cast!(args[2], object::object::Object::Integer) as usize] {
+          object::object::Object::Array(arr_arr) => {
+            let mut arr_arr_clone = arr_arr.clone();
+            let mut array_clone = array.clone();
+            arr_arr_clone[cast!(args[3], object::object::Object::Integer) as usize] =
+              args[1].clone();
+            array_clone[cast!(args[2], object::object::Object::Integer) as usize] =
+              object::object::Object::Array(arr_arr_clone);
+            return object::object::Object::Array(array_clone);
+          }
+          _ => {
+            panic!("🎤: second dimention must be an array");
+          }
+        }
+      }
+      _ => {
+        panic!("🎤: first argument must be an array");
+      }
+    }
+  } else {
+    panic!("🎤: too many arguments, got {}", args.len());
+  }
+}
+
 pub fn len(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
   if args.len() == 1 {
     match &args[0] {

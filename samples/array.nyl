@@ -2,31 +2,29 @@
 🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
 
 🍙 array_print = 🏨 ( x, i ) { 
-    🎤 ( x ) ;
-    🎤 ( ", " ) ;
+    🌸 (
+        🏨 () {
+            🎤 ( "|", x * 3 + i, x * 3 + i, x * 3 + i, 👎 ) ;
+        }, 
+        x / 2
+    ) ;
+    🎤🎶 ( "" ) ;
 } ;
 
 🍙 un_sorted = [ ] ;
 
 🌸 (
     🏨 () {
-        🍙 un_sorted = 🥌 ( un_sorted, __rand__random_num_zero_to_specified_number ( 255 ) );
+        🍙 un_sorted = 🥌 ( un_sorted, __rand__random_num_zero_to_specified_number ( 50 ) + 10 );
     }, 
-    30
+    40
 ) ;
 
-🎤🎶 ( "not sorted ( 30 elements ): " ) ;
-
-🎤 ( "[ " ) ;  
+🎤🎶 ( "not sorted ( 40 elements ): " ) ;
 __array__forEach ( un_sorted, array_print ) ;
-🎤🎶 ( " ]" ) ;
-
 🎤🎶 ( "" ) ;
-
 🎤🎶 ( "sorted: " ) ;
 
 🍙 sorted = __array__sort ( un_sorted ) ;
-
-🎤 ( "[ " ) ;  
+ 
 __array__forEach ( sorted, array_print ) ;
-🎤🎶 ( " ]" ) ;

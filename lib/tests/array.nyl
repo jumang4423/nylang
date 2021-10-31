@@ -21,7 +21,7 @@ __array__forEach ( arr, closure ) ;
     10
 ) ;
 
-🍙 arr = __array__assign ( arr, 10, 100 );
+🍙 arr = 🗿 ( arr, 100, 10 );
 
 🎤🎶 ( "[" ) ;  
 __array__forEach ( arr, closure ) ;

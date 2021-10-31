@@ -38,6 +38,10 @@ pub enum Token {
   LBrace,
   RBrace,
 
+  // OR and AND
+  Or,
+  And,
+
   // for array
   LBRacket,
   RBRacket,
@@ -69,6 +73,8 @@ impl Token {
 
   pub fn which_the_best(&self) -> ast::ast::WhichTheBest {
     match self {
+      Token::And => ast::ast::WhichTheBest::AndOr,
+      Token::Or => ast::ast::WhichTheBest::AndOr,
       Token::Equql => ast::ast::WhichTheBest::Equals,
       Token::NotEquql => ast::ast::WhichTheBest::Equals,
       Token::LessThan => ast::ast::WhichTheBest::LessGreater,

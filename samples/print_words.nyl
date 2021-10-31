@@ -2,4 +2,7 @@
     "print test"
 ) ;
 
+🍙 cell_cnt_alive = 2 ; 
+
 🎤🎶 ( "cat ass" ) ;
+🎤🎶 ( cell_cnt_alive == 2 || cell_cnt_alive == 3 ) ;

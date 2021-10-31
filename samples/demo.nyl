@@ -1,10 +1,14 @@
+🐶 ( 👍 || 👍 ) { 
+  🎤🎶 ( "OK" ) ;
+}
+
 🍄🍄 ( "life game" ) ;
 
 🍄🍄 ( "library import" ) ;
 🐽🐽🐽 ( ".nylang/lib/__array__.nyl" ) ;
 🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
 
-🍄🍄 ( "make empty 2 dimentional array" ) ;
+🍄🍄 ( "make empty 2 dimentional array: arr" ) ;
 🍙 make_array = 🏨 ( arr, size, value ) {
   🌸 (
     🏨 ( ) {
@@ -32,14 +36,13 @@
   💨 arr ;
 } ;
 
-🍄🍄 ( "put random value" ) ;
+🍄🍄 ( "put random value: arr" ) ;
 🍙 put_random_value = 🏨 ( arr, times ) {
   🌸 (
     🏨 ( ) {
         🍙 i = __rand__random_num_zero_to_specified_number ( 📏 ( arr ) ) ;
         🍙 j = __rand__random_num_zero_to_specified_number ( 📏 ( arr ) ) ;
-        🍙 ar_ar = arr [ i ] ;
-        🍙 arr = __array__assign ( arr , i , __array__assign ( ar_ar , j , __rand__random_number ( ) % 2 ) ) ;
+        🍙 arr = 🗿 ( arr, __rand__random_number ( ) % 2, i, j)
     },
     times
   ) ;
@@ -47,22 +50,68 @@
   💨 arr ;
 } ;
 
-🍄🍄 ( "literally display array" ) ;
+🍙 remove_outline = 🏨 ( arr ) {
+  🍙 arr_len = 📏 ( arr ) ;
+  
+  🍄🍄 ( "left" ) ;
+  🍙 i = 0 ;
+  🌸 (
+    🏨 ( ) {
+      🍙 arr = 🗿 ( arr, 👎, 0, i) ;
+      🍙 i = i + 1 ;
+    },
+    arr_len
+  ) ;
+
+  🍄🍄 ( "top" ) ;
+  🍙 i = 0 ;
+  🌸 (
+    🏨 ( ) {
+      🍙 arr = 🗿 ( arr, 👎, i, 0) ;
+      🍙 i = i + 1 ;
+    },
+    arr_len
+  ) ;
+
+  🍄🍄 ( "right" ) ;
+  🍙 i = 0 ;
+  🌸 (
+    🏨 ( ) {
+      🍙 arr = 🗿 ( arr, 👎, arr_len - 1, i) ;
+      🍙 i = i + 1 ;
+    },
+    arr_len
+  ) ;
+
+  🍄🍄 ( "bottom" ) ;
+  🍙 i = 0 ;
+  🌸 (
+    🏨 ( ) {
+      🍙 arr = 🗿 ( arr, 👎, i, arr_len - 1) ;
+      🍙 i = i + 1 ;
+    },
+    arr_len
+  ) ;
+
+  💨 arr ;
+}
+
+🍄🍄 ( "literally display array: str" ) ;
 🍙 display_array = 🏨 ( arr ) {
   🍙 i = 0 ; 🍙 j = 0 ;
   🍙 arr_len = 📏 ( arr ) ;
-  🍙 str = "" ;
+  🍙 str = "\n->\n\n" ;
 
   🌸 (
     🏨 ( ) {
       🍙 j = 0 ; 
       🌸 (
         🏨 ( ) {
-          🍙 _ar = arr [ i ] ;
-          🐶 ( _ar [ j ] ) {
-            🍙 str = 🥌 ( str, "o " ) ;
+          🍙 _ar = arr [ j ] ;
+          🐶 ( _ar [ i ] ) {
+            🍙 str = 🥌 ( str, "💖 " ) ;
           } 😱 {
-            🍙 str = 🥌 ( str, "- " ) ;
+            🍙 str = 🥌 ( str, "　 " ) ;
           } ;
           🍙 j = j + 1 ;
         },
@@ -74,38 +123,113 @@
     arr_len
   ) ;
 
-  🎤🎶 ( str ) ;
+  🍙 str = 🥌 ( str, "\n<-\n\n" ) ;
+
+  💨 str ;
 } ;
+
+🍄🍄 ( "next chunk: array" ) ;
+🍙 next_chunk = 🏨 ( arr ) {
+  🍙 n_c_array = arr ;
+  🍙 arr_len = 📏 ( arr ) ;
+  🍙 i = 1 ; 🍙 j = 1 ;
+
+  🌸 (
+    🏨 ( ) {
+      🍙 j = 1 ;
+      🌸 (
+        🏨 ( ) {
+
+          🍙 cell_cnt_alive = 0 ;
+          🐶 ( __array__get_two_dimention ( arr, i - 1, j - 1 ) ) {
+            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+          } ;
+          🐶 ( __array__get_two_dimention ( arr, i - 1, j ) ) {
+            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+          } ;
+          🐶 ( __array__get_two_dimention ( arr, i - 1, j + 1 ) ) {
+            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+          } ;
+          🐶 ( __array__get_two_dimention ( arr, i, j + 1 ) ) {
+            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+          } ;
+          🐶 ( __array__get_two_dimention ( arr, i + 1, j + 1 ) ) {
+            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+          } ;
+          🐶 ( __array__get_two_dimention ( arr, i + 1, j ) ) {
+            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+          } ;
+          🐶 ( __array__get_two_dimention ( arr, i + 1, j - 1 ) ) {
+            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+          } ;
+          🐶 ( __array__get_two_dimention ( arr, i, j - 1 ) ) {
+            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+          } ;
+
+          🍙 dead_flag = 👎 ;
+
+          🐶 ( __array__get_two_dimention ( arr, i, j ) == 👎 ) {
+            🍄🍄 ( "white" ) ;
+            🐶 ( cell_cnt_alive == 3 ) {
+              🍙 n_c_array = 🗿 ( n_c_array, 👍, i, j) ;
+            } 😱 {
+              🍙 dead_flag = 👍 ;
+            } ;
+          } 😱 {
+            🍄🍄 ( "black" ) ;
+            🐶 ( cell_cnt_alive == 2 || cell_cnt_alive == 3 ) { 
+              🍙 n_c_array = 🗿 ( n_c_array, 👍, i, j ) ;
+            } 😱 {
+              🍙 dead_flag = 👍 ;
+            } ;
+          } ;
+
+          🐶 ( dead_flag ) {
+            🍙 n_c_array = 🗿 ( n_c_array, 👎, i, j ) ;
+          } ;
+
+          🍙 j = j + 1 ;
+          💨 j != arr_len - 1 ;
+        }
+      ) ;
+      🍙 i = i + 1 ;
+      💨 i != arr_len - 1 ;
+    }
+  ) ;
+
+  💨 n_c_array ;
+}
 
 🍙 main = 🏨 ( ) {
 
   🥚 ( ) ;
+
+  🎤🎶 ( "\n-! life game demo", 0, 255, 0, 👎) ;
+
+  😪 ( 1000 ) ;
+
   🎤🎶 ( "-! preparing array...", 255, 0, 0, 👎 ) ;
 
   🍙 array_size = 20 ;
   🍙 array = put_random_value ( make_array ( [ ], array_size, 👎 ), array_size * array_size ) ;
+  🍙 array = remove_outline ( array ) ;
+  🍙 chunk_num = 0 ;
 
-  🍙 i = 0 ; 🍙 j = 0 ;
-  🍙 array_len = 📏 ( array ) ;
+  🥚 ( ) ;
 
   🌸 (
     🏨 ( ) {
-      🍙 j = 0 ; 
-      🌸 (
-        🏨 ( ) {
-          display_array ( array ) ;
-          🍙 ar_ar = array [ i ] ;
-          🍙 ar_ar = __array__assign ( ar_ar , j , 👎 ) ;
-          🍙 array = __array__assign ( array , i , ar_ar ) ;
-          🥚 ( ) ;
-          🍙 j = j + 1 ; 
-        },
-        array_len
-      ) ;
-      🍙 i = i + 1 ; 
-    },
-    array_len
+      🎤🎶 ( display_array ( array ) ) ;
+
+      🎤 ( " -! life chunk: ", 0, 255, 0, 👎 ) ;
+      🎤🎶 ( chunk_num, 0, 255, 0, 👎 ) ;
+      🍙 array = next_chunk ( array ) ;
+      🍙 chunk_num = chunk_num + 1 ;
+      🥚 ( ) ;
+      💨 👍 ;
+    }
   ) ;
+
 } ;
 
 main ( ) ;

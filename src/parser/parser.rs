@@ -122,7 +122,7 @@ impl<'a> Parser<'a> {
       token::token::Token::If => self.expression_if_parser(),
       token::token::Token::Closure => self.closure_parser(),
       token => {
-        panic!("Unexpected token {:?}", token)
+        panic!("Unexpected left token {:?}", token)
       }
     };
 
@@ -150,6 +150,16 @@ impl<'a> Parser<'a> {
           self.next_token();
           left_exp = self.infix_parser(left_exp);
         }
+        //
+        token::token::Token::And => {
+          self.next_token();
+          left_exp = self.infix_parser(left_exp);
+        }
+        token::token::Token::Or => {
+          self.next_token();
+          left_exp = self.infix_parser(left_exp);
+        }
+        //
         token::token::Token::LParen => {
           self.next_token();
           left_exp = self.call_parser(left_exp);
@@ -162,6 +172,7 @@ impl<'a> Parser<'a> {
           self.next_token();
           left_exp = self.infix_parser(left_exp);
         }
+        //
         token::token::Token::LessThan => {
           self.next_token();
           left_exp = self.infix_parser(left_exp);
@@ -371,6 +382,8 @@ impl<'a> Parser<'a> {
       token::token::Token::Minus => ast::ast::Infix::Minus,
       token::token::Token::Asterisk => ast::ast::Infix::Asterisk,
       token::token::Token::Slash => ast::ast::Infix::Slash,
+      token::token::Token::And => ast::ast::Infix::And,
+      token::token::Token::Or => ast::ast::Infix::Or,
       token::token::Token::Percent => ast::ast::Infix::Percent,
       token::token::Token::Equql => ast::ast::Infix::Eq,
       token::token::Token::NotEquql => ast::ast::Infix::NotEq,

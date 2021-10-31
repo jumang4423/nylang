@@ -33,6 +33,7 @@ fn is_letter(c: char) -> bool {
     || c == '🌛'
     || c == '❌'
     || c == '🥚'
+    || c == '🗿'
 }
 
 impl<'a> Lexer<'a> {
@@ -58,7 +59,23 @@ impl<'a> Lexer<'a> {
         } else {
           token::token::Token::Assign
         }
-      }
+      },
+      '&' => {
+        if self.peek_char == '&' {
+          self.read_char();
+          token::token::Token::And
+        } else {
+          token::token::Token::And
+        }
+      },
+      '|' => {
+        if self.peek_char == '|' {
+          self.read_char();
+          token::token::Token::Or
+        } else {
+          token::token::Token::Or
+        }
+      },
       '+' => token::token::Token::Plus,
       '-' => token::token::Token::Minus,
       '!' => {

@@ -2,25 +2,10 @@
     "array operations library!"
 ) ;
 
-🍄🍄 ( "assign by index then return array" ) ;
-🍙 __array__assign = 🏨 ( array, index, value ) {
-    🍙 cur_index = 0 ;
-    🍙 return_array = [ ] ; 
-
-    🌸 (
-        🏨 () {  
-            🐶 ( cur_index == index ) {
-                🍙 return_array = 🥌 ( return_array, value ) ;
-            } 😱 {
-                🍙 return_array = 🥌 ( return_array, array [ 0 ] ) ;
-            } ;
-            🍙 array = 🌛 ( array ) ; 
-            🍙 cur_index = cur_index + 1 ;
-        },
-        📏 ( array ) 
-    ) ;
-
-    💨 return_array ;
+🍄🍄 ( "since 2 dimention value access is not defined yet" ) ;
+🍙 __array__get_two_dimention = 🏨 ( array, i, j ) {
+    🍙 arr_arr = array [ i ] ;
+    💨 arr_arr [ j ] ;
 } ;
 
 🍄🍄 ( "do for each for array" ) ;
@@ -41,7 +26,7 @@
 
     🌸 (
         🏨 () {
-            🍙 array = __array__assign ( array, cur_index, closure ( array [ cur_index ], cur_index ) ) ;
+            🍙 array = 🗿 ( array, closure ( array [ cur_index ], cur_index ), cur_index ) ;
             🍙 cur_index = cur_index + 1 ;
         },
         📏 ( array ) 
@@ -64,8 +49,8 @@
                 🏨 () {
                     🐶 (array [ i ] > array[ j ] ) {
 				        🍙 tmp = array [ i ] ;
-                        🍙 array = __array__assign ( array, i, array [ j ] ) ;
-                        🍙 array = __array__assign ( array, j, tmp ) ;
+                        🍙 array = 🗿 ( array, array [ j ], i ) ;
+                        🍙 array = 🗿 ( array, tmp, j ) ;
 			        }
                     🍙 j = j + 1 ;
                 },

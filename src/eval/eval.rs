@@ -138,6 +138,16 @@ impl Evaluator {
         object::object::Object::Boolean(r_value),
       ) => object::object::Object::Boolean(l_value != r_value),
       (
+        ast::ast::Infix::And,
+        object::object::Object::Boolean(l_value),
+        object::object::Object::Boolean(r_value),
+      ) => object::object::Object::Boolean(l_value && r_value),
+      (
+        ast::ast::Infix::Or,
+        object::object::Object::Boolean(l_value),
+        object::object::Object::Boolean(r_value),
+      ) => object::object::Object::Boolean(l_value || r_value),
+      (
         ast::ast::Infix::Plus,
         object::object::Object::String(l_value),
         object::object::Object::String(r_value),
@@ -219,7 +229,7 @@ impl Evaluator {
       ast::ast::Expression::Integer(integer) => object::object::Object::Integer(integer),
       ast::ast::Expression::Bool(boolean) => object::object::Object::Boolean(boolean),
       ast::ast::Expression::String(string) => object::object::Object::String(string),
-      ast::ast::Expression::Array { elements } => self.array_evaluator(elements.clone()),
+      ast::ast::Expression::Array {elements} => self.array_evaluator(elements.clone()),
       ast::ast::Expression::ArrayIndex { left_ident, index } => {
         let array_obj: object::object::Object;
         let evaled_index: object::object::Object = self.expression_evaluator(*index);
@@ -302,6 +312,7 @@ impl Evaluator {
             "🌛" => return builtin::builtin::rest(args),
             "❌" => return builtin::builtin::panipani(args),
             "🥚" => return builtin::builtin::clear(),
+            "🗿" => return builtin::builtin::assign(args),
             "🍄🍄" => return object::object::Object::Null,
             _ => {}
           }
