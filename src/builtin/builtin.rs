@@ -96,38 +96,34 @@ pub fn clear() -> object::object::Object {
 ////////////////////////////////////////////////////////////////////////////////
 
 pub fn type_check(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-
   #[derive(PartialEq)]
   enum CheckableEnum {
     String,
     Integer,
     Boolean,
     Array,
+    Closure,
   }
 
+  // obj to type
   let type_wrap_closure = |obj: object::object::Object| -> CheckableEnum {
     match obj {
-      object::object::Object::Integer(_) => {
-        return CheckableEnum::Integer;
-      }
-      object::object::Object::String(_) => {
-        return CheckableEnum::String;
-      }
-      object::object::Object::Array(_) => {
-        return CheckableEnum::Array;
-      }
-      object::object::Object::Boolean(_) => {
-        return CheckableEnum::Boolean;
-      }
+      object::object::Object::Integer(_) => CheckableEnum::Integer,
+      object::object::Object::String(_) => CheckableEnum::String,
+      object::object::Object::Array(_) => CheckableEnum::Array,
+      object::object::Object::Boolean(_) => CheckableEnum::Boolean,
+      object::object::Object::Closure {
+        parameters: _,
+        body: _,
+        env: _,
+      } => CheckableEnum::Closure,
       _ => {
         panic!("type_check: argument must be a string, integer, array, function or boolean");
       }
     }
-  } ;
+  };
 
   let left_str: CheckableEnum = type_wrap_closure(args[0].clone());
   let right_str: CheckableEnum = type_wrap_closure(args[1].clone());
   object::object::Object::Boolean(left_str == right_str)
 }
-
-

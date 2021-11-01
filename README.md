@@ -30,6 +30,11 @@ chmod +x scripts/install.sh && ./scripts/install.sh
 chmod +x scripts/uninstall.sh && ./scripts/uninstall.sh
 ```
 
+## quick demo
+
+```
+cargo run --release run samples/demo.nyl
+```
 ## excution
 
 > show help

@@ -200,13 +200,18 @@
 
   🥚 ( ) ;
 
-  🎤🎶 ( "\n-! life game demo", 0, 255, 0, 👎) ;
+  🎤 ( "\n-! life game demo", 0, 255, 0, 👍) ;
+  🎤🎶 ( "\n-! array size? ( 0 < number < 50 )", 0, 255, 0, 👎) 
+  🍙 array_size = 👀 ( "number" ) ;
 
-  😪 ( 1000 ) ;
+  🐶 ( array_size < 1 ) {
+    ❌ ( "array size must be greater than 1" ) ;
+  }
+  🐶 ( array_size > 49 ) {
+    ❌ ( "array size must be less than 50" ) ;
+  }
 
   🎤🎶 ( "-! preparing array...", 255, 0, 0, 👎 ) ;
-
-  🍙 array_size = 20 ;
   🍙 array = put_random_value ( make_array ( [ ], array_size, 👎 ), array_size * array_size ) ;
   🍙 array = remove_outline ( array ) ;
   🍙 chunk_num = 0 ;
