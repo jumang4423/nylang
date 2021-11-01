@@ -15,6 +15,7 @@ pub enum Token {
   // operators
   Closure,
   Let,
+
   // keywords
   Assign,
   Equql,
@@ -27,6 +28,7 @@ pub enum Token {
   Asterisk,
   Slash,
   Percent,
+  Typeof,
 
   // delimiters
   LessThan,
@@ -67,6 +69,7 @@ impl Token {
       "🐶" => Some(Token::If),
       "😱" => Some(Token::Else),
       "💨" => Some(Token::Return),
+      "👽" => Some(Token::Typeof),
       _ => None,
     }
   }

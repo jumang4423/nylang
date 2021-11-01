@@ -72,6 +72,7 @@ pub enum Expression {
 pub enum Prefix {
   Bang,
   Minus,
+  Typeof
 }
 
 #[derive(Clone, PartialEq, Eq, Debug, Copy)]

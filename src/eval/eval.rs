@@ -65,11 +65,29 @@ impl Evaluator {
     right: object::object::Object,
   ) -> object::object::Object {
     match (operator, right) {
+      // !ass
       (ast::ast::Prefix::Bang, object::object::Object::Boolean(b_value)) => {
         object::object::Object::Boolean(!b_value)
       }
+      // -number
       (ast::ast::Prefix::Minus, object::object::Object::Integer(b_value)) => {
         object::object::Object::Integer(-1 * b_value)
+      }
+      // type of
+      (ast::ast::Prefix::Typeof, object::object::Object::Boolean(_)) => {
+        object::object::Object::Typeof(object::object::ComparebleTypes::Boolean)
+      }
+      (ast::ast::Prefix::Typeof, object::object::Object::String(_)) => {
+        object::object::Object::Typeof(object::object::ComparebleTypes::String)
+      }
+      (ast::ast::Prefix::Typeof, object::object::Object::Integer(_)) => {
+        object::object::Object::Typeof(object::object::ComparebleTypes::Integer)
+      }
+      (ast::ast::Prefix::Typeof, object::object::Object::Array(_)) => {
+        object::object::Object::Typeof(object::object::ComparebleTypes::Array)
+      }
+      (ast::ast::Prefix::Typeof, object::object::Object::Closure { .. }) => {
+        object::object::Object::Typeof(object::object::ComparebleTypes::Closure)
       }
       _ => object::object::Object::Null,
     }
@@ -168,8 +186,28 @@ impl Evaluator {
       (ast::ast::Infix::NotEq, object::object::Object::Null, object::object::Object::Null) => {
         object::object::Object::Boolean(false)
       }
+      // type eqing
+      (
+        ast::ast::Infix::Eq,
+        object::object::Object::Typeof(l_value),
+        object::object::Object::Typeof(r_value),
+      ) => object::object::Object::Boolean(l_value == r_value),
+      (
+        ast::ast::Infix::NotEq,
+        object::object::Object::Typeof(l_value),
+        object::object::Object::Typeof(r_value),
+      ) => object::object::Object::Boolean(l_value != r_value),
       _ => object::object::Object::Null,
     }
+  }
+
+  pub fn array_evaluator(&mut self, elements: Vec<ast::ast::Expression>) -> object::object::Object {
+    let obj_array: Vec<object::object::Object>;
+    obj_array = elements
+      .iter()
+      .map(|element| self.expression_evaluator(element.clone()))
+      .collect();
+    object::object::Object::Array(obj_array)
   }
 
   pub fn block_evaluator(
@@ -206,15 +244,6 @@ impl Evaluator {
     };
   }
 
-  pub fn array_evaluator(&mut self, elements: Vec<ast::ast::Expression>) -> object::object::Object {
-    let obj_array: Vec<object::object::Object>;
-    obj_array = elements
-      .iter()
-      .map(|element| self.expression_evaluator(element.clone()))
-      .collect();
-    object::object::Object::Array(obj_array)
-  }
-
   pub fn expression_evaluator(
     &mut self,
     expression: ast::ast::Expression,
@@ -229,7 +258,7 @@ impl Evaluator {
       ast::ast::Expression::Integer(integer) => object::object::Object::Integer(integer),
       ast::ast::Expression::Bool(boolean) => object::object::Object::Boolean(boolean),
       ast::ast::Expression::String(string) => object::object::Object::String(string),
-      ast::ast::Expression::Array {elements} => self.array_evaluator(elements.clone()),
+      ast::ast::Expression::Array { elements } => self.array_evaluator(elements.clone()),
       ast::ast::Expression::ArrayIndex { left_ident, index } => {
         let array_obj: object::object::Object;
         let evaled_index: object::object::Object = self.expression_evaluator(*index);
@@ -313,7 +342,6 @@ impl Evaluator {
             "❌" => return builtin::errors::panipani(args),
             "🥚" => return builtin::builtin::clear(),
             "🗿" => return builtin::array::assign(args),
-            "🦀" => return builtin::builtin::type_check(args),
             "🍄🍄" => return object::object::Object::Null,
             _ => {}
           }

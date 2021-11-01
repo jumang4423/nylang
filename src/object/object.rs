@@ -8,6 +8,7 @@ pub enum Object {
   Integer(i32),
   Boolean(bool),
   Array(Vec<Object>),
+  Typeof(ComparebleTypes),
   Null,
   ReturnValue(Box<Object>),
   Closure {
@@ -57,7 +58,24 @@ impl fmt::Display for Object {
       ),
       Object::Null => write!(f, "null"),
       Object::ReturnValue(value) => write!(f, "{}", value),
+      Object::Array(values) => {
+        let mut s = String::new();
+        for value in values {
+          s = format!("{}{}", s, value);
+        }
+        write!(f, "[{}]", s)
+      }
+      Object::Typeof(value) => write!(f, "{:?}", value),
       _ => write!(f, "illegal"),
     }
   }
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum ComparebleTypes {
+  String,
+  Integer,
+  Boolean,
+  Array,
+  Closure
 }

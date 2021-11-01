@@ -118,6 +118,7 @@ impl<'a> Parser<'a> {
       token::token::Token::False => ast::ast::Expression::Bool(false),
       token::token::Token::Bang => self.prefix_parser(),
       token::token::Token::Minus => self.prefix_parser(),
+      token::token::Token::Typeof => self.prefix_parser(),
       token::token::Token::LParen => self.g_exp_parser(),
       token::token::Token::If => self.expression_if_parser(),
       token::token::Token::Closure => self.closure_parser(),
@@ -360,6 +361,7 @@ impl<'a> Parser<'a> {
     let operator = match self.cur_token {
       token::token::Token::Bang => ast::ast::Prefix::Bang,
       token::token::Token::Minus => ast::ast::Prefix::Minus,
+      token::token::Token::Typeof => ast::ast::Prefix::Typeof,
       _ => {
         panic!("Unexpected token {:?}", self.cur_token)
       }
