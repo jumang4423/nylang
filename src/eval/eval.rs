@@ -300,19 +300,20 @@ impl Evaluator {
         // non reserved by parser
         if let ast::ast::Expression::Ident(func) = *closure.clone() {
           match func.as_str() {
-            "🎤" => return builtin::builtin::bark(args, false),
-            "🎤🎶" => return builtin::builtin::bark(args, true),
+            "🎤" => return builtin::io::bark(args, false),
+            "🎤🎶" => return builtin::io::bark(args, true),
             "😪" => return builtin::builtin::sleep(args),
             "🌸" => return builtin::builtin::looper(args, self),
-            "🌹" => return builtin::builtin::random_emojis(args),
-            "👀" => return builtin::builtin::scanf(args),
+            "🌹" => return builtin::io::random_emojis(args),
+            "👀" => return builtin::io::scanf(args),
             "🐽🐽🐽" => return builtin::builtin::import(args, self),
-            "📏" => return builtin::builtin::len(args),
-            "🥌" => return builtin::builtin::push(args),
-            "🌛" => return builtin::builtin::rest(args),
-            "❌" => return builtin::builtin::panipani(args),
+            "📏" => return builtin::array::len(args),
+            "🥌" => return builtin::array::push(args),
+            "🌛" => return builtin::array::rest(args),
+            "❌" => return builtin::errors::panipani(args),
             "🥚" => return builtin::builtin::clear(),
-            "🗿" => return builtin::builtin::assign(args),
+            "🗿" => return builtin::array::assign(args),
+            "🦀" => return builtin::builtin::type_check(args),
             "🍄🍄" => return object::object::Object::Null,
             _ => {}
           }

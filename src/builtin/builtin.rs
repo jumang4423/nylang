@@ -1,25 +1,9 @@
 use super::super::lexer;
 use super::super::object;
 use super::super::parser;
-use super::super::tools;
-use rand::Rng;
 use std::env;
 use std::fs;
-use std::io;
 use std::thread;
-
-use colored::Colorize;
-
-macro_rules! cast {
-  ($target: expr, $pat: path) => {{
-    if let $pat(a) = $target {
-      // #1
-      a
-    } else {
-      panic!("mismatch variant when cast to {}", stringify!($pat)); // #2
-    }
-  }};
-}
 
 #[allow(deprecated)]
 pub fn import(
@@ -48,126 +32,6 @@ pub fn import(
   } else {
     panic!("import: argument must be a string");
   }
-}
-
-pub fn scanf(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-  let mut _type = "string";
-
-  if args.len() != 1 {
-    panic!("get_input: wrong number of arguments");
-  }
-
-  if let object::object::Object::String(_str) = &args[0] {
-    _type = &_str;
-  }
-
-  let mut input = String::new();
-  io::stdin().read_line(&mut input).expect("cannot get input");
-
-  // remove last enter from input
-
-  return match _type {
-    "number" => object::object::Object::Integer(input.trim().parse::<i32>().unwrap()),
-    "boolean" | "bool" => {
-      object::object::Object::Boolean(tools::tools::str_to_bool(input.trim().to_string()))
-    }
-    _ => object::object::Object::String(input.trim().to_string()),
-  };
-}
-
-pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> object::object::Object {
-  if let object::object::Object::String(str) = &args[0] {
-    let array_of_str: Vec<String> = str
-      .as_str()
-      .clone()
-      .split("\\n")
-      .map(|s| s.to_string())
-      .collect();
-
-    match args.len() {
-      1 => {
-        for s in array_of_str.iter() {
-          print!("{}", s);
-          if array_of_str.len() > 1 && newline {
-            println!();
-          }
-        }
-      }
-      5 => {
-        // unwrap colors from objects
-        let red = cast!(args[1], object::object::Object::Integer);
-        let green = cast!(args[2], object::object::Object::Integer);
-        let blue = cast!(args[3], object::object::Object::Integer);
-        let is_text_coloring = cast!(args[4], object::object::Object::Boolean);
-
-        if is_text_coloring {
-          for s in array_of_str.iter() {
-            print!(
-              "{}",
-              format!("{}", s)
-                .truecolor(red as u8, green as u8, blue as u8)
-                .bold()
-            );
-            if array_of_str.len() > 1 && newline {
-              println!();
-            }
-          }
-        } else {
-          for s in array_of_str.iter() {
-            print!(
-              "{}",
-              format!("{}", s)
-                .on_truecolor(red as u8, green as u8, blue as u8)
-                .bold()
-            );
-            if array_of_str.len() > 1 && newline {
-              println!();
-            }
-          }
-        }
-      }
-      _ => {
-        panic!("🎤: arguments are invalid, arg len should be 1 or 5")
-      }
-    }
-  } else {
-    match args.len() {
-      1 => {
-        print!("{}", args[0].to_string());
-      }
-      5 => {
-        // unwrap colors from objects
-        let red = cast!(args[1], object::object::Object::Integer);
-        let green = cast!(args[2], object::object::Object::Integer);
-        let blue = cast!(args[3], object::object::Object::Integer);
-        let is_text_coloring = cast!(args[4], object::object::Object::Boolean);
-
-        if is_text_coloring {
-          print!(
-            "{}",
-            format!("{}", args[0].to_string())
-              .truecolor(red as u8, green as u8, blue as u8)
-              .bold()
-          );
-        } else {
-          print!(
-            "{}",
-            format!("{}", args[0].to_string())
-              .on_truecolor(red as u8, green as u8, blue as u8)
-              .bold()
-          );
-        }
-      }
-      _ => {
-        panic!("🎤: arguments are invalid, arg len should be 1 or 5")
-      }
-    }
-  }
-  if newline {
-    println!("");
-  }
-
-  object::object::Object::Null
 }
 
 #[allow(deprecated)]
@@ -220,27 +84,6 @@ pub fn looper(
 
   object::object::Object::Null
 }
-
-pub fn random_emojis(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-  let emojis = vec!["🐧", "🦄", "🐝", "🐹", "🐰", "🦊", "🐼", "🐨", "🐯", "🐷"];
-
-  if args.len() == 1 {
-    if let object::object::Object::Integer(int) = &args[0] {
-      let mut emojis_vec = vec![];
-      for _ in 0..*int {
-        let index = rand::thread_rng().gen_range(0, emojis.len());
-        emojis_vec.push(emojis[index].to_string());
-      }
-
-      return object::object::Object::String(emojis_vec.join(" "));
-    } else {
-      panic!("random_emoji: argument must be an integer");
-    }
-  } else {
-    panic!("random_emoji: too many arguments");
-  }
-}
-
 pub fn clear() -> object::object::Object {
   print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
   object::object::Object::Null
@@ -248,137 +91,43 @@ pub fn clear() -> object::object::Object {
 
 ////////////////////////////////////////////////////////////////////////////////
 ///
-/// // Array related functions
+/// // types
 ///
 ////////////////////////////////////////////////////////////////////////////////
 
-pub fn assign(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-  // ( array, value, index0 )
-  if args.len() == 3 {
-    match &args[0] {
-      object::object::Object::Array(array) => {
-        let index: i32 = match &args[2] {
-          object::object::Object::Integer(int) => *int,
-          _ => panic!("🎤: index must be an integer"),
-        };
+pub fn type_check(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
 
-        let mut array_copy = array.clone();
-        array_copy[index as usize] = args[1].clone();
-        return object::object::Object::Array(array_copy);
+  #[derive(PartialEq)]
+  enum CheckableEnum {
+    String,
+    Integer,
+    Boolean,
+    Array,
+  }
+
+  let type_wrap_closure = |obj: object::object::Object| -> CheckableEnum {
+    match obj {
+      object::object::Object::Integer(_) => {
+        return CheckableEnum::Integer;
+      }
+      object::object::Object::String(_) => {
+        return CheckableEnum::String;
+      }
+      object::object::Object::Array(_) => {
+        return CheckableEnum::Array;
+      }
+      object::object::Object::Boolean(_) => {
+        return CheckableEnum::Boolean;
       }
       _ => {
-        panic!("🎤: first argument must be an array");
+        panic!("type_check: argument must be a string, integer, array, function or boolean");
       }
     }
-    // ( array, value, index0, index1 )
-  } else if args.len() == 4 {
-    match &args[0] {
-      object::object::Object::Array(array) => {
-        match &array[cast!(args[2], object::object::Object::Integer) as usize] {
-          object::object::Object::Array(arr_arr) => {
-            let mut arr_arr_clone = arr_arr.clone();
-            let mut array_clone = array.clone();
-            arr_arr_clone[cast!(args[3], object::object::Object::Integer) as usize] =
-              args[1].clone();
-            array_clone[cast!(args[2], object::object::Object::Integer) as usize] =
-              object::object::Object::Array(arr_arr_clone);
-            return object::object::Object::Array(array_clone);
-          }
-          _ => {
-            panic!("🎤: second dimention must be an array");
-          }
-        }
-      }
-      _ => {
-        panic!("🎤: first argument must be an array");
-      }
-    }
-  } else {
-    panic!("🎤: too many arguments, got {}", args.len());
-  }
+  } ;
+
+  let left_str: CheckableEnum = type_wrap_closure(args[0].clone());
+  let right_str: CheckableEnum = type_wrap_closure(args[1].clone());
+  object::object::Object::Boolean(left_str == right_str)
 }
 
-pub fn len(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-  if args.len() == 1 {
-    match &args[0] {
-      object::object::Object::String(string) => {
-        return object::object::Object::Integer(string.len() as i32);
-      }
-      object::object::Object::Array(array) => {
-        return object::object::Object::Integer(array.len() as i32);
-      }
-      _ => {
-        panic!("len: argument must be a string or array");
-      }
-    }
-  } else {
-    panic!("len: too many arguments");
-  }
-}
 
-pub fn push(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-  if args.len() == 2 {
-    match &args[0] {
-      object::object::Object::Array(array) => {
-        let mut array_clone = array.clone();
-        array_clone.push(args[1].clone());
-        return object::object::Object::Array(array_clone);
-      }
-      object::object::Object::String(string) => {
-        let mut string_clone = string.clone();
-        string_clone.push_str(&format!("{}", args[1]));
-        return object::object::Object::String(string_clone);
-      }
-      _ => {
-        panic!("push: argument must be an array");
-      }
-    }
-  } else {
-    panic!("push: too many arguments");
-  }
-}
-
-pub fn rest(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-  if args.len() == 1 {
-    match &args[0] {
-      object::object::Object::Array(array) => {
-        let mut array_clone = array.clone();
-        array_clone.remove(0);
-        return object::object::Object::Array(array_clone);
-      }
-      object::object::Object::String(string) => {
-        let mut string_clone = string.clone();
-        string_clone.remove(0);
-        return object::object::Object::String(string_clone);
-      }
-      _ => {
-        panic!("rest: argument must be an array");
-      }
-    }
-  } else {
-    panic!("rest: too many arguments");
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-///
-/// // error handling
-///
-////////////////////////////////////////////////////////////////////////////////
-
-pub fn panipani(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
-  if args.len() == 1 {
-    if let object::object::Object::String(string) = &args[0] {
-      println!(
-        "{} {}",
-        "panic:".on_truecolor(255, 150, 150).bold(),
-        string.truecolor(255, 0, 0).bold()
-      );
-      std::process::exit(1);
-    } else {
-      panic!("panic: argument must be a string");
-    }
-  } else {
-    panic!("🎤: too many arguments");
-  }
-}

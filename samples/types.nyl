@@ -1,0 +1,25 @@
+🍙 str = "test" ; 
+🍙 bool = 👍 ;
+🍙 number = 1234 ;
+🍙 array = [ 1, 2, 3 ] ;
+
+🎤🎶 ( "string" ) ;
+🎤🎶 ( 🦀 ( str, str ) ) ;
+🎤🎶 ( 🦀 ( str, bool ) ) ;
+🎤🎶 ( 🦀 ( str, number ) ) ;
+🎤🎶 ( 🦀 ( str, array ) ) ;
+🎤🎶 ( "boolean" ) ;
+🎤🎶 ( 🦀 ( bool, bool ) ) ;
+🎤🎶 ( 🦀 ( bool, str ) ) ;
+🎤🎶 ( 🦀 ( bool, number ) ) ;
+🎤🎶 ( 🦀 ( bool, array ) ) ;
+🎤🎶 ( "number" ) ;
+🎤🎶 ( 🦀 ( number, number ) ) ;
+🎤🎶 ( 🦀 ( number, bool ) ) ;
+🎤🎶 ( 🦀 ( number, str ) ) ;
+🎤🎶 ( 🦀 ( number, array ) ) ;
+🎤🎶 ( "array" ) ;
+🎤🎶 ( 🦀 ( array, array ) ) ;
+🎤🎶 ( 🦀 ( array, bool ) ) ;
+🎤🎶 ( 🦀 ( array, str ) ) ;
+🎤🎶 ( 🦀 ( array, number ) ) ;

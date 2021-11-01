@@ -35,8 +35,41 @@
     💨 array ;
 } ;
 
+🍄🍄 ( "make empty 2 dimentional array: arr" ) ;
+🍙 __array__map__allc_array = 🏨 ( arr, size, value ) {
+  🌸 (
+    🏨 ( ) {
+      🍙 array_of_array = [ ] ;
+      🌸 (
+        🏨 ( ) {
+          🍙 array_of_array = 🥌 ( array_of_array, value ) ;
+        },
+        size
+      ) ;
+
+      🍙 arr = 🥌 ( arr, array_of_array ) ;
+    },
+    size
+  ) ;
+
+  🐶 ( 📏 ( arr ) != size ) {
+    ❌ ( "__array__map__allc_array: array size is incorrect" ) ;
+  }
+
+  🍙 __test_ar_ar = arr [ 0 ] ;
+  🐶 ( __test_ar_ar [ 0 ] != value ) {
+    ❌ ( "__array__map__allc_array: expected value is incorrect" ) ;
+  }
+  💨 arr ;
+} ;
+
 🍄🍄 ( "sort number pair of array" ) ;
 🍙 __array__sort = 🏨 ( array ) {
+
+    🐶 ( !🦀 ( [], array) ) { 
+        ❌ ( "__array__sort: give me array" ) ;
+    }
+
     🍙 i = 0 ;
     🍙 j = 0 ;
 
