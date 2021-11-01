@@ -10,7 +10,7 @@ chmod +x ~/.nylang
 # move the binary
 cp target/release/nylang ~/.nylang
 cp -r lib/ ~/.nylang/lib
-rm target/debug/nylang
+rm target/release/nylang
 chmod +x ~/.nylang/nylang
 
 echo "-! [2]PATHing..."
