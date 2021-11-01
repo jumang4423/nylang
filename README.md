@@ -1,4 +1,4 @@
-![](_img/emojis.png)
+<!-- ![](_img/emojis.png) -->
 
 # nylang
 
