@@ -1,38 +1,46 @@
 🍄🍄 ( 
-    "array operations library!"
+  "array operations library!"
 ) ;
 
 🍄🍄 ( "since 2 dimention value access is not defined yet" ) ;
 🍙 __array__get_two_dimention = 🏨 ( array, i, j ) {
-    🍙 arr_arr = array [ i ] ;
-    💨 arr_arr [ j ] ;
+  🍙 arr_arr = array [ i ] ;
+  💨 arr_arr [ j ] ;
 } ;
 
 🍄🍄 ( "do for each for array" ) ;
 🍙 __array__forEach = 🏨 ( array, closure ) {
-    🍙 cur_index = 0 ;
 
-    🌸 (
-        🏨 () {
-            closure ( array [ cur_index ], cur_index ) ;
-            🍙 cur_index = cur_index + 1 ;
-        },
-        📏 ( array ) 
-    ) ;
+  🐶 ( 👽 array != [] ) {
+    ❌ ( "__array__map__allc_array: first argument must be a array" ) ;
+  }
+
+  🍙 cur_index = 0 ;
+  🌸 (
+      🏨 () {
+          closure ( array [ cur_index ], cur_index ) ;
+          🍙 cur_index = cur_index + 1 ;
+      },
+      📏 ( array ) 
+  ) ;
 } ;
 
 🍙 __array__map = 🏨 ( array, closure ) {
-    🍙 cur_index = 0 ;
 
-    🌸 (
-        🏨 () {
-            🍙 array = 🗿 ( array, closure ( array [ cur_index ], cur_index ), cur_index ) ;
-            🍙 cur_index = cur_index + 1 ;
-        },
-        📏 ( array ) 
-    ) ;
+  🐶 ( 👽 array != [] ) {
+    ❌ ( "__array__map__allc_array: first argument must be a array" ) ;
+  }
 
-    💨 array ;
+  🍙 cur_index = 0 ;
+  🌸 (
+      🏨 () {
+          🍙 array = 🗿 ( array, closure ( array [ cur_index ], cur_index ), cur_index ) ;
+          🍙 cur_index = cur_index + 1 ;
+      },
+      📏 ( array ) 
+  ) ;
+
+  💨 array ;
 } ;
 
 🍄🍄 ( "make empty 2 dimentional array: arr" ) ;
@@ -66,34 +74,32 @@
 🍄🍄 ( "sort number pair of array" ) ;
 🍙 __array__sort = 🏨 ( array ) {
 
-    🐶 ( 👽 array != [] ) { 
-        ❌ ( "__array__sort: give me array" ) ;
-    }
-
-    🍙 i = 0 ;
-    🍙 j = 0 ;
-
-    🌸 (
-        🏨 () {
-
-            🍙 j = i + 1 ;
-
-            🌸 (
-                🏨 () {
-                    🐶 (array [ i ] > array[ j ] ) {
-				        🍙 tmp = array [ i ] ;
-                        🍙 array = 🗿 ( array, array [ j ], i ) ;
-                        🍙 array = 🗿 ( array, tmp, j ) ;
-			        }
-                    🍙 j = j + 1 ;
-                },
-                📏 ( array ) - i - 1
-            ) ;
-
-            🍙 i = i + 1 ;
-        },
-        📏 ( array ) - 1
-    ) ;
-
-    💨 array ;
+  🐶 ( 👽 array != [] ) { 
+    ❌ ( "__array__sort: give me array" ) ;
+  }
+  🐶 ( 📏 ( array ) < 1 ) { 
+    ❌ ( "__array__sort: array size is too small" ) ;
+  }
+  
+  🍙 i = 0 ;
+  🍙 j = 0 ;
+  🌸 (
+      🏨 () {
+          🍙 j = i + 1 ;
+          🌸 (
+              🏨 () {
+                  🐶 (array [ i ] > array[ j ] ) {
+			        🍙 tmp = array [ i ] ;
+                      🍙 array = 🗿 ( array, array [ j ], i ) ;
+                      🍙 array = 🗿 ( array, tmp, j ) ;
+		        }
+                  🍙 j = j + 1 ;
+              },
+              📏 ( array ) - i - 1
+          ) ;
+          🍙 i = i + 1 ;
+      },
+      📏 ( array ) - 1
+  ) ;
+  💨 array ;
 }

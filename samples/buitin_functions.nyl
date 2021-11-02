@@ -16,7 +16,7 @@
 
 🎤🎶 ( 🐶 ( checkCat ( "cat" ) ) { 💨 "i am cat" ; } 😱 { 💨 "i am not cat" ; } ) ;
 
-🎤 ( "who" ) ; 🎤 ( age ) ; 🎤🎶 ( "years old" ) ;
+🎤🎶 ( "who " + age + " years old" ) ;
 
 🎤🎶 ( 🐶 ( age < 20 ) { 💨 "i am young!" ; } 😱 { 💨 "i am old enough" ; } ) ;
 

@@ -171,6 +171,16 @@ impl Evaluator {
         object::object::Object::String(r_value),
       ) => object::object::Object::String(format!("{}{}", l_value, r_value)),
       (
+        ast::ast::Infix::Plus,
+        object::object::Object::Integer(l_value),
+        object::object::Object::String(r_value),
+      ) => object::object::Object::String(format!("{}{}", l_value, r_value)),
+      (
+        ast::ast::Infix::Plus,
+        object::object::Object::String(l_value),
+        object::object::Object::Integer(r_value),
+      ) => object::object::Object::String(format!("{}{}", l_value, r_value)),
+      (
         ast::ast::Infix::Eq,
         object::object::Object::String(l_value),
         object::object::Object::String(r_value),

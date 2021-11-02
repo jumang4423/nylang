@@ -407,3 +407,14 @@ impl<'a> Parser<'a> {
     }
   }
 }
+
+#[test]
+fn test_parse() {
+
+  let _lines = "🍙 x = 5;
+  🍄🍄 ( \"welcome to nylang!\" ) ;
+  ";
+  let l = lexer::lexer::Lexer::new(_lines);
+  let mut p = Parser::new(l);
+  p.program_parser();
+}
