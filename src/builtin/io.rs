@@ -17,13 +17,10 @@ macro_rules! cast {
 
 pub fn scanf(args: std::vec::Vec<object::object::Object>) -> object::object::Object {
   let mut _type = "string";
-
-  if args.len() != 1 {
-    panic!("get_input: wrong number of arguments");
-  }
+  assert!(!(args.len() != 1), "get_input: wrong number of arguments");
 
   if let object::object::Object::String(_str) = &args[0] {
-    _type = &_str;
+    _type = _str;
   }
 
   let mut input = String::new();
@@ -42,12 +39,7 @@ pub fn scanf(args: std::vec::Vec<object::object::Object>) -> object::object::Obj
 
 pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> object::object::Object {
   if let object::object::Object::String(str) = &args[0] {
-    let array_of_str: Vec<String> = str
-      .as_str()
-      .clone()
-      .split("\\n")
-      .map(|s| s.to_string())
-      .collect();
+    let array_of_str: Vec<String> = str.as_str().split("\\n").map(|s| s.to_string()).collect();
 
     match args.len() {
       1 => {
@@ -69,7 +61,7 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> objec
           for s in array_of_str.iter() {
             print!(
               "{}",
-              format!("{}", s)
+              s.to_string()
                 .truecolor(red as u8, green as u8, blue as u8)
                 .bold()
             );
@@ -81,7 +73,7 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> objec
           for s in array_of_str.iter() {
             print!(
               "{}",
-              format!("{}", s)
+              s.to_string()
                 .on_truecolor(red as u8, green as u8, blue as u8)
                 .bold()
             );
@@ -98,7 +90,7 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> objec
   } else {
     match args.len() {
       1 => {
-        print!("{}", args[0].to_string());
+        print!("{}", args[0]);
       }
       5 => {
         // unwrap colors from objects
@@ -110,14 +102,14 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> objec
         if is_text_coloring {
           print!(
             "{}",
-            format!("{}", args[0].to_string())
+            format!("{}", args[0])
               .truecolor(red as u8, green as u8, blue as u8)
               .bold()
           );
         } else {
           print!(
             "{}",
-            format!("{}", args[0].to_string())
+            format!("{}", args[0])
               .on_truecolor(red as u8, green as u8, blue as u8)
               .bold()
           );
@@ -129,7 +121,7 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> objec
     }
   }
   if newline {
-    println!("");
+    println!();
   }
 
   object::object::Object::Null
@@ -146,7 +138,7 @@ pub fn random_emojis(args: std::vec::Vec<object::object::Object>) -> object::obj
         emojis_vec.push(emojis[index].to_string());
       }
 
-      return object::object::Object::String(emojis_vec.join(" "));
+      object::object::Object::String(emojis_vec.join(" "))
     } else {
       panic!("random_emoji: argument must be an integer");
     }

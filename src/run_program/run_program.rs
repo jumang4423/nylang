@@ -90,7 +90,7 @@ pub fn lexer_program(file: String) -> Result<(), io::Error> {
 
   loop {
     match &tok {
-      token::token::Token::EOF => break,
+      token::token::Token::Eof => break,
       _ => println!("{:?}", tok),
     }
 

@@ -10,8 +10,8 @@ pub struct Lexer<'a> {
 }
 
 fn is_letter(c: char) -> bool {
-  c >= 'a' && c <= 'z'
-    || c >= 'A' && c <= 'Z'
+  ('a'..='z').contains(&c)
+    || ('A'..='Z').contains(&c)
     || c == '_'
     || c == '🏨'
     || c == '🍙'
@@ -60,7 +60,7 @@ impl<'a> Lexer<'a> {
         } else {
           token::token::Token::Assign
         }
-      },
+      }
       '&' => {
         if self.peek_char == '&' {
           self.read_char();
@@ -68,7 +68,7 @@ impl<'a> Lexer<'a> {
         } else {
           token::token::Token::And
         }
-      },
+      }
       '|' => {
         if self.peek_char == '|' {
           self.read_char();
@@ -76,7 +76,7 @@ impl<'a> Lexer<'a> {
         } else {
           token::token::Token::Or
         }
-      },
+      }
       '+' => token::token::Token::Plus,
       '-' => token::token::Token::Minus,
       '!' => {
@@ -101,7 +101,7 @@ impl<'a> Lexer<'a> {
       '{' => token::token::Token::LBrace,
       '}' => token::token::Token::RBrace,
       '"' => self.check_string(),
-      ZERO_CHAR => token::token::Token::EOF,
+      ZERO_CHAR => token::token::Token::Eof,
       char => {
         if is_letter(self.cur_char) {
           return self.check_identifier();
@@ -190,7 +190,7 @@ fn test_lexer() {
   while lexer.cur_char != ZERO_CHAR {
     tokens.push(lexer.next_token());
   }
-  tokens.push(token::token::Token::EOF);
+  tokens.push(token::token::Token::Eof);
   assert_eq!(
     tokens,
     vec![
@@ -223,7 +223,7 @@ fn test_lexer() {
       token::token::Token::RBrace,
       token::token::Token::RBrace,
       token::token::Token::Semicolon,
-      token::token::Token::EOF,
+      token::token::Token::Eof,
     ]
   );
 }

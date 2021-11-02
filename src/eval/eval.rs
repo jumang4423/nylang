@@ -51,7 +51,6 @@ impl Evaluator {
     // loop through the program
     for statement in program.statements.iter() {
       evaluated = self.statement_evaluator(statement.clone());
-
       if let object::object::Object::ReturnValue(value) = evaluated {
         return *value;
       }
@@ -71,7 +70,7 @@ impl Evaluator {
       }
       // -number
       (ast::ast::Prefix::Minus, object::object::Object::Integer(b_value)) => {
-        object::object::Object::Integer(-1 * b_value)
+        object::object::Object::Integer(-b_value)
       }
       // type of
       (ast::ast::Prefix::Typeof, object::object::Object::Boolean(_)) => {
@@ -235,13 +234,13 @@ impl Evaluator {
   }
 
   pub fn statement_evaluator(&mut self, statement: ast::ast::Statement) -> object::object::Object {
-    return match statement {
+    match statement {
       ast::ast::Statement::Let { identifier, value } => {
         // let indentifier to stringify!
         if let ast::ast::Expression::Ident(stringified_identifier) = identifier {
           let env_vle = self.expression_evaluator(value);
-          self.set_env(stringified_identifier.clone(), env_vle);
-          return object::object::Object::Null;
+          self.set_env(stringified_identifier, env_vle);
+          object::object::Object::Null
         } else {
           panic!("not implemented");
         }
@@ -251,7 +250,7 @@ impl Evaluator {
       }
       ast::ast::Statement::Expression(expression) => self.expression_evaluator(expression),
       ast::ast::Statement::Block(statements) => self.block_evaluator(statements),
-    };
+    }
   }
 
   pub fn expression_evaluator(
@@ -268,7 +267,7 @@ impl Evaluator {
       ast::ast::Expression::Integer(integer) => object::object::Object::Integer(integer),
       ast::ast::Expression::Bool(boolean) => object::object::Object::Boolean(boolean),
       ast::ast::Expression::String(string) => object::object::Object::String(string),
-      ast::ast::Expression::Array { elements } => self.array_evaluator(elements.clone()),
+      ast::ast::Expression::Array { elements } => self.array_evaluator(elements),
       ast::ast::Expression::ArrayIndex { left_ident, index } => {
         let array_obj: object::object::Object;
         let evaled_index: object::object::Object = self.expression_evaluator(*index);
@@ -326,8 +325,8 @@ impl Evaluator {
         }
       }
       ast::ast::Expression::Closure { parameters, body } => object::object::Object::Closure {
-        parameters: parameters.clone(),
-        body: *body.clone(),
+        parameters,
+        body: *body,
         env: enve::enve::Environment::ve(*self.env.clone().into_inner()),
       },
       ast::ast::Expression::Call { closure, arguments } => {

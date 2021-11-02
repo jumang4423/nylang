@@ -5,7 +5,7 @@ use super::super::ast;
 pub enum Token {
   // exceptions
   Illegal,
-  EOF,
+  Eof,
 
   // identifiers and literals
   Ident(String),
