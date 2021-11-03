@@ -1,3 +1,3 @@
 #!/bin/bash
-cd
-rm -rf .nylang/ .config/fish/conf.d/nylang.fish
+cargo uninstall nylang
+rm -rf ~/.nylang
