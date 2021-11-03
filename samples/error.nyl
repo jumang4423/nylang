@@ -1,13 +1,15 @@
-🎤🎶 ( "-! enter number ( 1 < number < 100 ):") ;
-🍙 cnt = 0 ;
-🍙 loop_num = 👀 ( "number" ) ;
+🍙 main = 🏨 () {
+  🎤🎶 ( "-! enter number ( 1 < number < 100 ):") ;
+  🍙 cnt = 0 ;
+  🍙 loop_num = 👀 ( "number" ) ;
 
-🐶 ( loop_num < 2 ) {
-  ❌ ( "number is smaller than 1" ) ;
-}
+  🐶 ( loop_num < 2 ) {
+    ❌ ( "number is smaller than 1" ) ;
+  }
 
-🐶 ( loop_num > 99 ) {
-  ❌ ( "number is larger than 100" ) ;
-}
+  🐶 ( loop_num > 99 ) {
+    ❌ ( "number is larger than 100" ) ;
+  }
 
-🎤🎶 ( "no error, passed" ) ;
+  🎤🎶 ( "no error, passed" ) ;
+} ;

@@ -55,7 +55,7 @@ nylang run <filename>.nyl
 nylang lexer <filename>.nyl
 ```
 
-> show ast
+> show tree
 
 ```
 nylang parser <filename>.nyl

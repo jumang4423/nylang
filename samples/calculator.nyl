@@ -1,22 +1,24 @@
 🐽🐽🐽 ( ".nylang/lib/__math__.nyl" ) ;
 
-🌸 (
-    🏨 ( ) {
+🍙 main = 🏨 () {
+    🌸 (
+        🏨 ( ) {
 
-        🎤🎶 ( "input left number :" ) ;
-        🍙 left = 👀 ( "number" );
+            🎤🎶 ( "input left number :" ) ;
+            🍙 left = 👀 ( "number" );
 
-        🎤🎶 ( "operator? (+-*/%) :" ) ;
-        🍙 operator = 👀 ( "string" );
+            🎤🎶 ( "operator? (+-*/%) :" ) ;
+            🍙 operator = 👀 ( "string" );
 
-        🎤🎶 ( "input right number :" ) ;
-        🍙 right = 👀 ( "number" );
+            🎤🎶 ( "input right number :" ) ;
+            🍙 right = 👀 ( "number" );
 
-        🎤 ( "result : ") ;
-        🎤🎶 ( __math__calc ( operator, left, right ) ) ;
-        🎤🎶 ( "" ) ;
-        
+            🎤 ( "result : ") ;
+            🎤🎶 ( __math__calc ( operator, left, right ) ) ;
+            🎤🎶 ( "" ) ;
+            
 
-        💨 👍 ;
-    }
-) ;
+            💨 👍 ;
+        }
+    ) ;
+} ;

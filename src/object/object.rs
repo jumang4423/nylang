@@ -10,13 +10,13 @@ pub enum Object {
   Boolean(bool),
   Array(Vec<Object>),
   Typeof(ComparebleTypes),
-  Null,
   ReturnValue(Box<Object>),
   Closure {
     parameters: Vec<ast::ast::Expression>,
     body: ast::ast::Statement,
     env: enve::enve::Environment,
   },
+  Null,
 }
 
 // Implement the Display trait for Object

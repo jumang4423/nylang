@@ -2,33 +2,24 @@
     "input and output test"
 ) ;
 
-🍙 gender_call = 🏨 ( bool ) {
-    🐶 ( bool ) {
-        💨 "he" ;
-    } 😱 {
-        💨 "she" ;
-    } 
+🍙 main = 🏨 () {
+    🍙 gender_call = 🏨 ( bool ) {
+        🐶 ( bool ) {
+            💨 "he" ;
+        } 😱 {
+            💨 "she" ;
+        } 
+    } ;
+    🎤🎶 ( "what is your pet name? :" ) ;
+    🍙 pet_name = 👀 ( "string" ) ;
+    🎤🎶 ( "is the pet male? (true or false) :" ) ;
+    🍙 pet_gender = 👀 ( "boolean" ) ;
+    🎤🎶 ( "pet age? :" ) ;
+    🍙 pet_age = 👀 ( "number" ) ;
+    🎤🎶 ( "" ) ;
+    🎤🎶 ( "-! hello " + pet_name) ;
+    🎤🎶 ( "-! " + gender_call ( pet_gender ) + " is " + "cute!") ;
+    🎤 ( "-! which" ) ;
+    🎤 ( pet_age ) ;
+    🎤🎶 ( "old" ) ;
 } ;
-
-
-🎤🎶 ( "what is your pet name? :" ) ;
-
-🍙 pet_name = 👀 ( "string" ) ;
-
-🎤🎶 ( "is the pet male? (true or false) :" ) ;
-
-🍙 pet_gender = 👀 ( "boolean" ) ;
-
-🎤🎶 ( "pet age? :" ) ;
-
-🍙 pet_age = 👀 ( "number" ) ;
-
-🎤🎶 ( "" ) ;
-
-🎤🎶 ( "-! hello " + pet_name) ;
-
-🎤🎶 ( "-! " + gender_call ( pet_gender ) + " is " + "cute!") ;
-
-🎤 ( "-! which" ) ;
-🎤 ( pet_age ) ;
-🎤🎶 ( "old" ) ;

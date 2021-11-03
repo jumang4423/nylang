@@ -1,29 +1,31 @@
 🐽🐽🐽 ( ".nylang/lib/__array__.nyl" ) ;
 🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
 
-🍙 array_print = 🏨 ( x, i ) { 
+🍙 main = 🏨 () {
+    🍙 array_print = 🏨 ( x, i ) { 
+        🌸 (
+            🏨 () {
+                🎤 ( "|", x * 3 + i, x * 3 + i, x * 3 + i, 👎 ) ;
+            }, 
+            x / 2
+        ) ;
+        🎤🎶 ( "" ) ;
+    } ;
+
+    🍙 un_sorted = [ ] ;
+
     🌸 (
         🏨 () {
-            🎤 ( "|", x * 3 + i, x * 3 + i, x * 3 + i, 👎 ) ;
+            🍙 un_sorted = 🥌 ( un_sorted, __rand__random_num_zero_to_specified_number ( 50 ) + 10 );
         }, 
-        x / 2
+        40
     ) ;
-    🎤🎶 ( "" ) ;
+
+    🎤🎶 ( "\nnot sorted ( 40 elements ): " ) ;
+    __array__forEach ( un_sorted, array_print ) ;
+    🎤🎶 ( "\nsorted: " ) ;
+
+    🍙 sorted = __array__sort ( un_sorted ) ;
+    
+    __array__forEach ( sorted, array_print ) ;
 } ;
-
-🍙 un_sorted = [ ] ;
-
-🌸 (
-    🏨 () {
-        🍙 un_sorted = 🥌 ( un_sorted, __rand__random_num_zero_to_specified_number ( 50 ) + 10 );
-    }, 
-    40
-) ;
-
-🎤🎶 ( "\nnot sorted ( 40 elements ): " ) ;
-__array__forEach ( un_sorted, array_print ) ;
-🎤🎶 ( "\nsorted: " ) ;
-
-🍙 sorted = __array__sort ( un_sorted ) ;
- 
-__array__forEach ( sorted, array_print ) ;
