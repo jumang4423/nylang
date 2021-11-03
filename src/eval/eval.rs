@@ -82,6 +82,9 @@ impl Evaluator {
       (ast::ast::Prefix::Typeof, object::object::Object::Integer(_)) => {
         object::object::Object::Typeof(object::object::ComparebleTypes::Integer)
       }
+      (ast::ast::Prefix::Typeof, object::object::Object::Double(_)) => {
+        object::object::Object::Typeof(object::object::ComparebleTypes::Double)
+      }
       (ast::ast::Prefix::Typeof, object::object::Object::Array(_)) => {
         object::object::Object::Typeof(object::object::ComparebleTypes::Array)
       }
@@ -99,6 +102,7 @@ impl Evaluator {
     right: object::object::Object,
   ) -> object::object::Object {
     match (operator, left, right) {
+      // INT
       (
         ast::ast::Infix::Plus,
         object::object::Object::Integer(l_value),
@@ -144,6 +148,53 @@ impl Evaluator {
         object::object::Object::Integer(l_value),
         object::object::Object::Integer(r_value),
       ) => object::object::Object::Boolean(l_value < r_value),
+      // DOUBLE
+      (
+        ast::ast::Infix::Plus,
+        object::object::Object::Double(l_value),
+        object::object::Object::Double(r_value),
+      ) => object::object::Object::Double(l_value + r_value),
+      (
+        ast::ast::Infix::Minus,
+        object::object::Object::Double(l_value),
+        object::object::Object::Double(r_value),
+      ) => object::object::Object::Double(l_value - r_value),
+      (
+        ast::ast::Infix::Slash,
+        object::object::Object::Double(l_value),
+        object::object::Object::Double(r_value),
+      ) => object::object::Object::Double(l_value / r_value),
+      (
+        ast::ast::Infix::Asterisk,
+        object::object::Object::Double(l_value),
+        object::object::Object::Double(r_value),
+      ) => object::object::Object::Double(l_value * r_value),
+      (
+        ast::ast::Infix::Percent,
+        object::object::Object::Double(l_value),
+        object::object::Object::Double(r_value),
+      ) => object::object::Object::Double(l_value % r_value),
+      (
+        ast::ast::Infix::Eq,
+        object::object::Object::Double(l_value),
+        object::object::Object::Double(r_value),
+      ) => object::object::Object::Boolean(l_value == r_value),
+      (
+        ast::ast::Infix::NotEq,
+        object::object::Object::Double(l_value),
+        object::object::Object::Double(r_value),
+      ) => object::object::Object::Boolean(l_value != r_value),
+      (
+        ast::ast::Infix::GreaterThan,
+        object::object::Object::Double(l_value),
+        object::object::Object::Double(r_value),
+      ) => object::object::Object::Boolean(l_value > r_value),
+      (
+        ast::ast::Infix::LessThan,
+        object::object::Object::Double(l_value),
+        object::object::Object::Double(r_value),
+      ) => object::object::Object::Boolean(l_value < r_value),
+      // BOOL
       (
         ast::ast::Infix::Eq,
         object::object::Object::Boolean(l_value),
@@ -164,11 +215,13 @@ impl Evaluator {
         object::object::Object::Boolean(l_value),
         object::object::Object::Boolean(r_value),
       ) => object::object::Object::Boolean(l_value || r_value),
+      // STRING
       (
         ast::ast::Infix::Plus,
         object::object::Object::String(l_value),
         object::object::Object::String(r_value),
       ) => object::object::Object::String(format!("{}{}", l_value, r_value)),
+      // STRING INT
       (
         ast::ast::Infix::Plus,
         object::object::Object::Integer(l_value),
@@ -178,6 +231,17 @@ impl Evaluator {
         ast::ast::Infix::Plus,
         object::object::Object::String(l_value),
         object::object::Object::Integer(r_value),
+      ) => object::object::Object::String(format!("{}{}", l_value, r_value)),
+      // STRING DOUBLE
+      (
+        ast::ast::Infix::Plus,
+        object::object::Object::Double(l_value),
+        object::object::Object::String(r_value),
+      ) => object::object::Object::String(format!("{}{}", l_value, r_value)),
+      (
+        ast::ast::Infix::Plus,
+        object::object::Object::String(l_value),
+        object::object::Object::Double(r_value),
       ) => object::object::Object::String(format!("{}{}", l_value, r_value)),
       (
         ast::ast::Infix::Eq,
@@ -265,6 +329,7 @@ impl Evaluator {
         }
       },
       ast::ast::Expression::Integer(integer) => object::object::Object::Integer(integer),
+      ast::ast::Expression::Double(double) => object::object::Object::Double(double),
       ast::ast::Expression::Bool(boolean) => object::object::Object::Boolean(boolean),
       ast::ast::Expression::String(string) => object::object::Object::String(string),
       ast::ast::Expression::Array { elements } => self.array_evaluator(elements),

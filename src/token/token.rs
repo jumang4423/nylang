@@ -1,7 +1,7 @@
 // define tokens
 use super::super::ast;
 
-#[derive(Clone, PartialEq, Eq, Debug)]
+#[derive(Clone, PartialEq, Debug, PartialOrd)]
 pub enum Token {
   // exceptions
   Illegal,
@@ -10,6 +10,7 @@ pub enum Token {
   // identifiers and literals
   Ident(String),
   Integer(i32),
+  Double(f64),
   String(String),
 
   // operators

@@ -162,11 +162,19 @@ impl<'a> Lexer<'a> {
 
   fn check_number(&mut self) -> token::token::Token {
     let mut number = String::new();
-    while self.cur_char.is_ascii_digit() {
+    let mut is_double = false;
+
+    while self.cur_char.is_ascii_digit() || self.cur_char == '.' {
+      if self.cur_char == '.' {
+        is_double = true;
+      }
       number.push(self.read_char());
     }
 
-    token::token::Token::Integer(number.parse().unwrap())
+    match is_double {
+      true => token::token::Token::Double(number.parse::<f64>().unwrap()),
+      false => token::token::Token::Integer(number.parse().unwrap()),
+    }
   }
 
   fn check_string(&mut self) -> token::token::Token {

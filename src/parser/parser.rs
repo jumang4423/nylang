@@ -113,6 +113,7 @@ impl<'a> Parser<'a> {
       }
       token::token::Token::String(s) => ast::ast::Expression::String(s.clone()),
       token::token::Token::Integer(value) => ast::ast::Expression::Integer(*value),
+      token::token::Token::Double(value) => ast::ast::Expression::Double(*value),
       token::token::Token::LBRacket => self.array_parser(),
       token::token::Token::True => ast::ast::Expression::Bool(true),
       token::token::Token::False => ast::ast::Expression::Bool(false),

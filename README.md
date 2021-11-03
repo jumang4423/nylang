@@ -58,7 +58,7 @@ nylang lexer <filename>.nyl
 > show ast
 
 ```
-nylang ast <filename>.nyl
+nylang parser <filename>.nyl
 ```
 
 ## excute uisng docker

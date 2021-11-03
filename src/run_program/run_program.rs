@@ -37,7 +37,7 @@ pub fn run_program(file: String) -> Result<(), io::Error> {
   Ok(())
 }
 
-pub fn ast_program(file: String) -> Result<(), io::Error> {
+pub fn parse_program(file: String) -> Result<(), io::Error> {
   let _lines = match fs::read_to_string(file) {
     Ok(lines) => lines,
     Err(_e) => return Err(io::Error::new(io::ErrorKind::Other, "Could not read file")),

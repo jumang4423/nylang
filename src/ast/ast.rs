@@ -34,6 +34,7 @@ pub enum Expression {
   Ident(String),
   String(String),
   Integer(i32),
+  Double(f64),
   Bool(bool),
   If {
     condition: Box<Expression>,
