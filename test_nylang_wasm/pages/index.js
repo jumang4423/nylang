@@ -2,21 +2,25 @@ import styles from '../styles/Home.module.css'
 import { useState } from 'react'
 import { excute_nyl } from "../../pkg/nylang_bg"
 
+const MODE = {
+  ast: 0,
+  run: 1
+}
+
 const INITIAL_SC = '🍙 main = 🏨 ( ) { 🎤🎶 ( "hello nylang" ) ; } ; '
 
 export default function Home() {
-
-  console.log(excute_nyl(INITIAL_SC));
-
   const [nyl, setNyl] = useState(INITIAL_SC)
-  const [outouts, setOutouts] = useState(excute_nyl(INITIAL_SC))
+  const [ast, setAst] = useState(excute_nyl(INITIAL_SC, MODE.ast))
+  const [outouts, setOutouts] = useState(excute_nyl(INITIAL_SC, MODE.run))
   return (
     <div className={styles.container}>
       <div className={styles.half}>
         nylang text:
         <button onClick={
           () => {
-            setOutouts(excute_nyl(nyl))
+            setAst(excute_nyl(nyl, MODE.ast))
+            setOutouts(excute_nyl(nyl, MODE.run))
           }
         }>excute</button>
         <textarea
@@ -26,15 +30,29 @@ export default function Home() {
         />
       </div>
       <div>
-        {/* {
-          outouts.map((outout, i) => {
-            return (
-              <div key={i} className={styles.half}>
-                {i}: {outout}
-              </div>
-            )
-          })
-        } */}
+        <div>
+          <h1> ast </h1>
+          {
+            ast.map((ast, i) => {
+              return (
+                <div key={i} className={styles.line}>
+                  {i}: {ast}
+                </div>
+              )
+            })
+          }
+
+          <h1> excute </h1>
+          {
+            outouts.map((outout, i) => {
+              return (
+                <div key={i} className={styles.line}>
+                  {i}: {outout}
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
     </div>
   )
