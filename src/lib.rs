@@ -19,8 +19,6 @@ pub fn excute_nyl(_lines: String, mode: i32) -> Vec<JsValue> {
     let l = lexer::lexer::Lexer::new(lines.as_str());
     let mut p = parser::parser::Parser::new(l);
     let program = p.program_parser();
-    // let mut env = eval::eval::Evaluator::new();
-    // env.evaluator(program);
     let mut asts: Vec<String> = [].to_vec();
     for statement in program.statements.iter() {
       asts.push(format!("{:?}", statement));

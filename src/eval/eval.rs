@@ -409,11 +409,11 @@ impl Evaluator {
             "🎤" => {
               self.outputs.append(&mut builtin::io::bark(args, false));
               return object::object::Object::Null;
-            }, 
+            }
             "🎤🎶" => {
               self.outputs.append(&mut builtin::io::bark(args, true));
               return object::object::Object::Null;
-            }, 
+            }
             "🌸" => return builtin::builtin::looper(args, self),
             "🌹" => return builtin::io::random_emojis(args),
             "📏" => return builtin::array::len(args),
@@ -422,11 +422,11 @@ impl Evaluator {
             "❌" => {
               self.outputs.append(&mut builtin::errors::panipani(args));
               return object::object::Object::Null;
-            }, 
+            }
             "🥚" => {
               self.outputs.append(&mut builtin::builtin::clear());
               return object::object::Object::Null;
-            },
+            }
             "🗿" => return builtin::array::assign(args),
             "🍄🍄" => return object::object::Object::Null,
             _ => {}
@@ -447,7 +447,13 @@ impl Evaluator {
               env.set_env(ident.to_owned(), arg.clone());
             }
           }
-          match env.statement_evaluator(body) {
+
+          let evaluated_env = env.statement_evaluator(body);
+
+          // only for io imutating
+          self.outputs.append(&mut env.outputs);
+
+          match evaluated_env {
             object::object::Object::ReturnValue(obj) => *obj,
             obj => obj,
           }

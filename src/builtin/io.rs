@@ -22,7 +22,7 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> Vec<S
   } else {
     match args.len() {
       1 => {
-        return_output.push(format!("{:?}", args[0]));
+        return_output.push(format!("{}", args[0]));
       }
       _ => {
         panic!("🎤: arguments are invalid, arg len should be 1 or 5")

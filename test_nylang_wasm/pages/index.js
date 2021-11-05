@@ -7,7 +7,12 @@ const MODE = {
   run: 1
 }
 
-const INITIAL_SC = '🍙 main = 🏨 ( ) { 🎤🎶 ( "hello nylang" ) ; } ; '
+const INITIAL_SC = `🍙 main = 🏨 ( ) { 
+  🎤 ( "hello nylang" ) ;
+  🍙 calc = 3 + 5 ;
+  🎤 ( "3 + 5 = " + calc ) ;
+} ; 
+`
 
 export default function Home() {
   const [nyl, setNyl] = useState(INITIAL_SC)
@@ -29,7 +34,7 @@ export default function Home() {
           onChange={(e) => setNyl(e.target.value)}
         />
       </div>
-      <div>
+      <div className={styles.half}>
         <div>
           <h1> ast </h1>
           {
@@ -37,6 +42,7 @@ export default function Home() {
               return (
                 <div key={i} className={styles.line}>
                   {i}: {ast}
+                  <hr/>
                 </div>
               )
             })
@@ -48,6 +54,7 @@ export default function Home() {
               return (
                 <div key={i} className={styles.line}>
                   {i}: {outout}
+                  <hr/>
                 </div>
               )
             })
