@@ -7,6 +7,7 @@ use std::cell::RefCell;
 // actual program runner
 pub struct Evaluator {
   pub env: RefCell<Box<enve::enve::Environment>>,
+  pub outputs: Vec<String>,
 }
 
 impl Evaluator {
@@ -18,12 +19,14 @@ impl Evaluator {
   pub fn new() -> Evaluator {
     Evaluator {
       env: RefCell::new(Box::new(enve::enve::Environment::new())),
+      outputs: Vec::new(),
     }
   }
 
   pub fn from(env: enve::enve::Environment) -> Evaluator {
     Evaluator {
       env: RefCell::new(Box::new(env)),
+      outputs: Vec::new(),
     }
   }
 
@@ -403,18 +406,27 @@ impl Evaluator {
         // non reserved by parser
         if let ast::ast::Expression::Ident(func) = *closure.clone() {
           match func.as_str() {
-            "🎤" => return builtin::io::bark(args, false),
-            "🎤🎶" => return builtin::io::bark(args, true),
-            "😪" => return builtin::builtin::sleep(args),
+            "🎤" => {
+              self.outputs.append(&mut builtin::io::bark(args, false));
+              return object::object::Object::Null;
+            }, 
+            "🎤🎶" => {
+              self.outputs.append(&mut builtin::io::bark(args, true));
+              return object::object::Object::Null;
+            }, 
             "🌸" => return builtin::builtin::looper(args, self),
             "🌹" => return builtin::io::random_emojis(args),
-            "👀" => return builtin::io::scanf(args),
-            "🐽🐽🐽" => return builtin::builtin::import(args, self),
             "📏" => return builtin::array::len(args),
             "🥌" => return builtin::array::push(args),
             "🌛" => return builtin::array::rest(args),
-            "❌" => return builtin::errors::panipani(args),
-            "🥚" => return builtin::builtin::clear(),
+            "❌" => {
+              self.outputs.append(&mut builtin::errors::panipani(args));
+              return object::object::Object::Null;
+            }, 
+            "🥚" => {
+              self.outputs.append(&mut builtin::builtin::clear());
+              return object::object::Object::Null;
+            },
             "🗿" => return builtin::array::assign(args),
             "🍄🍄" => return object::object::Object::Null,
             _ => {}
