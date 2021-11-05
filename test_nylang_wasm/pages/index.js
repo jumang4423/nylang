@@ -10,7 +10,14 @@ const MODE = {
 const INITIAL_SC = `🍙 main = 🏨 ( ) { 
   🎤 ( "hello nylang" ) ;
   🍙 calc = 3 + 5 ;
-  🎤 ( "3 + 5 = " + calc ) ;
+  🎤🎶 ( "3 + 5 = " + calc ) ;
+  🎤 ( "lets print 'doggy' 10 times using loop function:") ;
+  🌸 (
+    🏨 () {
+      🎤 ( "doggy" ) ;
+    },
+    5
+  )
 } ; 
 `
 
@@ -24,8 +31,12 @@ export default function Home() {
         nylang text:
         <button onClick={
           () => {
-            setAst(excute_nyl(nyl, MODE.ast))
-            setOutouts(excute_nyl(nyl, MODE.run))
+            try {
+              setAst(excute_nyl(nyl, MODE.ast))
+              setOutouts(excute_nyl(nyl, MODE.run))
+            } catch (_) {
+              alert("excution failed")
+            }
           }
         }>excute</button>
         <textarea

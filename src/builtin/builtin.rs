@@ -1,5 +1,11 @@
 use super::super::object;
 
+pub fn import() -> Vec<String> {
+  let mut v = Vec::new();
+  v.push("import is not available on nylang wasm edition".to_string());
+  v
+}
+
 pub fn looper(
   args: std::vec::Vec<object::object::Object>,
   eval: &mut super::super::eval::eval::Evaluator,

@@ -32,14 +32,18 @@ pub fn excute_nyl(_lines: String, mode: i32) -> Vec<JsValue> {
 
   // show output
   } else if mode == 1 {
+    // put main func implictly
     let lines = _lines + "main() ;";
+
+    // start compute
     let l = lexer::lexer::Lexer::new(lines.as_str());
     let mut p = parser::parser::Parser::new(l);
     let program = p.program_parser();
     let mut env = eval::eval::Evaluator::new();
     env.evaluator(program);
-    // []string -> Vec<JsValue>
-    let mut result = Vec::new();
+
+    // translate result to JsValue
+    let mut result: Vec<JsValue> = Vec::new();
     for value in env.outputs.iter() {
       result.push(JsValue::from_str(value));
     }

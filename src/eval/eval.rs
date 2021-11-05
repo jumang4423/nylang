@@ -414,6 +414,9 @@ impl Evaluator {
               self.outputs.append(&mut builtin::io::bark(args, true));
               return object::object::Object::Null;
             }
+            "👀" => {
+              return object::object::Object::Null;
+            }
             "🌸" => return builtin::builtin::looper(args, self),
             "🌹" => return builtin::io::random_emojis(args),
             "📏" => return builtin::array::len(args),
@@ -425,6 +428,13 @@ impl Evaluator {
             }
             "🥚" => {
               self.outputs.append(&mut builtin::builtin::clear());
+              return object::object::Object::Null;
+            }
+            "🐽🐽🐽" => {
+              self.outputs.append(&mut builtin::builtin::import());
+              return object::object::Object::Null;
+            }
+            "😪" => {
               return object::object::Object::Null;
             }
             "🗿" => return builtin::array::assign(args),
