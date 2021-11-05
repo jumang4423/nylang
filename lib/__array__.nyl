@@ -25,6 +25,7 @@
   ) ;
 } ;
 
+🍄🍄 ( "do map for array" ) ;
 🍙 __array__map = 🏨 ( array, closure ) {
 
   🐶 ( 👽 array != [] ) {
