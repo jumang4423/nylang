@@ -1,6 +1,5 @@
 use super::super::object;
 use super::super::tools;
-use colored::Colorize;
 use rand::Rng;
 use std::io;
 
@@ -59,24 +58,14 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> objec
 
         if is_text_coloring {
           for s in array_of_str.iter() {
-            print!(
-              "{}",
-              s.to_string()
-                .truecolor(red as u8, green as u8, blue as u8)
-                .bold()
-            );
+            print!("{}", s.to_string());
             if array_of_str.len() > 1 && newline {
               println!();
             }
           }
         } else {
           for s in array_of_str.iter() {
-            print!(
-              "{}",
-              s.to_string()
-                .on_truecolor(red as u8, green as u8, blue as u8)
-                .bold()
-            );
+            print!("{}", s.to_string());
             if array_of_str.len() > 1 && newline {
               println!();
             }
@@ -100,19 +89,9 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> objec
         let is_text_coloring = cast!(args[4], object::object::Object::Boolean);
 
         if is_text_coloring {
-          print!(
-            "{}",
-            format!("{}", args[0])
-              .truecolor(red as u8, green as u8, blue as u8)
-              .bold()
-          );
+          print!("{}", format!("{}", args[0]));
         } else {
-          print!(
-            "{}",
-            format!("{}", args[0])
-              .on_truecolor(red as u8, green as u8, blue as u8)
-              .bold()
-          );
+          print!("{}", format!("{}", args[0]));
         }
       }
       _ => {
