@@ -42,7 +42,7 @@ impl<'a> Parser<'a> {
     let mut program = ast::ast::Program::new();
 
     loop {
-      if self.cur_token.clone() == token::token::Token::EOF {
+      if self.cur_token.clone() == token::token::Token::Eof {
         break;
       } else {
         program.statements.push(self.statement_parser());
@@ -105,14 +105,15 @@ impl<'a> Parser<'a> {
   fn expression_parser(&mut self, precedence: ast::ast::WhichTheBest) -> ast::ast::Expression {
     let mut left_exp = match &self.cur_token {
       token::token::Token::Ident(ident) => {
-        if &self.peek_token == &token::token::Token::LBRacket {
+        if self.peek_token == token::token::Token::LBRacket {
           self.index_parser(ident.clone())
         } else {
           ast::ast::Expression::Ident(ident.clone())
         }
       }
       token::token::Token::String(s) => ast::ast::Expression::String(s.clone()),
-      token::token::Token::Integer(value) => ast::ast::Expression::Integer(value.clone()),
+      token::token::Token::Integer(value) => ast::ast::Expression::Integer(*value),
+      token::token::Token::Double(value) => ast::ast::Expression::Double(*value),
       token::token::Token::LBRacket => self.array_parser(),
       token::token::Token::True => ast::ast::Expression::Bool(true),
       token::token::Token::False => ast::ast::Expression::Bool(false),
@@ -192,7 +193,7 @@ impl<'a> Parser<'a> {
 
   fn g_exp_parser(&mut self) -> ast::ast::Expression {
     self.next_token();
-    return self.expression_parser(ast::ast::WhichTheBest::Lowest);
+    self.expression_parser(ast::ast::WhichTheBest::Lowest)
   }
 
   fn expression_if_parser(&mut self) -> ast::ast::Expression {
@@ -229,7 +230,7 @@ impl<'a> Parser<'a> {
     let mut blocks = Vec::new();
 
     loop {
-      if self.cur_token != token::token::Token::RBrace && self.cur_token != token::token::Token::EOF
+      if self.cur_token != token::token::Token::RBrace && self.cur_token != token::token::Token::Eof
       {
         blocks.push(self.statement_parser());
 
@@ -262,7 +263,7 @@ impl<'a> Parser<'a> {
     // self.next_token();
     self.next_token();
 
-    ast::ast::Expression::Array { elements: elements }
+    ast::ast::Expression::Array { elements }
   }
 
   fn index_parser(&mut self, ident: String) -> ast::ast::Expression {
@@ -341,11 +342,10 @@ impl<'a> Parser<'a> {
     }
 
     self.next_token(); // )
-
-    if self.cur_token != token::token::Token::RParen {
-      panic!("Expected RParen in call expression");
-    }
-
+    assert!(
+      !(self.cur_token != token::token::Token::RParen),
+      "Expected RParen in call expression"
+    );
     if self.peek_token == token::token::Token::Semicolon {
       self.next_token();
     }
@@ -406,4 +406,14 @@ impl<'a> Parser<'a> {
       right,
     }
   }
+}
+
+#[test]
+fn test_parse() {
+  let _lines = "🍙 x = 5;
+  🍄🍄 ( \"welcome to nylang!\" ) ;
+  ";
+  let l = lexer::lexer::Lexer::new(_lines);
+  let mut p = Parser::new(l);
+  p.program_parser();
 }

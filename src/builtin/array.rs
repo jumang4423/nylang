@@ -3,7 +3,6 @@
 /// // Array related functions
 ///
 ////////////////////////////////////////////////////////////////////////////////
-
 use super::super::object;
 
 macro_rules! cast {
@@ -29,7 +28,7 @@ pub fn assign(args: std::vec::Vec<object::object::Object>) -> object::object::Ob
 
         let mut array_copy = array.clone();
         array_copy[index as usize] = args[1].clone();
-        return object::object::Object::Array(array_copy);
+        object::object::Object::Array(array_copy)
       }
       _ => {
         panic!("🎤: first argument must be an array");
@@ -47,7 +46,7 @@ pub fn assign(args: std::vec::Vec<object::object::Object>) -> object::object::Ob
               args[1].clone();
             array_clone[cast!(args[2], object::object::Object::Integer) as usize] =
               object::object::Object::Array(arr_arr_clone);
-            return object::object::Object::Array(array_clone);
+            object::object::Object::Array(array_clone)
           }
           _ => {
             panic!("🎤: second dimention must be an array");
@@ -67,11 +66,9 @@ pub fn len(args: std::vec::Vec<object::object::Object>) -> object::object::Objec
   if args.len() == 1 {
     match &args[0] {
       object::object::Object::String(string) => {
-        return object::object::Object::Integer(string.len() as i32);
+        object::object::Object::Integer(string.len() as i32)
       }
-      object::object::Object::Array(array) => {
-        return object::object::Object::Integer(array.len() as i32);
-      }
+      object::object::Object::Array(array) => object::object::Object::Integer(array.len() as i32),
       _ => {
         panic!("len: argument must be a string or array");
       }
@@ -87,12 +84,12 @@ pub fn push(args: std::vec::Vec<object::object::Object>) -> object::object::Obje
       object::object::Object::Array(array) => {
         let mut array_clone = array.clone();
         array_clone.push(args[1].clone());
-        return object::object::Object::Array(array_clone);
+        object::object::Object::Array(array_clone)
       }
       object::object::Object::String(string) => {
         let mut string_clone = string.clone();
         string_clone.push_str(&format!("{}", args[1]));
-        return object::object::Object::String(string_clone);
+        object::object::Object::String(string_clone)
       }
       _ => {
         panic!("push: argument must be an array");
@@ -109,12 +106,12 @@ pub fn rest(args: std::vec::Vec<object::object::Object>) -> object::object::Obje
       object::object::Object::Array(array) => {
         let mut array_clone = array.clone();
         array_clone.remove(0);
-        return object::object::Object::Array(array_clone);
+        object::object::Object::Array(array_clone)
       }
       object::object::Object::String(string) => {
         let mut string_clone = string.clone();
         string_clone.remove(0);
-        return object::object::Object::String(string_clone);
+        object::object::Object::String(string_clone)
       }
       _ => {
         panic!("rest: argument must be an array");

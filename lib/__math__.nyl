@@ -4,6 +4,19 @@
 
 🍄🍄 ( "simple calculator, (operator left right) " ) ;
 🍙 __math__calc = 🏨 ( operator, left, right ) {
+
+    🐶 ( 👽 operator != "" ) { 
+        ❌ ( "__math__calc: given operator is not string" ) ;
+    }
+
+    🐶 ( 👽 left != 0 ) { 
+        ❌ ( "__math__calc: given left number is not number" ) ;
+    }
+
+    🐶 ( 👽 right != 0 ) { 
+        ❌ ( "__math__calc: given right number is not number" ) ;
+    }
+
     🐶 ( operator == "+" ) {
         💨 left + right ;
     } ;

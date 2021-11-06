@@ -1,40 +1,42 @@
 🐽🐽🐽 ( ".nylang/lib/__array__.nyl" ) ;
 
-🍙 arr = [ 1, 2, 3, 4 ] ;
+🍙 main = 🏨 () {
+    🍙 arr = [ 1, 2, 3, 4 ] ;
 
-🍙 closure = 🏨 ( x, i ) { 
-    🎤 ( i ) ;  
-    🎤 ( ": " ) ;  
-    🎤🎶 ( x ) ;   
+    🍙 closure = 🏨 ( x, i ) { 
+        🎤 ( i ) ;  
+        🎤 ( ": " ) ;  
+        🎤🎶 ( x ) ;   
+    } ;
+
+    🎤🎶 ( "[" ) ;  
+    __array__forEach ( arr, closure ) ;
+    🎤🎶 ( "]" ) ;
+
+    🎤🎶 ( "array forEach: " ) ; 
+
+    🌸 (
+        🏨 () {
+            🍙 arr = 🥌 ( arr, 5 );
+        }, 
+        10
+    ) ;
+
+    🍙 arr = 🗿 ( arr, 100, 10 );
+
+    🎤🎶 ( "[" ) ;  
+    __array__forEach ( arr, closure ) ;
+    🎤🎶 ( "]" ) ;
+
+    🎤🎶 ( "array map: " ) ; 
+
+    🍙 map_closure = 🏨 ( x, i ) { 
+        💨 x + i ;
+    } ;
+
+    🍙 maped_arr = __array__map ( arr, map_closure ) ;
+
+    🎤🎶 ( "[" ) ;  
+    __array__forEach ( maped_arr, closure ) ;
+    🎤🎶 ( "]" ) ;
 } ;
-
-🎤🎶 ( "[" ) ;  
-__array__forEach ( arr, closure ) ;
-🎤🎶 ( "]" ) ;
-
-🎤🎶 ( "array forEach: " ) ; 
-
-🌸 (
-    🏨 () {
-        🍙 arr = 🥌 ( arr, 5 );
-    }, 
-    10
-) ;
-
-🍙 arr = 🗿 ( arr, 100, 10 );
-
-🎤🎶 ( "[" ) ;  
-__array__forEach ( arr, closure ) ;
-🎤🎶 ( "]" ) ;
-
-🎤🎶 ( "array map: " ) ; 
-
-🍙 map_closure = 🏨 ( x, i ) { 
-    💨 x + i ;
-} ;
-
-🍙 maped_arr = __array__map ( arr, map_closure ) ;
-
-🎤🎶 ( "[" ) ;  
-__array__forEach ( maped_arr, closure ) ;
-🎤🎶 ( "]" ) ;

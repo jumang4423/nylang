@@ -1,25 +1,26 @@
 🐽🐽🐽 ( ".nylang/lib/__math__.nyl" ) ;
 
-🍙 exp_vle = 1 ;
+🍙 main = 🏨 () {
+    🍙 expo_vle = 1 ;
 
-🌸 (
-    🏨 ( ) {
-        🎤🎶 ( __math__pow ( 2, exp_vle ) ) ;
-        🍙 exp_vle = exp_vle + 1 ;
-        💨 exp_vle != 10 ;
-    }
-) ;
+    🌸 (
+        🏨 ( ) {
+            🎤🎶 ( __math__pow ( 2, expo_vle ) ) ;   
+            🍙 expo_vle = expo_vle + 1 ;
+            💨 expo_vle != 10 ;
+        }
+    ) ;
 
-🍙 test_array = [ 1, 2 * 5, 3 - 1  ] ;
+    🍙 test_array = [ 1, 2 * 5, 3 - 1  ] ;
 
-🎤 ( "math sum of [ 1, 2 * 5, 3 - 1 ]: " ) ;
-🎤🎶 ( __math__sum ( test_array ) ) ;
+    🎤 ( "math sum of [ 1, 2 * 5, 3 - 1 ]: " ) ;
+    🎤🎶 ( __math__sum ( test_array ) ) ;
 
-🎤 ( "larger number of 567 and 234: " ) ;
-🎤🎶 ( __math__max ( 567, 234 ) ) ;
-
-🎤 ( "smaller number of 567 and 234: " ) ;
-🎤🎶 ( __math__min ( 567, 234 ) ) ;
-
-🎤🎶 ( __math__log ( 3, 9 ) ) ;
-🎤🎶 ( __math__log ( 3, 82 ) ) ;
+    🎤 ( "larger number of 567 and 234: " ) ;
+    🎤🎶 ( __math__max ( 567, 234 ) ) ;
+    🎤🎶 ( __math__log ( 3, 9 ) ) ;
+    🎤🎶 ( __math__log ( 3, 82 ) ) ;
+    
+    🎤 ( "smaller number of 567 and 234: " ) ;
+    🎤🎶 ( __math__min ( 567, 234 ) ) ;
+} ;

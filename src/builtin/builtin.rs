@@ -69,14 +69,12 @@ pub fn looper(
           panic!("loop: function must return something since this loop function doesnt have a loop number");
         }
       }
-    } else {
-      if let object::object::Object::Integer(int) = &args[1] {
-        for _ in 0..*int {
-          eval.statement_evaluator(body.clone());
-        }
-      } else {
-        panic!("loop: argument must be an integer");
+    } else if let object::object::Object::Integer(int) = &args[1] {
+      for _ in 0..*int {
+        eval.statement_evaluator(body.clone());
       }
+    } else {
+      panic!("loop: argument must be an integer");
     }
   } else {
     panic!("loop: first argument must be a function");

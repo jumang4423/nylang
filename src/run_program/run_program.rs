@@ -8,10 +8,11 @@ use super::super::parser;
 use super::super::token;
 
 pub fn run_program(file: String) -> Result<(), io::Error> {
-  let _lines = match fs::read_to_string(file) {
+  let mut _lines = match fs::read_to_string(file) {
     Ok(lines) => lines,
     Err(_e) => return Err(io::Error::new(io::ErrorKind::Other, "Could not read file")),
   };
+  _lines = _lines + "main() ;";
 
   let blue_color_res: Result<Color, ()> = "magenta".parse();
   println!(
@@ -37,11 +38,12 @@ pub fn run_program(file: String) -> Result<(), io::Error> {
   Ok(())
 }
 
-pub fn ast_program(file: String) -> Result<(), io::Error> {
-  let _lines = match fs::read_to_string(file) {
+pub fn parse_program(file: String) -> Result<(), io::Error> {
+  let mut _lines = match fs::read_to_string(file) {
     Ok(lines) => lines,
     Err(_e) => return Err(io::Error::new(io::ErrorKind::Other, "Could not read file")),
   };
+  _lines = _lines + "main() ;";
 
   let blue_color_res: Result<Color, ()> = "magenta".parse();
   println!(
@@ -73,10 +75,11 @@ pub fn ast_program(file: String) -> Result<(), io::Error> {
 }
 
 pub fn lexer_program(file: String) -> Result<(), io::Error> {
-  let _lines = match fs::read_to_string(file) {
+  let mut _lines = match fs::read_to_string(file) {
     Ok(lines) => lines,
     Err(_e) => return Err(io::Error::new(io::ErrorKind::Other, "Could not read file")),
   };
+  _lines = _lines + "main() ;";
   let mut l = lexer::lexer::Lexer::new(_lines.as_str());
   let mut tok = l.next_token();
 
@@ -90,7 +93,7 @@ pub fn lexer_program(file: String) -> Result<(), io::Error> {
 
   loop {
     match &tok {
-      token::token::Token::EOF => break,
+      token::token::Token::Eof => break,
       _ => println!("{:?}", tok),
     }
 

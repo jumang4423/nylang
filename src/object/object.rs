@@ -6,16 +6,17 @@ use std::fmt;
 pub enum Object {
   String(String),
   Integer(i32),
+  Double(f64),
   Boolean(bool),
   Array(Vec<Object>),
   Typeof(ComparebleTypes),
-  Null,
   ReturnValue(Box<Object>),
   Closure {
     parameters: Vec<ast::ast::Expression>,
     body: ast::ast::Statement,
     env: enve::enve::Environment,
   },
+  Null,
 }
 
 // Implement the Display trait for Object
@@ -35,6 +36,7 @@ impl PartialEq for Object {
     match (self, other) {
       (Object::String(x), Object::String(y)) => x == y,
       (Object::Integer(x), Object::Integer(y)) => x == y,
+      (Object::Double(x), Object::Double(y)) => x == y,
       (Object::Boolean(x), Object::Boolean(y)) => x == y,
       (Object::Null, Object::Null) => true,
       _ => false,
@@ -47,6 +49,7 @@ impl fmt::Display for Object {
     match self {
       Object::String(s) => write!(f, "{}", s),
       Object::Integer(value) => write!(f, "{}", value),
+      Object::Double(value) => write!(f, "{}", value),
       Object::Boolean(value) => write!(
         f,
         "{}",
@@ -75,6 +78,7 @@ impl fmt::Display for Object {
 pub enum ComparebleTypes {
   String,
   Integer,
+  Double,
   Boolean,
   Array,
   Closure

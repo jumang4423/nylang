@@ -25,8 +25,8 @@ fn main() -> io::Result<()> {
         run_program::run_program::run_program(env::args().nth(2).unwrap())
       } else if command == "lexer" {
         run_program::run_program::lexer_program(env::args().nth(2).unwrap())
-      } else if command == "ast" {
-        run_program::run_program::ast_program(env::args().nth(2).unwrap())
+      } else if command == "parser" {
+        run_program::run_program::parse_program(env::args().nth(2).unwrap())
       } else {
         help::help::help()
       }

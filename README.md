@@ -55,10 +55,10 @@ nylang run <filename>.nyl
 nylang lexer <filename>.nyl
 ```
 
-> show ast
+> show tree
 
 ```
-nylang ast <filename>.nyl
+nylang parser <filename>.nyl
 ```
 
 ## excute uisng docker

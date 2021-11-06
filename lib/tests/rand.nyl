@@ -1,37 +1,39 @@
 🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
 
-🍙 cnt = 0 ;
+🍙 main = 🏨 () {
+    🍙 cnt = 0 ;
 
-🌸 (
-    🏨 ( ) {
-        🎤 ( 
-            __rand__random_num_zero_to_specified_number ( 999999999 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ),
-            👍
-        ) ;
-        🍙 cnt = cnt + 1 ;
+    🌸 (
+        🏨 ( ) {
+            🎤 ( 
+                __rand__random_num_zero_to_specified_number ( 999999999 ), 
+                __rand__random_num_zero_to_specified_number ( 255 ), 
+                __rand__random_num_zero_to_specified_number ( 255 ), 
+                __rand__random_num_zero_to_specified_number ( 255 ),
+                👍
+            ) ;
+            🍙 cnt = cnt + 1 ;
 
-        💨 cnt != 1000 ;
-    }
-) ;
+            💨 cnt != 1000 ;
+        }
+    ) ;
 
-🍙 cnt = 0 ;
+    🍙 cnt = 0 ;
 
-🌸 (
-    🏨 ( ) {
-        🎤 ( 
-            __rand__random_num_zero_to_specified_number ( 999999999 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ), 
-            __rand__random_num_zero_to_specified_number ( 255 ),
-            👎
-        ) ;
-        🍙 cnt = cnt + 1 ;
+    🌸 (
+        🏨 ( ) {
+            🎤 ( 
+                __rand__random_num_zero_to_specified_number ( 999999999 ), 
+                __rand__random_num_zero_to_specified_number ( 255 ), 
+                __rand__random_num_zero_to_specified_number ( 255 ), 
+                __rand__random_num_zero_to_specified_number ( 255 ),
+                👎
+            ) ;
+            🍙 cnt = cnt + 1 ;
 
-        💨 cnt != 1000 ;
-    }
-) ;
+            💨 cnt != 1000 ;
+        }
+    ) ;
 
-🎤🎶 ( "" ) ;
+    🎤🎶 ( "" ) ;
+} ;
