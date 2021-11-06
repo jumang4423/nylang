@@ -1,12 +1,12 @@
 🐽🐽🐽 ( ".nylang/lib/__math__.nyl" ) ;
 
-🍙 expo_vle = 1 ;
+🍙 exp_vle = 1 ;
 
 🌸 (
     🏨 ( ) {
-        🎤🎶 ( __math__pow ( 2, expo_vle ) ) ;   
-        🍙 expo_vle = expo_vle + 1 ;
-        💨 expo_vle != 10 ;
+        🎤🎶 ( __math__pow ( 2, exp_vle ) ) ;
+        🍙 exp_vle = exp_vle + 1 ;
+        💨 exp_vle != 10 ;
     }
 ) ;
 
@@ -20,3 +20,6 @@
 
 🎤 ( "smaller number of 567 and 234: " ) ;
 🎤🎶 ( __math__min ( 567, 234 ) ) ;
+
+🎤🎶 ( __math__log ( 3, 9 ) ) ;
+🎤🎶 ( __math__log ( 3, 82 ) ) ;

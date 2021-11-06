@@ -27,15 +27,15 @@
     💨 -1 ;
 } ;
 
-🍄🍄 ( "generates bot ^ expo" ) ;
-🍙 __math__pow = 🏨 ( bot, expo ) {
+🍄🍄 ( "generates bot ^ exp" ) ;
+🍙 __math__pow = 🏨 ( bot, exp ) {
     🍙 ans = 1;
 
     🌸 (
         🏨 ( ) {
             🍙 ans = ans * bot ;
         },
-        expo
+        exp
     ) ;
 
     💨 ans ;
@@ -53,7 +53,7 @@
 
             💨 i != 📏(arr) ;
         }
-    )
+    ) ;
 
     💨 sum ;
 } ;
@@ -74,4 +74,27 @@
     } 😱 {
         💨 right ;
     }
+} ;
+
+🍄🍄 ( "generates log( base, x )" ) ;
+🍙 __math__log = 🏨 ( base, x ) {
+    🍙 ans = 0 ;
+
+    🐶 ( x == 1 ) {
+        🐶 ( base == 1 ) {
+            💨 1 ;
+        } 😱 {
+            💨 0 ;
+        }
+    }
+
+    🌸 (
+        🏨 ( ) {
+            🍙 x = x / base ;
+            🍙 ans = ans + 1 ;
+            💨 __math__max( base, x ) == x ;
+        }
+    ) ;
+
+    💨 ans ;
 } ;
