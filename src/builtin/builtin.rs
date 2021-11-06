@@ -1,8 +1,7 @@
 use super::super::object;
 
 pub fn import() -> Vec<String> {
-  let mut v = Vec::new();
-  v.push("import is not available on nylang wasm edition".to_string());
+  let mut v: Vec<String> = Vec::new();
   v
 }
 

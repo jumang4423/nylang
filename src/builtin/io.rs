@@ -6,28 +6,15 @@ pub fn bark(args: std::vec::Vec<object::object::Object>, newline: bool) -> Vec<S
   if let object::object::Object::String(str) = &args[0] {
     let array_of_str: Vec<String> = str.as_str().split("\\n").map(|s| s.to_string()).collect();
 
-    match args.len() {
-      1 => {
-        for s in array_of_str.iter() {
-          return_output.push(format!("{}", s));
-          if array_of_str.len() > 1 && newline {
-            return_output.push("".to_string());
-          }
-        }
-      }
-      _ => {
-        panic!("🎤: arguments are invalid, arg len should be 1 or 5")
+    for s in array_of_str.iter() {
+      return_output.push(format!("{}", s));
+      if array_of_str.len() > 1 && newline {
+        return_output.push("".to_string());
       }
     }
+
   } else {
-    match args.len() {
-      1 => {
-        return_output.push(format!("{}", args[0]));
-      }
-      _ => {
-        panic!("🎤: arguments are invalid, arg len should be 1 or 5")
-      }
-    }
+    return_output.push(format!("{}", args[0]));
   }
   if newline {
     return_output.push("".to_string());
