@@ -89,11 +89,11 @@
     }
 } ;
 
-🍄🍄 ( "generates log( base, x )" ) ;
-🍙 __math__log = 🏨 ( base, x ) {
+🍄🍄 ( "generates log( base, value )" ) ;
+🍙 __math__log = 🏨 ( base, value ) {
     🍙 ans = 0 ;
 
-    🐶 ( x == 1 ) {
+    🐶 ( value == 1 ) {
         🐶 ( base == 1 ) {
             💨 1 ;
         } 😱 {
@@ -103,9 +103,9 @@
 
     🌸 (
         🏨 ( ) {
-            🍙 x = x / base ;
+            🍙 value = value / base ;
             🍙 ans = ans + 1 ;
-            💨 __math__max( base, x ) == x ;
+            💨 __math__max( base, value ) == value ;
         }
     ) ;
 
