@@ -1,5 +1,5 @@
 use colored::*;
-use std::fs;
+
 use std::io::{self};
 
 use super::super::eval;
@@ -7,11 +7,8 @@ use super::super::lexer;
 use super::super::parser;
 use super::super::token;
 
-pub fn run_program(file: String) -> Result<(), io::Error> {
-  let mut _lines = match fs::read_to_string(file) {
-    Ok(lines) => lines,
-    Err(_e) => return Err(io::Error::new(io::ErrorKind::Other, "Could not read file")),
-  };
+pub fn run_program(mut _lines: String) -> Result<(), io::Error> {
+
   _lines = _lines + "main() ;";
 
   let blue_color_res: Result<Color, ()> = "magenta".parse();
@@ -38,11 +35,8 @@ pub fn run_program(file: String) -> Result<(), io::Error> {
   Ok(())
 }
 
-pub fn parse_program(file: String) -> Result<(), io::Error> {
-  let mut _lines = match fs::read_to_string(file) {
-    Ok(lines) => lines,
-    Err(_e) => return Err(io::Error::new(io::ErrorKind::Other, "Could not read file")),
-  };
+pub fn parse_program(mut _lines: String) -> Result<(), io::Error> {
+ 
   _lines = _lines + "main() ;";
 
   let blue_color_res: Result<Color, ()> = "magenta".parse();
@@ -74,11 +68,8 @@ pub fn parse_program(file: String) -> Result<(), io::Error> {
   Ok(())
 }
 
-pub fn lexer_program(file: String) -> Result<(), io::Error> {
-  let mut _lines = match fs::read_to_string(file) {
-    Ok(lines) => lines,
-    Err(_e) => return Err(io::Error::new(io::ErrorKind::Other, "Could not read file")),
-  };
+pub fn lexer_program(mut _lines: String) -> Result<(), io::Error> {
+ 
   _lines = _lines + "main() ;";
   let mut l = lexer::lexer::Lexer::new(_lines.as_str());
   let mut tok = l.next_token();
