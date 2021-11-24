@@ -24,7 +24,7 @@ fn main() -> io::Result<()> {
       match command.as_str(){
       "run"=>{
          _lines= tools::tools::check_if_file().unwrap();
-       println!("{}",_lines);
+       
         run_program::run_program::run_program(_lines)
       }, 
        
