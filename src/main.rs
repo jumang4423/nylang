@@ -16,21 +16,31 @@ mod parser;
 mod run_program;
 mod token;
 mod tools;
-
 fn main() -> io::Result<()> {
+  let mut _lines:String;
   match match env::args().nth(1) {
     // run program from source code
     Some(command) => {
-      return if command == "run" {
-        run_program::run_program::run_program(env::args().nth(2).unwrap())
-      } else if command == "lexer" {
-        run_program::run_program::lexer_program(env::args().nth(2).unwrap())
-      } else if command == "parser" {
-        run_program::run_program::parse_program(env::args().nth(2).unwrap())
-      } else {
+      match command.as_str(){
+      "run"=>{
+         _lines= tools::tools::check_if_file().unwrap();
+       println!("{}",_lines);
+        run_program::run_program::run_program(_lines)
+      }, 
+       
+      "lexer" =>{
+         _lines= tools::tools::check_if_file().unwrap();
+       
+        run_program::run_program::lexer_program(_lines)
+      },  
+      "parser" =>{
+        _lines=tools::tools::check_if_file().unwrap();
+        run_program::run_program::parse_program(_lines)
+      }, _=> {
         help::help::help()
-      }
+      },
     }
+  }
     // run help
     None => help::help::help(),
   } {
