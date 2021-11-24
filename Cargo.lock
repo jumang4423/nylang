@@ -59,7 +59,7 @@ dependencies = [
 
 [[package]]
 name = "nylang"
-version = "0.1.2"
+version = "0.1.4"
 dependencies = [
  "rand",
  "wasm-bindgen",

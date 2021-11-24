@@ -15,6 +15,27 @@ use wasm_bindgen::prelude::*;
 pub fn excute_nyl(_lines: String, mode: i32) -> Vec<JsValue> {
   // show ast
   if mode == 0 {
+    // put main func implictly
+    let lines = _lines + "main() ;";
+    // start compute
+    let mut l = lexer::lexer::Lexer::new(lines.as_str());
+
+    let mut tokens: Vec<String> = [].to_vec();
+    loop {
+      let token = l.next_token();
+      if token == token::token::Token::Eof {
+        break;
+      }
+      tokens.push(format!("{:?}", token));
+    }
+
+    // translate result to JsValue
+    let mut result: Vec<JsValue> = Vec::new();
+    for value in tokens.iter() {
+      result.push(JsValue::from_str(value));
+    }
+    result
+  } else if mode == 1 {
     let lines = _lines + "main() ;";
     let l = lexer::lexer::Lexer::new(lines.as_str());
     let mut p = parser::parser::Parser::new(l);
@@ -31,7 +52,7 @@ pub fn excute_nyl(_lines: String, mode: i32) -> Vec<JsValue> {
     result
 
   // show output
-  } else if mode == 1 {
+  } else if mode == 2 {
     // put main func implictly
     let lines = _lines + "main() ;";
 
