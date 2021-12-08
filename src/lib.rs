@@ -7,6 +7,7 @@ mod object;
 mod parser;
 mod token;
 mod tools;
+mod transpiler_rust;
 
 use wasm_bindgen::prelude::*;
 
@@ -75,4 +76,16 @@ pub fn excute_nyl(_lines: String, mode: i32) -> Vec<JsValue> {
     result.push(JsValue::from_str("mode is invalid"));
     result
   }
+}
+
+#[wasm_bindgen::prelude::wasm_bindgen]
+pub fn transpile_to_rust_from_nylang(_lines: String) -> String {
+  // calc ast from _lines
+  let l = lexer::lexer::Lexer::new(_lines.as_str());
+  let mut p = parser::parser::Parser::new(l);
+  let program = p.program_parser();
+  // translate ast to rust
+  let mut transpiler = transpiler_rust::transpiler_rust::TranspilerRust::new();
+  // return rust code
+  transpiler.transpile(program)
 }
