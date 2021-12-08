@@ -1,13 +1,13 @@
 use super::super::ast;
 
 pub struct TranspilerRust {
-  pub outputs: String
+  pub outputs: String,
 }
 
 impl TranspilerRust {
   pub fn new() -> TranspilerRust {
     TranspilerRust {
-      outputs: String::new()
+      outputs: String::new(),
     }
   }
 
@@ -27,7 +27,16 @@ impl TranspilerRust {
         if let ast::ast::Expression::Ident(stringified_identifier) = identifier {
           // if let main, translate to fn main
           if stringified_identifier == "main" {
-            return format!("fn main() {{\n{}\n}}", self.expression_to_rust(value.clone()));
+            // get call from value
+            if let ast::ast::Expression::Closure { parameters: _, body } = value {
+              if let ast::ast::Statement::Block(statements) = *body {
+                return format!("fn main() {{\n{}}}", self.block_transpiler(statements));
+              } else {
+                panic!("Expected block");
+              }
+            } else {
+              panic!("Expected closure");
+            }
           } else {
             return format!(
               "let {} = {};",
@@ -40,27 +49,27 @@ impl TranspilerRust {
         }
       }
       ast::ast::Statement::Expression(expression) => self.expression_to_rust(expression.clone()),
-      ast::ast::Statement::Block(statements) => self.block_evaluator(statements.clone()),
+      ast::ast::Statement::Block(statements) => self.block_transpiler(statements.clone()),
       _ => panic!("Statement is not a Statement"),
     }
   }
 
   pub fn expression_to_rust(&mut self, expression: ast::ast::Expression) -> String {
     match expression {
-      ast::ast::Expression::Ident(identifier) => format!("{}", identifier),
+      ast::ast::Expression::Ident(identifier) => format!("{}", ident_to_rust(identifier)),
       ast::ast::Expression::Integer(integer) => format!("{}", integer),
       ast::ast::Expression::Bool(boolean) => format!("{}", boolean),
       ast::ast::Expression::String(string) => format!("\"{}\"", string),
       // ast::ast::Expression::Array(array) => self.array_evaluator(array),
       ast::ast::Expression::Closure { parameters, body } => {
-        self.closure_evaluator(parameters, body)
+        self.closure_transpiler(parameters, body)
       }
-      ast::ast::Expression::Call { closure, arguments } => self.call_evaluator(closure, arguments),
+      ast::ast::Expression::Call { closure, arguments } => self.call_transpiler(closure, arguments),
       _ => panic!("Expression is not an Expression"),
     }
   }
 
-  pub fn call_evaluator(
+  pub fn call_transpiler(
     &mut self,
     closure: Box<ast::ast::Expression>,
     arguments: Vec<ast::ast::Expression>,
@@ -91,7 +100,7 @@ impl TranspilerRust {
     arguments_string
   }
 
-  pub fn closure_evaluator(
+  pub fn closure_transpiler(
     &mut self,
     parameters: std::vec::Vec<ast::ast::Expression>,
     body: std::boxed::Box<ast::ast::Statement>,
@@ -100,20 +109,29 @@ impl TranspilerRust {
       "|{}| {{\n{}\n}}",
       self.arguments_to_rust(parameters),
       self.statement_to_rust(*body)
-    ).to_string()
+    )
+    .to_string()
   }
 
-  pub fn block_evaluator(&mut self, statements: std::vec::Vec<ast::ast::Statement>) -> String {
+  pub fn block_transpiler(&mut self, statements: std::vec::Vec<ast::ast::Statement>) -> String {
     let mut block_string = String::new();
 
     for statement in statements.iter() {
       block_string = format!(
-        "{}{}\n",
+        "{}{};\n",
         block_string,
         self.statement_to_rust(statement.clone())
       );
     }
 
     block_string
+  }
+}
+
+pub fn ident_to_rust(ident: String) -> String {
+  match ident.as_str() {
+    "🎤" => "print!".to_string(),
+    "🎤🎶" => "println!".to_string(),
+    _ => ident,
   }
 }
