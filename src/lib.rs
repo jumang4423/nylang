@@ -84,8 +84,8 @@ pub fn transpile_to_rust_from_nylang(_lines: String) -> String {
   let l = lexer::lexer::Lexer::new(_lines.as_str());
   let mut p = parser::parser::Parser::new(l);
   let program = p.program_parser();
-
   // translate ast to rust
-
-
+  let mut transpiler = transpiler_rust::transpiler_rust::TranspilerRust::new();
+  // return rust code
+  transpiler.transpile(program)
 }

@@ -1,24 +1,119 @@
 use super::super::ast;
 
-pub struct Transpiler_rust {
-  pub ast: ast::ast::Program,
+pub struct TranspilerRust {
   pub outputs: String
 }
 
-impl Transpiler_rust {
-  pub fn new(ast: ast::ast::Program) -> Transpiler_rust {
-    Transpiler_rust {
-      ast: ast,
+impl TranspilerRust {
+  pub fn new() -> TranspilerRust {
+    TranspilerRust {
       outputs: String::new()
     }
   }
 
-  pub fn transpile(&mut self) {
-
-    for statement in self.ast.statements.iter() {
-      statement.transpile(self);
+  pub fn transpile(&mut self, statements: ast::ast::Program) -> String {
+    for statement in statements.statements.iter() {
+      let evaluated_statement: String = self.statement_to_rust(statement.clone());
+      // output + evaluated_statement + "\n"
+      self.outputs = format!("{}{}\n", self.outputs, evaluated_statement);
     }
 
+    self.outputs.clone()
   }
 
+  pub fn statement_to_rust(&mut self, statement: ast::ast::Statement) -> String {
+    match statement {
+      ast::ast::Statement::Let { identifier, value } => {
+        if let ast::ast::Expression::Ident(stringified_identifier) = identifier {
+          // if let main, translate to fn main
+          if stringified_identifier == "main" {
+            return format!("fn main() {{\n{}\n}}", self.expression_to_rust(value.clone()));
+          } else {
+            return format!(
+              "let {} = {};",
+              stringified_identifier,
+              self.expression_to_rust(value.clone())
+            );
+          }
+        } else {
+          panic!("Identifier is not an Identifier");
+        }
+      }
+      ast::ast::Statement::Expression(expression) => self.expression_to_rust(expression.clone()),
+      ast::ast::Statement::Block(statements) => self.block_evaluator(statements.clone()),
+      _ => panic!("Statement is not a Statement"),
+    }
+  }
+
+  pub fn expression_to_rust(&mut self, expression: ast::ast::Expression) -> String {
+    match expression {
+      ast::ast::Expression::Ident(identifier) => format!("{}", identifier),
+      ast::ast::Expression::Integer(integer) => format!("{}", integer),
+      ast::ast::Expression::Bool(boolean) => format!("{}", boolean),
+      ast::ast::Expression::String(string) => format!("\"{}\"", string),
+      // ast::ast::Expression::Array(array) => self.array_evaluator(array),
+      ast::ast::Expression::Closure { parameters, body } => {
+        self.closure_evaluator(parameters, body)
+      }
+      ast::ast::Expression::Call { closure, arguments } => self.call_evaluator(closure, arguments),
+      _ => panic!("Expression is not an Expression"),
+    }
+  }
+
+  pub fn call_evaluator(
+    &mut self,
+    closure: Box<ast::ast::Expression>,
+    arguments: Vec<ast::ast::Expression>,
+  ) -> String {
+    // unbox closure then call
+    let closure_string = self.expression_to_rust(*closure);
+    let arguments_string = self.arguments_to_rust(arguments);
+
+    format!("{}({})", closure_string, arguments_string)
+  }
+
+  pub fn arguments_to_rust(&mut self, arguments: Vec<ast::ast::Expression>) -> String {
+    // output will be "1, 2, 3"
+    let mut arguments_string = String::new();
+
+    for (index, argument) in arguments.iter().enumerate() {
+      if index != 0 {
+        arguments_string = format!("{}, ", arguments_string);
+      }
+
+      arguments_string = format!(
+        "{}{}",
+        arguments_string,
+        self.expression_to_rust(argument.clone())
+      );
+    }
+
+    arguments_string
+  }
+
+  pub fn closure_evaluator(
+    &mut self,
+    parameters: std::vec::Vec<ast::ast::Expression>,
+    body: std::boxed::Box<ast::ast::Statement>,
+  ) -> String {
+    format!(
+      "|{}| {{\n{}\n}}",
+      self.arguments_to_rust(parameters),
+      self.statement_to_rust(*body)
+    ).to_string()
+  }
+
+  pub fn block_evaluator(&mut self, statements: std::vec::Vec<ast::ast::Statement>) -> String {
+    let mut block_string = String::new();
+
+    for statement in statements.iter() {
+      block_string = format!(
+        "{}{}\n",
+        block_string,
+        self.statement_to_rust(statement.clone())
+      );
+    }
+
+    block_string
+  }
 }
