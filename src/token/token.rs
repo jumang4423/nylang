@@ -13,7 +13,6 @@ pub enum Token {
   Double(f64),
   String(String),
 
-  // operators
   Closure,
   Let,
 
