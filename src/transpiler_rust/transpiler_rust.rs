@@ -190,6 +190,695 @@ impl TranspilerRust {
     right: Box<ast::ast::Expression>,
   ) -> String {
     match (op, *left.clone(), *right.clone()) {
+      // infix op infix
+      (
+        ast::ast::Infix::Plus,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!(
+          "{} + {}",
+          self.expression_to_rust(*left),
+          self.expression_to_rust(*right)
+        )
+      }
+      (
+        ast::ast::Infix::Minus,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!(
+          "{} - {}",
+          self.expression_to_rust(*left),
+          self.expression_to_rust(*right)
+        )
+      }
+      (
+        ast::ast::Infix::Slash,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!(
+          "{} / {}",
+          self.expression_to_rust(*left),
+          self.expression_to_rust(*right)
+        )
+      }
+      (
+        ast::ast::Infix::Asterisk,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!(
+          "{} * {}",
+          self.expression_to_rust(*left),
+          self.expression_to_rust(*right)
+        )
+      }
+      (
+        ast::ast::Infix::Eq,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!(
+          "{} == {}",
+          self.expression_to_rust(*left),
+          self.expression_to_rust(*right)
+        )
+      }
+      (
+        ast::ast::Infix::NotEq,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!(
+          "{} != {}",
+          self.expression_to_rust(*left),
+          self.expression_to_rust(*right)
+        )
+      }
+      (
+        ast::ast::Infix::LessThan,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!(
+          "{} < {}",
+          self.expression_to_rust(*left),
+          self.expression_to_rust(*right)
+        )
+      }
+      (
+        ast::ast::Infix::GreaterThan,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!(
+          "{} > {}",
+          self.expression_to_rust(*left),
+          self.expression_to_rust(*right)
+        )
+      }
+      // infix op type
+      (
+        ast::ast::Infix::Plus,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Integer(right),
+      ) => {
+        format!("{} + {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Minus,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Integer(right),
+      ) => {
+        format!("{} - {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Slash,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Integer(right),
+      ) => {
+        format!("{} / {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Asterisk,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Integer(right),
+      ) => {
+        format!("{} * {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Eq,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Integer(right),
+      ) => {
+        format!("{} == {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::NotEq,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Integer(right),
+      ) => {
+        format!("{} != {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::LessThan,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Integer(right),
+      ) => {
+        format!("{} < {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::GreaterThan,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Integer(right),
+      ) => {
+        format!("{} > {}", self.expression_to_rust(*left), right)
+      }
+      // type op infix
+      (
+        ast::ast::Infix::Plus,
+        ast::ast::Expression::Integer(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} + {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Minus,
+        ast::ast::Expression::Integer(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} - {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Slash,
+        ast::ast::Expression::Integer(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} / {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Asterisk,
+        ast::ast::Expression::Integer(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} * {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Eq,
+        ast::ast::Expression::Integer(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} == {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::NotEq,
+        ast::ast::Expression::Integer(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} != {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::LessThan,
+        ast::ast::Expression::Integer(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} < {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::GreaterThan,
+        ast::ast::Expression::Integer(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} > {}", left, self.expression_to_rust(*right))
+      }
+      // infix op type
+      (
+        ast::ast::Infix::Plus,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Ident(right),
+      ) => {
+        format!("{} + &{}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Minus,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Ident(right),
+      ) => {
+        format!("{} - &{}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Slash,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Ident(right),
+      ) => {
+        format!("{} / &{}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Asterisk,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Ident(right),
+      ) => {
+        format!("{} * &{}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Eq,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Ident(right),
+      ) => {
+        format!("{} == &{}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::NotEq,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Ident(right),
+      ) => {
+        format!("{} != &{}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::LessThan,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Ident(right),
+      ) => {
+        format!("{} < &{}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::GreaterThan,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::Ident(right),
+      ) => {
+        format!("{} > &{}", self.expression_to_rust(*left), right)
+      }
+      // type op infix
+      (
+        ast::ast::Infix::Plus,
+        ast::ast::Expression::Ident(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("&{} + {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Minus,
+        ast::ast::Expression::Ident(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("&{} - {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Slash,
+        ast::ast::Expression::Ident(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("&{} / {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Asterisk,
+        ast::ast::Expression::Ident(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("&{} * {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Eq,
+        ast::ast::Expression::Ident(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("&{} == {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::NotEq,
+        ast::ast::Expression::Ident(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("&{} != {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::LessThan,
+        ast::ast::Expression::Ident(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("&{} < {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::GreaterThan,
+        ast::ast::Expression::Ident(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("&{} > {}", left, self.expression_to_rust(*right))
+      }
+
+      // infix op type
+      (
+        ast::ast::Infix::Plus,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::String(right),
+      ) => {
+        format!("{} + {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Minus,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::String(right),
+      ) => {
+        format!("{} - {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Slash,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::String(right),
+      ) => {
+        format!("{} / {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Asterisk,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::String(right),
+      ) => {
+        format!("{} * {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::Eq,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::String(right),
+      ) => {
+        format!("{} == {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::NotEq,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::String(right),
+      ) => {
+        format!("{} != {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::LessThan,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::String(right),
+      ) => {
+        format!("{} < {}", self.expression_to_rust(*left), right)
+      }
+      (
+        ast::ast::Infix::GreaterThan,
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+        ast::ast::Expression::String(right),
+      ) => {
+        format!("{} > {}", self.expression_to_rust(*left), right)
+      }
+      // type op infix
+      (
+        ast::ast::Infix::Plus,
+        ast::ast::Expression::String(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} + {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Minus,
+        ast::ast::Expression::String(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} - {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Slash,
+        ast::ast::Expression::String(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} / {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Asterisk,
+        ast::ast::Expression::String(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} * {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::Eq,
+        ast::ast::Expression::String(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} == {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::NotEq,
+        ast::ast::Expression::String(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} != {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::LessThan,
+        ast::ast::Expression::String(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} < {}", left, self.expression_to_rust(*right))
+      }
+      (
+        ast::ast::Infix::GreaterThan,
+        ast::ast::Expression::String(left),
+        ast::ast::Expression::Infix {
+          left: _,
+          op: _,
+          right: _,
+        },
+      ) => {
+        format!("{} > {}", left, self.expression_to_rust(*right))
+      }
+
       // int
       (
         ast::ast::Infix::Plus,
@@ -393,29 +1082,29 @@ impl TranspilerRust {
       (
         ast::ast::Infix::Eq,
         ast::ast::Expression::Ident(left),
-        ast::ast::Expression::Ident(right)
+        ast::ast::Expression::Ident(right),
       ) => format!("{} == {}", left, right),
       (
         ast::ast::Infix::Eq,
         ast::ast::Expression::Bool(left),
-        ast::ast::Expression::Ident(right)
+        ast::ast::Expression::Ident(right),
       ) => format!("{} == {}", left, right),
       (
         ast::ast::Infix::Eq,
         ast::ast::Expression::Integer(left),
-        ast::ast::Expression::Ident(right)
+        ast::ast::Expression::Ident(right),
       ) => format!("{} == {}", left, right),
       (
         ast::ast::Infix::Eq,
         ast::ast::Expression::Double(left),
-        ast::ast::Expression::Ident(right)
+        ast::ast::Expression::Ident(right),
       ) => format!("{} == {}", left, right),
       (
         ast::ast::Infix::Eq,
         ast::ast::Expression::String(left),
-        ast::ast::Expression::Ident(right)
+        ast::ast::Expression::Ident(right),
       ) => format!("{} == {}", left, right),
-      _ => panic!("Infix is not an Infix"),
+      _ => format!("[-! Infix is not an Infix]"),
     }
   }
 
