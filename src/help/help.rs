@@ -23,13 +23,13 @@ pub fn say_welcome() -> Result<(), io::Error> {
   );
   println!(
     "-! '{}' to parse program",
-    "nylang parse <filename>.nyl"
+    "nylang parser <filename>.nyl"
       .color(blue_color_res.unwrap_or(Color::Green))
       .bold(),
   );
   println!(
     "-! '{}' to ast program",
-    "nylang ast <filename>.nyl"
+    "nylang lexer <filename>.nyl"
       .color(blue_color_res.unwrap_or(Color::Green))
       .bold(),
   );
