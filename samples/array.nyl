@@ -14,14 +14,24 @@
 
     🍙 un_sorted = [ ] ;
 
+    🎤🎶 ( "\n-! array size? ( 0 < number < 2048 )", 255, 0, 0, 👎) 
+    🍙 array_size = 👀 ( "number" ) ;
+
+    🐶 ( array_size < 1 ) {
+        ❌ ( "array size must be greater than 1" ) ;
+    }
+    🐶 ( array_size > 2047 ) {
+        ❌ ( "array size must be less than 2048" ) ;
+    }
+
     🌸 (
         🏨 () {
             🍙 un_sorted = 🥌 ( un_sorted, __rand__random_num_zero_to_specified_number ( 50 ) + 10 );
         }, 
-        40
+        array_size
     ) ;
 
-    🎤🎶 ( "\nnot sorted ( 40 elements ): " ) ;
+    🎤🎶 ( "\nnot sorted ( " + array_size + " elements ): " ) ;
     __array__forEach ( un_sorted, array_print ) ;
     🎤🎶 ( "\nsorted: " ) ;
 
