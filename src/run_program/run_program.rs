@@ -11,13 +11,13 @@ pub fn run_program(mut _lines: String) -> Result<(), io::Error> {
 
   _lines = _lines + "main() ;";
 
-  let blue_color_res: Result<Color, ()> = "magenta".parse();
-  println!(
-    "\n-! {}\n",
-    "excuting program"
-      .color(blue_color_res.unwrap_or(Color::Green))
-      .bold()
-  );
+  // let blue_color_res: Result<Color, ()> = "magenta".parse();
+  // println!(
+  //   "\n-! {}\n",
+  //   "excuting program"
+  //     .color(blue_color_res.unwrap_or(Color::Green))
+  //     .bold()
+  // );
 
   let mut env = eval::eval::Evaluator::new();
   let l = lexer::lexer::Lexer::new(_lines.as_str());
@@ -25,12 +25,12 @@ pub fn run_program(mut _lines: String) -> Result<(), io::Error> {
   let program = p.program_parser();
   env.evaluator(program);
 
-  println!(
-    "\n-! {}",
-    "finished"
-      .color(blue_color_res.unwrap_or(Color::Green))
-      .bold()
-  );
+  // println!(
+  //   "\n-! {}",
+  //   "finished"
+  //     .color(blue_color_res.unwrap_or(Color::Green))
+  //     .bold()
+  // );
 
   Ok(())
 }
