@@ -11,12 +11,12 @@
       🍙 array_of_array = [ ] ;
       🌸 (
         🏨 ( ) {
-          🍙 array_of_array = 🥌 ( array_of_array, value ) ;
+          array_of_array = 🥌 ( array_of_array, value ) ;
         },
         size
       ) ;
 
-      🍙 arr = 🥌 ( arr, array_of_array ) ;
+      arr = 🥌 ( arr, array_of_array ) ;
     },
     size
   ) ;
@@ -38,7 +38,7 @@
     🏨 ( ) {
         🍙 i = __rand__random_num_zero_to_specified_number ( 📏 ( arr ) ) ;
         🍙 j = __rand__random_num_zero_to_specified_number ( 📏 ( arr ) ) ;
-        🍙 arr = 🗿 ( arr, __rand__random_number ( ) % 2, i, j)
+        arr = 🗿 ( arr, __rand__random_number ( ) % 2, i, j)
     },
     times
   ) ;
@@ -53,8 +53,8 @@
   🍙 i = 0 ;
   🌸 (
     🏨 ( ) {
-      🍙 arr = 🗿 ( arr, 👎, 0, i) ;
-      🍙 i = i + 1 ;
+      arr = 🗿 ( arr, 👎, 0, i) ;
+      i = i + 1 ;
     },
     arr_len
   ) ;
@@ -63,8 +63,8 @@
   🍙 i = 0 ;
   🌸 (
     🏨 ( ) {
-      🍙 arr = 🗿 ( arr, 👎, i, 0) ;
-      🍙 i = i + 1 ;
+      arr = 🗿 ( arr, 👎, i, 0) ;
+      i = i + 1 ;
     },
     arr_len
   ) ;
@@ -73,8 +73,8 @@
   🍙 i = 0 ;
   🌸 (
     🏨 ( ) {
-      🍙 arr = 🗿 ( arr, 👎, arr_len - 1, i) ;
-      🍙 i = i + 1 ;
+      arr = 🗿 ( arr, 👎, arr_len - 1, i) ;
+      i = i + 1 ;
     },
     arr_len
   ) ;
@@ -83,8 +83,8 @@
   🍙 i = 0 ;
   🌸 (
     🏨 ( ) {
-      🍙 arr = 🗿 ( arr, 👎, i, arr_len - 1) ;
-      🍙 i = i + 1 ;
+      arr = 🗿 ( arr, 👎, i, arr_len - 1) ;
+      i = i + 1 ;
     },
     arr_len
   ) ;
@@ -105,16 +105,16 @@
         🏨 ( ) {
           🍙 _ar = arr [ j ] ;
           🐶 ( _ar [ i ] ) {
-            🍙 str = 🥌 ( str, "💖 " ) ;
+            str = 🥌 ( str, "💖 " ) ;
           } 😱 {
-            🍙 str = 🥌 ( str, "　 " ) ;
+            str = 🥌 ( str, "　 " ) ;
           } ;
-          🍙 j = j + 1 ;
+          j = j + 1 ;
         },
         arr_len
       ) ;
       🍙 str = 🥌 ( str, "\n" ) ;
-      🍙 i = i + 1 ;
+      i = i + 1 ;
     },
     arr_len
   ) ;
@@ -132,34 +132,34 @@
 
   🌸 (
     🏨 ( ) {
-      🍙 j = 1 ;
+      j = 1 ;
       🌸 (
         🏨 ( ) {
 
           🍙 cell_cnt_alive = 0 ;
           🐶 ( __array__get_two_dimention ( arr, i - 1, j - 1 ) ) {
-            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+            cell_cnt_alive = cell_cnt_alive + 1 ;
           } ;
           🐶 ( __array__get_two_dimention ( arr, i - 1, j ) ) {
-            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+            cell_cnt_alive = cell_cnt_alive + 1 ;
           } ;
           🐶 ( __array__get_two_dimention ( arr, i - 1, j + 1 ) ) {
-            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+            cell_cnt_alive = cell_cnt_alive + 1 ;
           } ;
           🐶 ( __array__get_two_dimention ( arr, i, j + 1 ) ) {
-            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+            cell_cnt_alive = cell_cnt_alive + 1 ;
           } ;
           🐶 ( __array__get_two_dimention ( arr, i + 1, j + 1 ) ) {
-            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+            cell_cnt_alive = cell_cnt_alive + 1 ;
           } ;
           🐶 ( __array__get_two_dimention ( arr, i + 1, j ) ) {
-            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+            cell_cnt_alive = cell_cnt_alive + 1 ;
           } ;
           🐶 ( __array__get_two_dimention ( arr, i + 1, j - 1 ) ) {
-            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+            cell_cnt_alive = cell_cnt_alive + 1 ;
           } ;
           🐶 ( __array__get_two_dimention ( arr, i, j - 1 ) ) {
-            🍙 cell_cnt_alive = cell_cnt_alive + 1 ;
+            cell_cnt_alive = cell_cnt_alive + 1 ;
           } ;
 
           🍙 dead_flag = 👎 ;

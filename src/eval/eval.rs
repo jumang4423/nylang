@@ -309,6 +309,12 @@ impl Evaluator {
           panic!("not implemented");
         }
       }
+      ast::ast::Statement::Assign { identifier, value } => {
+        // let indentifier to stringify!
+        let env_vle = self.expression_evaluator(value);
+          self.set_env(identifier, env_vle.clone());
+          env_vle
+      }
       ast::ast::Statement::Return(value) => {
         object::object::Object::ReturnValue(Box::new(self.expression_evaluator(value)))
       }

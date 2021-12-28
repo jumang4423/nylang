@@ -1,0 +1,9 @@
+
+🍙 main = 🏨 () {
+  🍙 test = 5 ;
+  test = 2 ; 
+
+  🐶 ( test != 2 ) {
+    ❌ ( "value isnt modified correctly" ) ;
+  }
+} ;

@@ -54,10 +54,37 @@ impl<'a> Parser<'a> {
   }
 
   fn statement_parser(&mut self) -> ast::ast::Statement {
-    match self.cur_token.clone() {
-      token::token::Token::Let => self.let_statement_parser(),
-      token::token::Token::Return => self.return_statement_parser(),
-      _ => self.expression_statement_parser(),
+    // check just a ident or assign
+    match self.check_just_a_ident_or_assign() {
+      Some(some_stat) => some_stat,
+      None => match self.cur_token.clone() {
+        token::token::Token::Let => self.let_statement_parser(),
+        token::token::Token::Return => self.return_statement_parser(),
+        _ => self.expression_statement_parser(),
+      },
+    }
+  }
+
+  fn check_just_a_ident_or_assign(&mut self) -> Option<ast::ast::Statement> {
+    if let token::token::Token::Ident(ident) = self.cur_token.clone() {
+      if self.peek_token.clone() == token::token::Token::Assign {
+        self.next_token();
+        self.next_token();
+        let value = self.expression_parser(ast::ast::WhichTheBest::Lowest);
+
+        if self.peek_token == token::token::Token::Semicolon {
+          self.next_token();
+        }
+
+        Some(ast::ast::Statement::Assign {
+          identifier: ident,
+          value,
+        })
+      } else {
+        None
+      }
+    } else {
+      None
     }
   }
 
@@ -278,6 +305,20 @@ impl<'a> Parser<'a> {
       left_ident: Box::new(ast::ast::Expression::Ident(ident)),
       index: Box::new(index),
     }
+  }
+
+  fn assign_parser(&mut self) -> ast::ast::Statement {
+    let identifier: String;
+
+    if let token::token::Token::String(_str) = &self.cur_token {
+      identifier = _str.clone()
+    } else {
+      panic!("Expected identifier");
+    }
+    self.next_token(); // =
+    let value = self.expression_parser(ast::ast::WhichTheBest::Lowest);
+
+    ast::ast::Statement::Assign { identifier, value }
   }
 
   fn closure_parser(&mut self) -> ast::ast::Expression {

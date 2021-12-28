@@ -21,6 +21,10 @@ pub enum Statement {
     identifier: Expression,
     value: Expression,
   },
+  Assign {
+    identifier: String,
+    value: Expression,
+  },
   // return e
   Return(Expression),
   // e
