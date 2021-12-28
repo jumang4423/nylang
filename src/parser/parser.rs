@@ -68,10 +68,11 @@ impl<'a> Parser<'a> {
   fn check_just_a_ident_or_assign(&mut self) -> Option<ast::ast::Statement> {
     if let token::token::Token::Ident(ident) = self.cur_token.clone() {
       if self.peek_token.clone() == token::token::Token::Assign {
-        self.next_token();
-        self.next_token();
+        self.next_token(); // indet
+        self.next_token(); // =
         let value = self.expression_parser(ast::ast::WhichTheBest::Lowest);
 
+        // skip until semicolon
         if self.peek_token == token::token::Token::Semicolon {
           self.next_token();
         }
