@@ -43,7 +43,18 @@ cargo run --release run samples/demo.nyl
 nylang
 ```
 
+> make new project
+
+u can edit hoge.nylsh
+then excute with ./hoge.nylsh
+
+```
+nylang new <project name>
+```
+
 > run program
+
+run hoge.nyl file
 
 ```
 nylang run <filename>.nyl
@@ -51,11 +62,15 @@ nylang run <filename>.nyl
 
 > show tokens program
 
+only run lexer
+
 ```
 nylang lexer <filename>.nyl
 ```
 
 > show tree
+
+only show ast tree
 
 ```
 nylang parser <filename>.nyl
