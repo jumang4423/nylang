@@ -2,10 +2,11 @@
 
 // lib
 use std::env::args;
+use std::fs;
 use std::io;
 use std::io::prelude::*;
-use std::fs;
 use std::os::unix::fs::PermissionsExt;
+use colored::*;
 
 // mod
 mod ast;
@@ -19,8 +20,39 @@ mod parser;
 mod run_program;
 mod token;
 mod tools;
+
 fn main() -> io::Result<()> {
   let mut _lines: String;
+
+  // check nylang library is available on computer
+  match tools::tools::check_nylang_lib() {
+    Some(_nylang_path) => {
+      // nylang lib is not installed
+      println!(
+        "\n{}",
+        "-! oi! nylang lib is missing😭".on_truecolor(150, 50, 50).white()
+      );
+      match tools::tools::auto_install_lib() {
+        Ok(_) => {
+          println!(
+            "{}\n",
+            "-o ready to use nylang library".on_truecolor(50, 150, 50).white()
+          );
+        }
+        Err(_e) => {
+          println!(
+            "\n{}",
+            "-! installation skipped".on_truecolor(255, 0, 0)
+          );
+          println!("{}\n", _e);
+        }
+      }
+    }
+    None => {
+      //ignoreing
+    }
+  }
+
   match match args().nth(1) {
     // run program from source code
     Some(command) => {
@@ -48,8 +80,12 @@ nylang run -c '
               ) {
                 Ok(_) => {
                   println!("{} created", project_name);
-                                // set excutable the file
-                  fs::set_permissions(project_name.clone() + ".nylsh", fs::Permissions::from_mode(0o755)).unwrap();
+                  // set excutable the file
+                  fs::set_permissions(
+                    project_name.clone() + ".nylsh",
+                    fs::Permissions::from_mode(0o755),
+                  )
+                  .unwrap();
                 }
                 Err(e) => {
                   println!("{}", e);

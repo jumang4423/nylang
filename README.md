@@ -21,13 +21,13 @@ a cute language with a bunch emoji
 > install 
 
 ```
-chmod +x scripts/install.sh && ./scripts/install.sh
+cargo install --path .
 ```
 
 > uninstall
 
 ```
-chmod +x scripts/uninstall.sh && ./scripts/uninstall.sh
+cargo uninstall nylang && rm -rf ~/.nylang
 ```
 
 ## quick demo

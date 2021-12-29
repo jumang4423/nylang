@@ -12,8 +12,8 @@ pub fn help() -> Result<(), io::Error> {
 pub fn say_welcome() -> Result<(), io::Error> {
   let blue_color_res: Result<Color, ()> = "magenta".parse();
   println!(
-    "-> welcome to nylang, is the interplitor written in {}",
-    "rust".color(blue_color_res.unwrap_or(Color::Green)).bold(),
+    "{}",
+    "-> welcome to nylang, is the interplitor written in rust".on_truecolor(255, 255, 255).black(),
   );
   println!(
     "-! '{}' to make a new project",
