@@ -16,6 +16,12 @@ pub fn say_welcome() -> Result<(), io::Error> {
     "rust".color(blue_color_res.unwrap_or(Color::Green)).bold(),
   );
   println!(
+    "-! '{}' to make a new project",
+    "nylang new <project name>"
+      .color(blue_color_res.unwrap_or(Color::Green))
+      .bold(),
+  );
+  println!(
     "-! '{}' to excute program",
     "nylang run <filename>.nyl"
       .color(blue_color_res.unwrap_or(Color::Green))
