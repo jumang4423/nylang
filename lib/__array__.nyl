@@ -35,8 +35,8 @@
   🍙 cur_index = 0 ;
   🌸 (
       🏨 () {
-          🍙 array = 🗿 ( array, closure ( array [ cur_index ], cur_index ), cur_index ) ;
-          🍙 cur_index = cur_index + 1 ;
+          array = 🗿 ( array, closure ( array [ cur_index ], cur_index ), cur_index ) ;
+          cur_index = cur_index + 1 ;
       },
       📏 ( array ) 
   ) ;
@@ -51,12 +51,12 @@
       🍙 array_of_array = [ ] ;
       🌸 (
         🏨 ( ) {
-          🍙 array_of_array = 🥌 ( array_of_array, value ) ;
+          array_of_array = 🥌 ( array_of_array, value ) ;
         },
         size
       ) ;
 
-      🍙 arr = 🥌 ( arr, array_of_array ) ;
+      arr = 🥌 ( arr, array_of_array ) ;
     },
     size
   ) ;
@@ -86,14 +86,14 @@
   🍙 j = 0 ;
   🌸 (
       🏨 () {
-          🍙 j = i + 1 ;
+          j = i + 1 ;
           🌸 (
               🏨 () {
                   🐶 (array [ i ] > array[ j ] ) {
-			        🍙 tmp = array [ i ] ;
-                      🍙 array = 🗿 ( array, array [ j ], i ) ;
-                      🍙 array = 🗿 ( array, tmp, j ) ;
-		        }
+			                🍙 tmp = array [ i ] ;
+                      array = 🗿 ( array, array [ j ], i ) ;
+                      array = 🗿 ( array, tmp, j ) ;
+		              }
                   🍙 j = j + 1 ;
               },
               📏 ( array ) - i - 1

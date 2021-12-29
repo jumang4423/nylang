@@ -46,7 +46,7 @@
 
     🌸 (
         🏨 ( ) {
-            🍙 ans = ans * bot ;
+            ans = ans * bot ;
         },
         exp
     ) ;
@@ -61,8 +61,8 @@
 
     🌸 (
         🏨 ( ) {
-            🍙 sum = sum + arr[ i ] ;
-            🍙 i = i + 1 ;
+            sum = sum + arr[ i ] ;
+            i = i + 1 ;
 
             💨 i != 📏(arr) ;
         }
@@ -103,8 +103,8 @@
 
     🌸 (
         🏨 ( ) {
-            🍙 value = value / base ;
-            🍙 ans = ans + 1 ;
+            value = value / base ;
+            ans = ans + 1 ;
             💨 __math__max( base, value ) == value ;
         }
     ) ;

@@ -33,8 +33,8 @@
 
     🌸 ( 
         🏨 ( ) {
-            🍙 return_num = return_num + current_digit * __rand__random_number ( ) ;
-            🍙 current_digit = current_digit * 10 ;
+            return_num = return_num + current_digit * __rand__random_number ( ) ;
+            current_digit = current_digit * 10 ;
         } ,
         con_rand % digit
     ) ;
