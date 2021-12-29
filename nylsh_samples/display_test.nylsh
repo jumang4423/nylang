@@ -1,3 +1,11 @@
+
+#!/bin/sh
+if ! [ -x "$(command -v nylang)" ]; then
+  echo '-! nylang excutable not found in your PATH' >&2
+  exit 1
+fi
+
+nylang run -c '
 🍄🍄 ( 
     "welcome to nylang!",
     "this demo shows that what exactly nylang can do!"
@@ -115,3 +123,4 @@
 
     🎤🎶 ( "" ) ;
 } ;
+'
