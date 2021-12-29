@@ -235,3 +235,26 @@ fn test_lexer() {
     ]
   );
 }
+
+#[test]
+fn test_call_func() {
+  let input = "🎤 ( \"ass\" ) ;";
+  let mut lexer = Lexer::new(input);
+  let mut tokens = vec![];
+  while lexer.cur_char != ZERO_CHAR {
+    tokens.push(lexer.next_token());
+  }
+  tokens.push(token::token::Token::Eof);
+  assert_eq!(
+    tokens,
+    vec![
+      token::token::Token::Ident("🎤".to_string()),
+      token::token::Token::LParen,
+      token::token::Token::String("ass".to_string()),
+      token::token::Token::RParen,
+      token::token::Token::Semicolon,
+      token::token::Token::Eof
+
+    ]
+  );
+}

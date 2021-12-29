@@ -308,19 +308,21 @@ impl<'a> Parser<'a> {
     }
   }
 
-  fn assign_parser(&mut self) -> ast::ast::Statement {
-    let identifier: String;
+  // todo: already implemented in check_just_a_ident_or_assign()
 
-    if let token::token::Token::String(_str) = &self.cur_token {
-      identifier = _str.clone()
-    } else {
-      panic!("Expected identifier");
-    }
-    self.next_token(); // =
-    let value = self.expression_parser(ast::ast::WhichTheBest::Lowest);
+  // fn assign_parser(&mut self) -> ast::ast::Statement {
+  //   let identifier: String;
 
-    ast::ast::Statement::Assign { identifier, value }
-  }
+  //   if let token::token::Token::String(_str) = &self.cur_token {
+  //     identifier = _str.clone()
+  //   } else {
+  //     panic!("Expected identifier");
+  //   }
+  //   self.next_token(); // =
+  //   let value = self.expression_parser(ast::ast::WhichTheBest::Lowest);
+
+  //   ast::ast::Statement::Assign { identifier, value }
+  // }
 
   fn closure_parser(&mut self) -> ast::ast::Expression {
     // (
@@ -451,11 +453,36 @@ impl<'a> Parser<'a> {
 }
 
 #[test]
-fn test_parse() {
+fn test_let() {
   let _lines = "🍙 x = 5;
   🍄🍄 ( \"welcome to nylang!\" ) ;
   ";
   let l = lexer::lexer::Lexer::new(_lines);
   let mut p = Parser::new(l);
-  p.program_parser();
+  if p.program_parser().statements.len() != 2 {
+    panic!("statements number bad ass")
+  }
+}
+
+#[test]
+fn test_asiggn_value() {
+  let _lines = "🍙 x = 5;
+  x = 2 ;
+  ";
+  let l = lexer::lexer::Lexer::new(_lines);
+  let mut p = Parser::new(l);
+  if p.program_parser().statements.len() != 2 {
+    panic!("statements number bad ass")
+  }
+  
+}
+
+#[test]
+fn test_if_statement() {
+  let _lines = "🐶 ( 👍 ) { 👍 } 😱 { 👎 } ;";
+  let l = lexer::lexer::Lexer::new(_lines);
+  let mut p = Parser::new(l);
+  if p.program_parser().statements.len() != 1 {
+    panic!("statements number bad ass")
+  }
 }
