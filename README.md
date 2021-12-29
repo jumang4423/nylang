@@ -21,7 +21,7 @@ a cute language with a bunch emoji
 > install 
 
 ```
-cargo install --path .
+cargo install --git https://github.com/jumang4423/nylang.git
 ```
 
 > uninstall
