@@ -1,0 +1,5 @@
+docker run --rm \
+    --volume "${PWD}":/root/src \
+    --workdir /root/src \
+    joseluisq/rust-linux-darwin-builder:1.57.0 \
+    sh -c "cargo build --release"

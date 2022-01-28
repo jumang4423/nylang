@@ -10,7 +10,7 @@ a cute language with a bunch emoji
 
 [WIKI](https://github.com/jumang4423/nylang/wiki)
 
-# usage
+# install
 
 ## dependancies
 
@@ -28,52 +28,6 @@ cargo install --git https://github.com/jumang4423/nylang.git
 
 ```
 cargo uninstall nylang && rm -rf ~/.nylang
-```
-
-## quick demo
-
-```
-cargo run --release run samples/demo.nyl
-```
-## excution
-
-> show help
-
-```
-nylang
-```
-
-> make new project
-
-u can edit hoge.nylsh
-then excute with ./hoge.nylsh
-
-```
-nylang new <project name>
-```
-
-> run program
-
-run hoge.nyl file
-
-```
-nylang run <filename>.nyl
-```
-
-> show tokens program
-
-only run lexer
-
-```
-nylang lexer <filename>.nyl
-```
-
-> show tree
-
-only show ast tree
-
-```
-nylang parser <filename>.nyl
 ```
 
 ## excute uisng docker
