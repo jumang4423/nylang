@@ -1,0 +1,8 @@
+🍄🍄 (
+    "import one function"
+) ;
+
+🍙 main = 🏨 () {
+    🐽("nyl_samples/quick_import_module.nyl", "hello");
+    hello();
+} ;

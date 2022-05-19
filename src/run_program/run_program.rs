@@ -11,32 +11,17 @@ pub fn run_program(mut _lines: String) -> Result<(), io::Error> {
 
   _lines = _lines + "main() ;";
 
-  // let blue_color_res: Result<Color, ()> = "magenta".parse();
-  // println!(
-  //   "\n-! {}\n",
-  //   "excuting program"
-  //     .color(blue_color_res.unwrap_or(Color::Green))
-  //     .bold()
-  // );
-
   let mut env = eval::eval::Evaluator::new();
   let l = lexer::lexer::Lexer::new(_lines.as_str());
   let mut p = parser::parser::Parser::new(l);
   let program = p.program_parser();
   env.evaluator(program);
 
-  // println!(
-  //   "\n-! {}",
-  //   "finished"
-  //     .color(blue_color_res.unwrap_or(Color::Green))
-  //     .bold()
-  // );
-
   Ok(())
 }
 
 pub fn parse_program(mut _lines: String) -> Result<(), io::Error> {
- 
+
   _lines = _lines + "main() ;";
 
   let blue_color_res: Result<Color, ()> = "magenta".parse();
@@ -69,7 +54,7 @@ pub fn parse_program(mut _lines: String) -> Result<(), io::Error> {
 }
 
 pub fn lexer_program(mut _lines: String) -> Result<(), io::Error> {
- 
+
   _lines = _lines + "main() ;";
   let mut l = lexer::lexer::Lexer::new(_lines.as_str());
   let mut tok = l.next_token();

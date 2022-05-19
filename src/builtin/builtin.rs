@@ -1,8 +1,11 @@
 use super::super::lexer;
 use super::super::object;
 use super::super::parser;
-use std::env;
+use std::{env, io};
+use std::cell::{RefCell, RefMut};
 use std::fs;
+use std::fs::DirEntry;
+use std::path::Path;
 use std::thread;
 
 #[allow(deprecated)]
@@ -31,6 +34,85 @@ pub fn import(
     object::object::Object::Null
   } else {
     panic!("import: argument must be a string");
+  }
+}
+
+// one possible implementation of walking a directory only visiting files
+fn visit_dirs(dir: &Path, cb: &dyn Fn(&DirEntry)) -> io::Result<()> {
+  if dir.is_dir() {
+    for entry in fs::read_dir(dir)? {
+      let entry = entry?;
+      let path = entry.path();
+      if path.is_dir() {
+        visit_dirs(&path, cb)?;
+      } else {
+        cb(&entry);
+      }
+    }
+  }
+  Ok(())
+}
+
+#[allow(deprecated)]
+pub fn quick_import(
+  args: std::vec::Vec<object::object::Object>,
+  eval_global: &mut super::super::eval::eval::Evaluator,
+) -> object::object::Object {
+  if let object::object::Object::String(file_name) = &args[0] {
+
+    // find one file from the current directory
+    let seen_cell = RefCell::new("".to_string());
+    let cur_dir = env::current_dir().unwrap().display().to_string();
+    let mut is_found = false;
+    let is_found_cell = RefCell::new(is_found);
+    visit_dirs(Path::new(&cur_dir), &|entry| {
+      let path = entry.path();
+      if path.is_file() {
+        if path.to_str().unwrap().contains(&file_name.clone()) {
+          let mut borrowed = seen_cell.borrow_mut();
+          let mut borrowed_is_found = is_found_cell.borrow_mut();
+          borrowed = RefMut::map(borrowed, |s| {
+            *s = path.to_str().unwrap().to_string();
+            s
+          });
+          borrowed_is_found = RefMut::map(borrowed_is_found, |s| {
+            *s = true;
+            s
+          });
+        }
+      }
+    });
+
+    if !is_found_cell.borrow().clone() {
+      panic!("quick_import: file not found");
+    }
+
+    let _lines = match fs::read_to_string(format!("{}", &seen_cell.borrow())) {
+      Ok(lines) => lines,
+      Err(_e) => panic!("Error reading file"),
+    };
+    let l = lexer::lexer::Lexer::new(_lines.as_str());
+    let mut p = parser::parser::Parser::new(l);
+    let program = p.program_parser();
+
+    if let object::object::Object::String(func_name) = &args[1] {
+      // loop through the program
+      for statement in program.statements.iter() {
+        // evaluate the statement
+        let evaluated = eval_global.statement_evaluator(statement.clone());
+        if let object::object::Object::String(identifier) = evaluated {
+          // the function found!
+          if identifier == *func_name {
+            return object::object::Object::Null
+          }
+        }
+      }
+    }
+
+    // no expected function, return err
+    object::object::Object::String("no func found".to_string())
+  } else {
+    panic!("quick_import: argument must be (string, string)");
   }
 }
 

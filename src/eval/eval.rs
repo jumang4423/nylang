@@ -312,8 +312,8 @@ impl Evaluator {
       ast::ast::Statement::Assign { identifier, value } => {
         // let indentifier to stringify!
         let env_vle = self.expression_evaluator(value);
-          self.set_env(identifier, env_vle.clone());
-          env_vle
+          self.set_env(identifier.clone(), env_vle);
+          object::object::Object::String(identifier)
       }
       ast::ast::Statement::Return(value) => {
         object::object::Object::ReturnValue(Box::new(self.expression_evaluator(value)))
@@ -416,6 +416,7 @@ impl Evaluator {
             "🌹" => return builtin::io::random_emojis(args),
             "👀" => return builtin::io::scanf(args),
             "🐽🐽🐽" => return builtin::builtin::import(args, self),
+            "🐽" => return builtin::builtin::quick_import(args,self),
             "📏" => return builtin::array::len(args),
             "🥌" => return builtin::array::push(args),
             "🌛" => return builtin::array::rest(args),
