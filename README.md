@@ -6,40 +6,31 @@
 
 a cute language with a bunch emoji
 
-# documentation
+## how nylang looks like
+
+``` text
+🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
+🍙 main = 🏨 () {
+   🍙 cnt = 0 ;
+    🌸 (
+        🏨 ( ) {
+            🎤 ( 🌹 ( 16 ) ) ;
+            🍙 cnt = cnt + 1 ;
+            💨 cnt != 120 ;
+        }
+    ) ;
+    🎤 ( "we are here!" ) ;
+} ;
+```
+
+## documentation
 
 [WIKI](https://github.com/jumang4423/nylang/wiki)
 
-# install
-
-## dependancies
-
-- rust ( cargo )
-
 ## install & uninstall
 
-> install 
+- install
+  cargo install --git https://github.com/jumang4423/nylang
 
-```
-
-```
-
-> uninstall
-
-```
-cargo uninstall nylang && rm -rf ~/.nylang
-```
-
-## excute uisng docker
-
-- to start the container
-
-```
-docker compose up -d
-```
-
-- entering shell
-
-```
-docker compose exec nylang bash
-```
+- uninstall
+  cargo uninstall nylang
