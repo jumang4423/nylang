@@ -6,7 +6,7 @@
 
 a cute language with a bunch emoji
 
-## how nylang looks like
+## nylang looks like:
 
 ``` text
 🐽🐽🐽 ( ".nylang/lib/__rand__.nyl" ) ;
@@ -19,7 +19,7 @@ a cute language with a bunch emoji
             💨 cnt != 120 ;
         }
     ) ;
-    🎤 ( "we are here!" ) ;
+    🎤 ( "welcome to nylang!" ) ;
 } ;
 ```
 
@@ -30,7 +30,14 @@ a cute language with a bunch emoji
 ## install & uninstall
 
 - install
-  cargo install --git https://github.com/jumang4423/nylang
+
+``` sh
+cargo install --git https://github.com/jumang4423/nylang
+```
 
 - uninstall
-  cargo uninstall nylang
+
+``` sh
+cargo uninstall nylang
+```
+
